@@ -3,350 +3,292 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dudu Art Gallery</title>
+<title>dudu art gallery</title>
 
 <style>
-/* Reset & Basics */
-* {
-    box-sizing: border-box;
-}
-body {
-    margin: 0;
-    font-family: "Helvetica Neue", Arial, sans-serif;
-    background-color: #0d0d0d;
-    color: #f2f2f2;
-    line-height: 1.6;
-}
+    /* Base Styles */
+    body {
+        margin: 0;
+        font-family: "Helvetica Neue", Arial, sans-serif;
+        background-color: #f5f5f5;
+        color: #111;
+        line-height: 1.6;
+    }
 
-.container {
-    width: 90%;
-    max-width: 1200px;
-    margin: auto;
-}
+    .container {
+        width: 90%;
+        max-width: 1200px;
+        margin: auto;
+    }
 
-/* Header */
-header {
-    padding: 80px 0 50px;
-    text-align: center;
-    border-bottom: 1px solid #222;
-    position: relative;
-}
+    header {
+        padding: 80px 20px 60px;
+        text-align: center;
+        background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+        border-bottom: 1px solid #ccc;
+    }
 
-header h1 {
-    font-weight: 300;
-    font-size: 36px;
-    letter-spacing: 4px;
-    margin: 0;
-}
-
-header p {
-    margin-top: 15px;
-    font-size: 16px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: #888;
-}
-
-.lang-switch {
-    position: absolute;
-    top: 20px;
-    right: 0;
-}
-
-.lang-switch button {
-    background: none;
-    border: 1px solid #555;
-    color: #aaa;
-    padding: 5px 12px;
-    margin-left: 5px;
-    cursor: pointer;
-    font-weight: 500;
-    transition: 0.3s;
-}
-
-.lang-switch button:hover {
-    border-color: #c5a46d;
-    color: #c5a46d;
-}
-
-/* Sections */
-section {
-    margin-bottom: 100px;
-}
-
-section h2 {
-    font-weight: 300;
-    font-size: 20px;
-    letter-spacing: 2px;
-    color: #c5a46d;
-    text-transform: uppercase;
-    margin-bottom: 50px;
-}
-
-/* Grid */
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 60px;
-}
-
-.artwork {
-    position: relative;
-    overflow: hidden;
-    border-radius: 6px;
-}
-
-.artwork img {
-    width: 100%;
-    cursor: pointer;
-    transition: transform 0.4s ease, filter 0.4s ease;
-    display: block;
-}
-
-.artwork img:hover {
-    transform: scale(1.05);
-    filter: brightness(1.1);
-}
-
-/* Art Info */
-.art-info {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 12px;
-    font-size: 14px;
-}
-
-.label {
-    display: inline-block;
-    margin-top: 5px;
-    font-size: 12px;
-    padding: 3px 8px;
-    border: 1px solid #c5a46d;
-    color: #c5a46d;
-    border-radius: 4px;
-}
-
-.price {
-    color: #c5a46d;
-}
-
-.price a {
-    display: block;
-    font-size: 12px;
-    color: #aaa;
-    text-decoration: none;
-    margin-top: 5px;
-}
-
-.price a:hover {
-    color: #c5a46d;
-}
-
-/* Sold Badge */
-.sold-badge {
-    position: absolute;
-    top: 15px;
-    left: 15px;
-    background: #c5a46d;
-    color: black;
-    padding: 5px 10px;
-    font-size: 12px;
-    font-weight: bold;
-    border-radius: 4px;
-}
-
-/* HR */
-hr {
-    border: none;
-    border-top: 1px solid #222;
-    margin: 80px 0;
-}
-
-/* Quote */
-.quote-section {
-    text-align: center;
-    max-width: 700px;
-    margin: auto;
-    color: #aaa;
-    font-style: italic;
-}
-
-.quote-section h3 {
-    color: #c5a46d;
-    margin-bottom: 20px;
-}
-
-/* Footer */
-footer {
-    padding: 60px 0;
-    color: #888;
-    font-size: 13px;
-    text-align: center;
-}
-
-footer strong {
-    display: block;
-    margin-bottom: 5px;
-}
-
-/* Responsive */
-@media(max-width: 768px) {
     header h1 {
-        font-size: 28px;
+        font-weight: 600;
+        font-size: 38px;
+        margin: 0;
+        letter-spacing: 1px;
     }
-    section h2 {
+
+    header p {
+        margin-top: 10px;
         font-size: 18px;
+        color: #555;
+        letter-spacing: 1px;
+        font-style: italic;
     }
+
+    section {
+        margin-bottom: 80px;
+    }
+
+    section h2 {
+        font-weight: 500;
+        margin-bottom: 40px;
+        font-size: 26px;
+        text-transform: lowercase;
+        border-bottom: 2px solid #ddd;
+        display: inline-block;
+        padding-bottom: 5px;
+        color: #333;
+    }
+
     .grid {
-        gap: 40px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 50px;
     }
-}
 
-/* MODAL */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 999;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.95);
-    justify-content: center;
-    align-items: center;
-    animation: fadeIn 0.3s ease;
-}
+    .artwork {
+        background: #fff;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
 
-.modal img {
-    max-width: 90%;
-    max-height: 90%;
-    border-radius: 4px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.5);
-    transition: transform 0.3s ease;
-}
+    .artwork:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+    }
 
-.modal span {
-    position: absolute;
-    top: 30px;
-    right: 40px;
-    font-size: 36px;
-    cursor: pointer;
-    color: #c5a46d;
-}
+    .artwork img {
+        width: 100%;
+        display: block;
+        object-fit: cover;
+        height: 300px;
+    }
 
-@keyframes fadeIn {
-    from {opacity: 0;}
-    to {opacity: 1;}
-}
+    .art-info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 20px;
+        font-size: 14px;
+        border-top: 1px solid #eee;
+    }
+
+    .art-info div {
+        line-height: 1.5;
+    }
+
+    .art-info em {
+        font-style: italic;
+        color: #555;
+    }
+
+    .price {
+        font-style: italic;
+        color: #777;
+    }
+
+    hr {
+        border: none;
+        border-top: 1px solid #ccc;
+        margin: 80px 0;
+    }
+
+    .quote-section {
+        text-align: center;
+        margin-bottom: 60px;
+    }
+
+    .quote-section h3 {
+        font-weight: 500;
+        font-size: 28px;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    .quote {
+        max-width: 700px;
+        margin: auto;
+        font-size: 16px;
+        color: #555;
+        font-style: italic;
+        line-height: 1.7;
+    }
+
+    footer {
+        font-size: 14px;
+        padding: 40px 0 60px;
+        text-align: center;
+        color: #444;
+        background-color: #f9f9f9;
+        border-top: 1px solid #ccc;
+    }
+
+    footer .contact {
+        line-height: 1.8;
+    }
+
+    footer .contact strong {
+        font-weight: 600;
+    }
+
+    @media(max-width: 768px) {
+        header h1 {
+            font-size: 28px;
+        }
+
+        header p {
+            font-size: 16px;
+        }
+
+        section h2 {
+            font-size: 22px;
+        }
+
+        .artwork img {
+            height: 250px;
+        }
+    }
+
+    @media(max-width: 480px) {
+        .artwork img {
+            height: 200px;
+        }
+    }
 </style>
 </head>
-
 <body>
+
 <div class="container">
 
 <header>
     <h1>dudu art gallery</h1>
-    <p id="tagline">every masterpiece was once a scratch</p>
-
-    <div class="lang-switch">
-        <button onclick="setLang('en')">EN</button>
-        <button onclick="setLang('de')">DE</button>
-    </div>
+    <p>every masterpiece was once a scretch</p>
 </header>
 
 <section>
-<h2>abstract</h2>
-<div class="grid">
+    <h2>abstract</h2>
+    <div class="grid">
 
-<div class="artwork">
-<img src="images/abstract1.jpeg" alt="Lost in Voices - dudu" onclick="openModal(this.src)">
-<div class="art-info">
-<div>
-<em>lost in voices</em><br>
-dudu<br>
-<span class="label">Original</span>
-</div>
-<div class="price">
-240€ 
-<a href="mailto:d.demir@dudu-art-gallery.com?subject=Purchase request - Lost in Voices">inquire</a>
-</div>
-</div>
-</div>
+        <div class="artwork">
+            <img src="images/abstract1.jpeg" alt="lost in voices">
+            <div class="art-info">
+                <div>
+                    <em>lost in voices</em><br>dudu
+                </div>
+                <div class="price">240€</div>
+            </div>
+        </div>
 
-<div class="artwork">
-<img src="images/abstract2.jpg" alt="Bloody Chains - dudu" onclick="openModal(this.src)">
-<div class="sold-badge">SOLD</div>
-<div class="art-info">
-<div>
-<em>bloody chains</em><br>
-dudu<br>
-<span class="label">Edition of 25</span>
-</div>
-<div class="price">60€</div>
-</div>
-</div>
+        <div class="artwork">
+            <img src="images/abstract2.jpg" alt="bloody chains">
+            <div class="art-info">
+                <div>
+                    <em>bloody chains</em><br>dudu
+                </div>
+                <div class="price">60€</div>
+            </div>
+        </div>
 
-</div>
+    </div>
+</section>
+
+<section>
+    <h2>cubism</h2>
+    <div class="grid">
+
+        <div class="artwork">
+            <img src="images/cubism1.jpeg" alt="business card">
+            <div class="art-info">
+                <div>
+                    <em>business card</em><br>dudu
+                </div>
+                <div class="price">210€</div>
+            </div>
+        </div>
+
+        <div class="artwork">
+            <img src="images/cubism2.jpg" alt="lost in the room">
+            <div class="art-info">
+                <div>
+                    <em>lost in the room</em><br>dudu
+                </div>
+                <div class="price">100€</div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section>
+    <h2>landscape</h2>
+    <div class="grid">
+
+        <div class="artwork">
+            <img src="images/landscape1.jpg" alt="wisdom of light">
+            <div class="art-info">
+                <div>
+                    <em>wisdom of light</em><br>dudu
+                </div>
+                <div class="price">not for sale</div>
+            </div>
+        </div>
+
+        <div class="artwork">
+            <img src="images/landscape2.jpg" alt="bridge of the darkness">
+            <div class="art-info">
+                <div>
+                    <em>bridge of the darkness</em><br>dudu
+                </div>
+                <div class="price">80€</div>
+            </div>
+        </div>
+
+    </div>
 </section>
 
 <hr>
 
 <div class="quote-section">
-<h3>dudu</h3>
-<p id="quoteText">
-September, 2024: sitting on the sofa all alone, extremely depressed and not able to move,
-not because I am physically disabled but because I felt ashamed
-</p>
+    <h3>dudu</h3>
+    <div class="quote">
+        September, 2024: sitting on the sofa all alone, extremely depressed and not able to move,
+        not because I am physically disabled but because I felt ashamed
+    </div>
 </div>
 
 <hr>
 
 <footer>
-<strong>dudu art gallery</strong>
-81929 Munich<br>
-Munich, Bavaria<br><br>
-+49 176 416 292 50<br>
-<a href="mailto:d.demir@dudu-art-gallery.com" style="color: #888; text-decoration: none;">d.demir@dudu-art-gallery.com</a>
+    <div class="contact">
+        <strong>dudu art gallery</strong><br>
+        81929 Munich<br>
+        Munich, Bavaria<br><br>
+        +49 176 416 292 50<br>
+        d.demir@dudu-art-gallery.com
+    </div>
 </footer>
 
 </div>
-
-<!-- MODAL -->
-<div id="modal" class="modal" aria-hidden="true">
-<span onclick="closeModal()" aria-label="Close Modal">×</span>
-<img id="modal-img" alt="Artwork preview">
-</div>
-
-<script>
-function openModal(src) {
-    const modal = document.getElementById("modal");
-    document.getElementById("modal-img").src = src;
-    modal.style.display = "flex";
-    modal.setAttribute("aria-hidden", "false");
-}
-
-function closeModal() {
-    const modal = document.getElementById("modal");
-    modal.style.display = "none";
-    modal.setAttribute("aria-hidden", "true");
-}
-
-function setLang(lang) {
-    if(lang === "de") {
-        document.getElementById("tagline").innerText =
-        "jedes meisterwerk war einmal nur ein strich";
-
-        document.getElementById("quoteText").innerText =
-        "September 2024: allein auf dem sofa sitzend, extrem deprimiert und unfähig mich zu bewegen, nicht weil ich körperlich eingeschränkt bin, sondern weil ich mich schämte.";
-    } else {
-        document.getElementById("tagline").innerText =
-        "every masterpiece was once a scratch";
-
-        document.getElementById("quoteText").innerText =
-        "September, 2024: sitting on the sofa all alone, extremely depressed and not able to move, not because I am physically disabled but because I felt ashamed";
-    }
-}
-</script>
 
 </body>
 </html>
