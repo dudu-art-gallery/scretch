@@ -151,6 +151,34 @@
         font-weight: 600;
     }
 
+    /* History Button Styles */
+    .history-btn {
+        display: block;
+        width: 100%;
+        padding: 8px 0;
+        border: none;
+        background-color: #333;
+        color: #fff;
+        cursor: pointer;
+        font-size: 14px;
+        margin-top: 5px;
+        border-radius: 0 0 10px 10px;
+        transition: background-color 0.3s;
+    }
+
+    .history-btn:hover {
+        background-color: #555;
+    }
+
+    .history-text {
+        padding: 10px 15px;
+        font-size: 13px;
+        color: #444;
+        background-color: #f0f0f0;
+        border-top: 1px solid #ddd;
+        display: none;
+    }
+
     @media(max-width: 768px) {
         header h1 {
             font-size: 28px;
@@ -197,6 +225,10 @@
                 </div>
                 <div class="price">240€</div>
             </div>
+            <button class="history-btn" onclick="toggleHistory(this)">History</button>
+            <div class="history-text">
+                Created in 2025, inspired by the artist's inner thoughts and unspoken emotions.
+            </div>
         </div>
 
         <div class="artwork">
@@ -206,6 +238,10 @@
                     <em>bloody chains</em><br>dudu
                 </div>
                 <div class="price">60€</div>
+            </div>
+            <button class="history-btn" onclick="toggleHistory(this)">History</button>
+            <div class="history-text">
+                Painted during a period of reflection on freedom and constraint in life.
             </div>
         </div>
 
@@ -224,6 +260,10 @@
                 </div>
                 <div class="price">210€</div>
             </div>
+            <button class="history-btn" onclick="toggleHistory(this)">History</button>
+            <div class="history-text">
+                A cubist exploration of identity and societal roles through abstract shapes.
+            </div>
         </div>
 
         <div class="artwork">
@@ -233,6 +273,10 @@
                     <em>lost in the room</em><br>dudu
                 </div>
                 <div class="price">100€</div>
+            </div>
+            <button class="history-btn" onclick="toggleHistory(this)">History</button>
+            <div class="history-text">
+                Represents the feeling of isolation within familiar spaces.
             </div>
         </div>
 
@@ -251,6 +295,10 @@
                 </div>
                 <div class="price">not for sale</div>
             </div>
+            <button class="history-btn" onclick="toggleHistory(this)">History</button>
+            <div class="history-text">
+                Inspired by a sunrise viewed from the Bavarian Alps.
+            </div>
         </div>
 
         <div class="artwork">
@@ -260,6 +308,10 @@
                     <em>bridge of the darkness</em><br>dudu
                 </div>
                 <div class="price">80€</div>
+            </div>
+            <button class="history-btn" onclick="toggleHistory(this)">History</button>
+            <div class="history-text">
+                the painting „bridge of the darkness“ was painted early 2025. Even though it’s one of the more cheaper paintings, it has the most deeply meaning. It was a time in which death was at the edge of the life. It was a point of excepting the death and an agreement of ending the life. But at exactly that point the death turned his back to the life and let him live. Not because it’s on his hand whom sole he takes but only and only because of the graciousness of God the all mighty.
             </div>
         </div>
 
@@ -289,6 +341,19 @@
 </footer>
 
 </div>
+
+<script>
+function toggleHistory(button) {
+    const historyDiv = button.nextElementSibling;
+    if (historyDiv.style.display === "none" || historyDiv.style.display === "") {
+        historyDiv.style.display = "block";
+        button.textContent = "Hide History";
+    } else {
+        historyDiv.style.display = "none";
+        button.textContent = "History";
+    }
+}
+</script>
 
 </body>
 </html>
