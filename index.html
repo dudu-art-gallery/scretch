@@ -93,7 +93,7 @@ section h2 {
 .art-info {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     padding: 15px 20px;
     font-size: 14px;
     border-top: 1px solid #eee;
@@ -108,27 +108,62 @@ section h2 {
     color: #555;
 }
 
+/* Price & PayPal Button */
 .price {
     font-style: italic;
     color: #777;
+    display: flex;
+    flex-direction: column; /* stack vertically */
+    gap: 8px; /* space between price and button */
 }
 
 .price a {
     display: inline-block;
     font-size: 14px;
-    color: #000;
+    color: #fff;
     text-decoration: none;
     padding: 6px 12px;
     border-radius: 5px;
-    background-color: #c5a46d;
-    margin-top: 5px;
+    background-color: #e53935; /* red */
+    text-align: center;
     transition: background 0.3s;
 }
 
 .price a:hover {
-    background-color: #aa8b54;
+    background-color: #b71c1c; /* darker red on hover */
 }
 
+/* History Button Styles */
+.history-btn {
+    display: block;
+    width: 100%;
+    padding: 8px 0;
+    border: none;
+    background-color: #333;
+    color: #fff;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 5px;
+    border-radius: 0 0 10px 10px;
+    transition: background-color 0.3s;
+}
+
+.history-btn:hover {
+    background-color: #555;
+}
+
+.history-text {
+    padding: 0 15px;
+    font-size: 13px;
+    color: #444;
+    background-color: #f0f0f0;
+    border-top: 1px solid #ddd;
+    max-height: 0; /* fully hidden */
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.4s ease;
+}
+
+/* Quote Section */
 hr {
     border: none;
     border-top: 1px solid #ccc;
@@ -173,59 +208,16 @@ footer .contact strong {
     font-weight: 600;
 }
 
-/* History Button Styles */
-.history-btn {
-    display: block;
-    width: 100%;
-    padding: 8px 0;
-    border: none;
-    background-color: #333;
-    color: #fff;
-    cursor: pointer;
-    font-size: 14px;
-    margin-top: 5px;
-    border-radius: 0 0 10px 10px;
-    transition: background-color 0.3s;
-}
-
-.history-btn:hover {
-    background-color: #555;
-}
-
-.history-text {
-    padding: 10px 15px;
-    font-size: 13px;
-    color: #444;
-    background-color: #f0f0f0;
-    border-top: 1px solid #ddd;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s ease, padding 0.4s ease;
-}
-
 /* Responsive */
 @media(max-width: 768px) {
-    header h1 {
-        font-size: 28px;
-    }
-
-    header p {
-        font-size: 16px;
-    }
-
-    section h2 {
-        font-size: 22px;
-    }
-
-    .artwork img {
-        height: 250px;
-    }
+    header h1 { font-size: 28px; }
+    header p { font-size: 16px; }
+    section h2 { font-size: 22px; }
+    .artwork img { height: 250px; }
 }
 
 @media(max-width: 480px) {
-    .artwork img {
-        height: 200px;
-    }
+    .artwork img { height: 200px; }
 }
 </style>
 </head>
@@ -248,7 +240,8 @@ footer .contact strong {
                 <div>
                     <em>lost in voices</em><br>dudu
                 </div>
-                <div class="price">240€ 
+                <div class="price">
+                    240€
                     <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=duralidemir948@gmail.com&item_name=Lost+in+Voices&amount=240&currency_code=EUR" target="_blank">Buy with PayPal</a>
                 </div>
             </div>
@@ -264,7 +257,8 @@ footer .contact strong {
                 <div>
                     <em>bloody chains</em><br>dudu
                 </div>
-                <div class="price">60€ 
+                <div class="price">
+                    60€
                     <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=duralidemir948@gmail.com&item_name=Bloody+Chains&amount=60&currency_code=EUR" target="_blank">Buy with PayPal</a>
                 </div>
             </div>
@@ -287,7 +281,8 @@ footer .contact strong {
                 <div>
                     <em>business card</em><br>dudu
                 </div>
-                <div class="price">210€ 
+                <div class="price">
+                    210€
                     <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=duralidemir948@gmail.com&item_name=Business+Card&amount=210&currency_code=EUR" target="_blank">Buy with PayPal</a>
                 </div>
             </div>
@@ -303,7 +298,8 @@ footer .contact strong {
                 <div>
                     <em>lost in the room</em><br>dudu
                 </div>
-                <div class="price">100€ 
+                <div class="price">
+                    100€
                     <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=duralidemir948@gmail.com&item_name=Lost+in+the+Room&amount=100&currency_code=EUR" target="_blank">Buy with PayPal</a>
                 </div>
             </div>
@@ -340,13 +336,14 @@ footer .contact strong {
                 <div>
                     <em>bridge of the darkness</em><br>dudu
                 </div>
-                <div class="price">80€ 
+                <div class="price">
+                    80€
                     <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=duralidemir948@gmail.com&item_name=Bridge+of+the+Darkness&amount=80&currency_code=EUR" target="_blank">Buy with PayPal</a>
                 </div>
             </div>
             <button class="history-btn" onclick="toggleHistory(this)">History</button>
             <div class="history-text">
-                the painting „bridge of the darkness“ was painted early 2025...
+                The painting „bridge of the darkness“ was painted early 2025...
             </div>
         </div>
 
@@ -394,3 +391,4 @@ function toggleHistory(button) {
 
 </body>
 </html>
+
