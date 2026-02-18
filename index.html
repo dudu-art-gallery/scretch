@@ -3,278 +3,415 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dudu Art Gallery</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<title>dudu art gallery</title>
 
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
+/* Base Styles */
 body {
-    font-family: 'Inter', sans-serif;
+    margin: 0;
+    font-family: "Helvetica Neue", Arial, sans-serif;
     background-color: #f5f5f5;
     color: #111;
     line-height: 1.6;
-    opacity: 0;
-    animation: pageFade 1s ease forwards;
-}
-
-@keyframes pageFade {
-    to { opacity: 1; }
 }
 
 .container {
     width: 90%;
     max-width: 1200px;
-    margin: 0 auto;
+    margin: auto;
 }
 
-/* HERO */
-
-.hero {
+header {
+    padding: 100px 20px 70px;
     text-align: center;
-    padding: 100px 0 60px;
+    background: #f7f7f7;
+    border-bottom: 1px solid #dcdcdc;
 }
 
-.hero h1 {
-    font-size: 42px;
-    font-weight: 400;
-    margin-bottom: 10px;
-    animation: fadeUp 1s ease forwards;
+/* ===== High-End Gallery Header Upgrade ===== */
+
+.header-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
 }
 
-.hero p {
-    font-size: 18px;
+/* Logo */
+.logo {
+    width: 90px;
+    height: auto;
+    opacity: 0.9;
+}
+
+header h1 {
+    font-weight: 500;
+    font-size: 34px;
+    margin: 0;
+    letter-spacing: 3px;
+    text-transform: lowercase;
+}
+
+header p {
+    margin-top: 0;
+    font-size: 14px;
+    letter-spacing: 2px;
     color: #666;
-    margin-bottom: 50px;
-    animation: fadeUp 1.2s ease forwards;
+    font-style: normal;
 }
 
-.hero img {
-    width: 100%;
-    max-width: 900px;
-    border-radius: 6px;
-    box-shadow: 0 15px 50px rgba(0,0,0,0.1);
-    animation: fadeUp 1.4s ease forwards;
+section {
+    margin-bottom: 80px;
 }
 
-/* Section Titles */
-
-.section-title {
+section h2 {
+    font-weight: 500;
+    margin-bottom: 40px;
     font-size: 26px;
-    font-weight: 400;
-    margin: 100px 0 50px;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all .6s ease;
+    text-transform: lowercase;
+    border-bottom: 2px solid #ddd;
+    display: inline-block;
+    padding-bottom: 5px;
+    color: #333;
 }
 
-.section-title.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* Gallery Grid */
-
-.gallery-grid {
+.grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 50px;
 }
 
-.art-card {
-    text-align: left;
-    opacity: 0;
-    transform: translateY(40px);
-    transition: all .8s ease;
+.artwork {
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.art-card.visible {
-    opacity: 1;
-    transform: translateY(0);
+.artwork:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.15);
 }
 
-.art-card img {
+.artwork img {
     width: 100%;
-    border-radius: 4px;
-    margin-bottom: 12px;
-    transition: transform .6s ease;
+    display: block;
+    object-fit: cover;
+    height: 300px;
+    transition: transform 0.3s, filter 0.3s;
 }
 
-.art-card:hover img {
+.artwork img:hover {
     transform: scale(1.05);
+    filter: brightness(1.1);
 }
 
-.art-card:hover {
-    transform: translateY(-5px);
-}
-
-/* Text */
-
-.art-title {
+.art-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 15px 20px;
     font-size: 14px;
-    font-weight: 500;
+    border-top: 1px solid #eee;
 }
 
-.art-artist {
-    font-size: 13px;
+.art-info div {
+    line-height: 1.5;
+}
+
+.art-info em {
+    font-style: italic;
+    color: #555;
+}
+
+/* Price & PayPal Button */
+.price {
+    font-style: italic;
     color: #777;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
-.art-price {
-    float: right;
+.price a {
+    display: inline-block;
+    font-size: 14px;
+    color: #fff;
+    text-decoration: none;
+    padding: 6px 12px;
+    border-radius: 5px;
+    background-color: #e53935;
+    text-align: center;
+    transition: background 0.3s;
 }
 
-/* Statement */
-
-.statement {
-    margin: 120px 0;
-    padding: 70px;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.05);
-    opacity: 0;
-    transform: translateY(40px);
-    transition: all .8s ease;
+.price a:hover {
+    background-color: #b71c1c;
 }
 
-.statement.visible {
-    opacity: 1;
-    transform: translateY(0);
+/* History Button Styles */
+.history-btn {
+    display: block;
+    width: 100%;
+    padding: 8px 0;
+    border: none;
+    background-color: #333;
+    color: #fff;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 5px;
+    border-radius: 0 0 10px 10px;
+    transition: background-color 0.3s;
 }
 
-.statement h2 {
+.history-btn:hover {
+    background-color: #555;
+}
+
+.history-text {
+    padding: 0 15px;
+    font-size: 13px;
+    color: #444;
+    background-color: #f0f0f0;
+    border-top: 1px solid #ddd;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.4s ease;
+}
+
+/* Quote Section */
+hr {
+    border: none;
+    border-top: 1px solid #ccc;
+    margin: 80px 0;
+}
+
+.quote-section {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.quote-section h3 {
+    font-weight: 500;
     font-size: 28px;
     margin-bottom: 20px;
+    color: #333;
 }
 
-/* Footer */
+.quote {
+    max-width: 700px;
+    margin: auto;
+    font-size: 16px;
+    color: #555;
+    font-style: italic;
+    line-height: 1.7;
+}
 
 footer {
-    margin: 80px 0 40px;
     font-size: 14px;
-    color: #555;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all .6s ease;
+    padding: 40px 0 60px;
+    text-align: center;
+    color: #444;
+    background-color: #f9f9f9;
+    border-top: 1px solid #ccc;
 }
 
-footer.visible {
-    opacity: 1;
-    transform: translateY(0);
+footer .contact {
+    line-height: 1.8;
 }
 
-/* Fade Up Animation */
-
-@keyframes fadeUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+footer .contact strong {
+    font-weight: 600;
 }
 
 /* Responsive */
+@media(max-width: 768px) {
+    header h1 { font-size: 26px; letter-spacing: 2px; }
+    .logo { width: 70px; }
+    section h2 { font-size: 22px; }
+    .artwork img { height: 250px; }
+}
 
-@media (max-width: 768px) {
-    .hero h1 {
-        font-size: 32px;
-    }
+@media(max-width: 480px) {
+    .artwork img { height: 200px; }
 }
 </style>
 </head>
-
 <body>
 
 <div class="container">
 
-    <section class="hero">
-        <h1>dudu art gallery</h1>
-        <p>every masterpiece was once a scratch</p>
-        <img src="cubism1.jpeg" alt="">
-    </section>
+<header>
+    <div class="header-inner">
+        <img src="images/logo.png">
+            </div>
+</header>
+<body>
 
-    <h2 class="section-title">abstract</h2>
-    <div class="gallery-grid">
-        <div class="art-card">
-            <img src="abstract1.jpeg" alt="">
-            <div class="art-title">Lost in Voices <span class="art-price">$240</span></div>
-            <div class="art-artist">dudu</div>
+<div class="container">
+
+<header>
+        <p>every masterpiece was once a scretch</p>
+</header>
+
+<section>
+    <h2>abstract</h2>
+    <div class="grid">
+
+        <div class="artwork">
+            <img src="images/abstract1.jpeg" alt="lost in voices">
+            <div class="art-info">
+                <div>
+                    <em>lost in voices</em><br>dudu
+                </div>
+                <div class="price">
+                    240€
+                    <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=duralidemir948@gmail.com&item_name=Lost+in+Voices&amount=240&currency_code=EUR" target="_blank">Buy with PayPal</a>
+                </div>
+            </div>
+            <button class="history-btn" onclick="toggleHistory(this)">History</button>
+            <div class="history-text">
+                Created in 2025, inspired by the artist's inner thoughts and unspoken emotions. It is the voices that insure the mind. What is real? Where am I? Who am I?
+            </div>
         </div>
-        <div class="art-card">
-            <img src="abstract2.jpg" alt="">
-            <div class="art-title">Bloody Chains <span class="art-price">$60</span></div>
-            <div class="art-artist">dudu</div>
+
+        <div class="artwork">
+            <img src="images/abstract2.jpg" alt="bloody chains">
+            <div class="art-info">
+                <div>
+                    <em>bloody chains</em><br>dudu
+                </div>
+                <div class="price">
+                    60€
+                    <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=duralidemir948@gmail.com&item_name=Bloody+Chains&amount=60&currency_code=EUR" target="_blank">Buy with PayPal</a>
+                </div>
+            </div>
+            <button class="history-btn" onclick="toggleHistory(this)">History</button>
+            <div class="history-text">
+                It is February 2025, waking up but life does not seem the way it was once. Every morning whishes the returning of nigth. It is a painfull time. Trapped in chains. It is a bloody figth to unbind from the chains.
+            </div>
         </div>
+
     </div>
+</section>
 
-    <h2 class="section-title">cubism</h2>
-    <div class="gallery-grid">
-        <div class="art-card">
-            <img src="cubism1.jpeg" alt="">
-            <div class="art-title">business card <span class="art-price">210€</span></div>
-            <div class="art-artist">dudu</div>
+<section>
+    <h2>cubism</h2>
+    <div class="grid">
+
+        <div class="artwork">
+            <img src="images/cubism1.jpeg" alt="business card">
+            <div class="art-info">
+                <div>
+                    <em>business card</em><br>dudu
+                </div>
+                <div class="price">
+                    210€
+                    <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=duralidemir948@gmail.com&item_name=Business+Card&amount=210&currency_code=EUR" target="_blank">Buy with PayPal</a>
+                </div>
+            </div>
+            <button class="history-btn" onclick="toggleHistory(this)">History</button>
+            <div class="history-text">
+                The business card, is a creation that reflects order, precision and emphasis. A time in which these attributes are necessary for regeneration. Coming back to life, so life gets colour.
+            </div>
         </div>
-        <div class="art-card">
-            <img src="cubism2.jpg" alt="">
-            <div class="art-title">lost in the room <span class="art-price">$100</span></div>
-            <div class="art-artist">dudu</div>
+
+        <div class="artwork">
+            <img src="images/cubism2.jpg" alt="lost in the room">
+            <div class="art-info">
+                <div>
+                    <em>lost in the room</em><br>dudu
+                </div>
+                <div class="price">
+                    100€
+                    <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=duralidemir948@gmail.com&item_name=Lost+in+the+Room&amount=100&currency_code=EUR" target="_blank">Buy with PayPal</a>
+                </div>
+            </div>
+            <button class="history-btn" onclick="toggleHistory(this)">History</button>
+            <div class="history-text">
+                A room of isolation to find back to life. The path is a struggle. It is disorienting. But no body said " It will be an easy way."
+            </div>
         </div>
+
     </div>
+</section>
 
-    <h2 class="section-title">landscape</h2>
-    <div class="gallery-grid">
-        <div class="art-card">
-            <img src="landscape1.jpg" alt="">
-            <div class="art-title">wisdom of light <span class="art-price">not for sale</span></div>
-            <div class="art-artist">dudu</div>
+<section>
+    <h2>landscape</h2>
+    <div class="grid">
+
+        <div class="artwork">
+            <img src="images/landscape1.jpg" alt="wisdom of light">
+            <div class="art-info">
+                <div>
+                    <em>wisdom of light</em><br>dudu
+                </div>
+                <div class="price">not for sale</div>
+            </div>
+            <button class="history-btn" onclick="toggleHistory(this)">History</button>
+            <div class="history-text">
+                You have to earn wisdom. It is not capable to buy.
+            </div>
         </div>
-        <div class="art-card">
-            <img src="landscape2.jpg" alt="">
-            <div class="art-title">bridge of the darkness <span class="art-price">$80</span></div>
-            <div class="art-artist">dudu</div>
+
+        <div class="artwork">
+            <img src="images/landscape2.jpg" alt="bridge of the darkness">
+            <div class="art-info">
+                <div>
+                    <em>bridge of the darkness</em><br>dudu
+                </div>
+                <div class="price">
+                    80€
+                    <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=duralidemir948@gmail.com&item_name=Bridge+of+the+Darkness&amount=80&currency_code=EUR" target="_blank">Buy with PayPal</a>
+                </div>
+            </div>
+            <button class="history-btn" onclick="toggleHistory(this)">History</button>
+            <div class="history-text">
+                the painting „bridge of the darkness“ was painted early 2025. Even though it’s one of the more cheaper paintings, it has the most deeply meaning. It was a time in which death was at the edge of the life. It was a point of excepting the death and an agreement of ending the life. But at exactly that point the death turned his back to the life and let him live. Not because it’s on his hand whom sole he takes but only and only because of the graciousness of God the all mighty.
+            </div>
         </div>
+
     </div>
+</section>
 
-    <section class="statement">
-        <h2>dudu</h2>
-        <p>
-            September 2024: sitting on the sofa all alone, extremely depressed and not able to move;
-            not because I am physically disabled but because I felt ashamed.
-        </p>
-    </section>
+<hr>
 
-    <footer>
-        <p><strong>dudu art gallery</strong></p>
-        <p>81929 Munich</p>
-        <p>+49 176 416 292 50</p>
-        <p>d.demur@dudu-art-gallery.com</p>
-    </footer>
+<div class="quote-section">
+    <h3>dudu</h3>
+    <div class="quote">
+        September, 2024: sitting on the sofa all alone, extremely depressed and not able to move,
+        not because I am physically disabled but because I felt ashamed
+    </div>
+</div>
+
+<hr>
+
+<footer>
+    <div class="contact">
+        <strong>dudu art gallery</strong><br>
+        81929 Munich<br>
+        Munich, Bavaria<br><br>
+        +49 176 416 292 50<br>
+        d.demir@dudu-art-gallery.com
+    </div>
+</footer>
 
 </div>
 
 <script>
-const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-        }
-    });
-}, { threshold: 0.15 });
-
-document.querySelectorAll('.section-title, .art-card, .statement, footer')
-.forEach(el => observer.observe(el));
+function toggleHistory(button) {
+    const historyDiv = button.nextElementSibling;
+    if (historyDiv.style.maxHeight && historyDiv.style.maxHeight !== "0px") {
+        historyDiv.style.maxHeight = "0";
+        historyDiv.style.padding = "0 15px";
+        button.textContent = "History";
+    } else {
+        historyDiv.style.maxHeight = historyDiv.scrollHeight + "px";
+        historyDiv.style.padding = "10px 15px";
+        button.textContent = "Hide History";
+    }
+}
 </script>
 
 </body>
