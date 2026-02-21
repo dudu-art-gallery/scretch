@@ -1,290 +1,258 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>dudu | Art Gallery</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dudu art gallery</title>
+    <style>
+        /* Global Styles */
+        body {
+            background-color: white;
+            color: black;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+        a {
+            color: red;
+            text-decoration: none;
+        }
 
-<style>
+        a:hover {
+            text-decoration: underline;
+        }
 
-:root{
-    --bg: #ffffff;
-    --text: #000000;
-    --accent: #9e1b1b; /* slightly deep red tone */
-    --soft-grey: #777;
-}
+        /* Header */
+        header {
+            background-color: white;
+            border-bottom: 2px solid red;
+            padding: 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: red;
+        }
 
-body{
-    font-family: 'Inter', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    line-height:1.6;
-}
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: flex-end;
+        }
 
-/* NAVIGATION */
+        nav ul li {
+            margin-left: 20px;
+        }
 
-nav{
-    position:fixed;
-    width:100%;
-    background:#fff;
-    padding:25px 0;
-    border-bottom:1px solid #eee;
-    z-index:1000;
-}
+        nav ul li a {
+            font-weight: bold;
+        }
 
-.container{
-    width:90%;
-    max-width:1200px;
-    margin:auto;
-}
+        /* Hero Section */
+        .hero {
+            background-color: white;
+            text-align: center;
+            padding: 100px 20px;
+        }
 
-.nav-flex{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
 
-.logo{
-    font-family:'Playfair Display', serif;
-    font-size:1.8rem;
-    font-weight:700;
-    letter-spacing:2px;
-}
+        .hero p {
+            font-size: 18px;
+            max-width: 800px;
+            margin: 0 auto 40px;
+        }
 
-nav ul{
-    list-style:none;
-    display:flex;
-}
+        .cta-button {
+            background-color: red;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
 
-nav ul li{
-    margin-left:40px;
-}
+        .cta-button:hover {
+            background-color: darkred;
+        }
 
-nav ul li a{
-    text-decoration:none;
-    color:#000;
-    font-weight:500;
-    transition:0.3s ease;
-}
+        /* Gallery Section */
+        .gallery {
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
 
-nav ul li a:hover{
-    color:var(--accent);
-}
+        .gallery h2 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 40px;
+            border-bottom: 1px solid red;
+            padding-bottom: 10px;
+        }
 
-/* HERO */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
 
-.hero{
-    height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    padding-top:80px;
-}
+        .art-item {
+            background-color: white;
+            border: 1px solid red;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
 
-.hero h1{
-    font-family:'Playfair Display', serif;
-    font-size:4rem;
-    margin-bottom:20px;
-}
+        .art-item:hover {
+            transform: scale(1.05);
+        }
 
-.hero p{
-    font-size:1.2rem;
-    color:var(--soft-grey);
-    margin-bottom:35px;
-}
+        .art-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
 
-.btn{
-    padding:12px 35px;
-    border:1px solid var(--accent);
-    color:var(--accent);
-    text-decoration:none;
-    transition:0.3s ease;
-    font-weight:500;
-}
+        .art-info {
+            padding: 15px;
+            text-align: center;
+        }
 
-.btn:hover{
-    background:var(--accent);
-    color:#fff;
-}
+        .art-info h3 {
+            font-size: 20px;
+            margin: 10px 0;
+        }
 
-/* ABOUT */
+        .art-info p {
+            font-size: 14px;
+            color: gray;
+        }
 
-section{
-    padding:120px 0;
-}
+        /* About Section */
+        .about {
+            background-color: white;
+            padding: 60px 20px;
+            text-align: center;
+            border-top: 2px solid red;
+        }
 
-.about{
-    text-align:center;
-}
+        .about h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
 
-.about p{
-    max-width:750px;
-    margin:20px auto;
-    color:var(--soft-grey);
-}
+        .about p {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 16px;
+        }
 
-/* GALLERY */
+        /* Footer */
+        footer {
+            background-color: white;
+            border-top: 1px solid red;
+            padding: 20px;
+            text-align: center;
+            font-size: 14px;
+        }
 
-.gallery-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-    gap:25px;
-}
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 36px;
+            }
 
-.gallery-grid img{
-    width:100%;
-    height:380px;
-    object-fit:cover;
-    transition:0.4s ease;
-}
+            nav ul {
+                justify-content: center;
+            }
 
-.gallery-grid img:hover{
-    transform:scale(1.03);
-}
-
-/* EXHIBITIONS */
-
-.exhibitions{
-    text-align:center;
-    background:#fafafa;
-}
-
-.exhibit{
-    margin-top:30px;
-}
-
-.exhibit h3{
-    color:var(--accent);
-    font-family:'Playfair Display', serif;
-    margin-bottom:5px;
-}
-
-/* CONTACT */
-
-.contact form{
-    max-width:600px;
-    margin:auto;
-}
-
-.contact input,
-.contact textarea{
-    width:100%;
-    padding:12px;
-    margin-bottom:15px;
-    border:1px solid #ddd;
-    font-family:'Inter', sans-serif;
-}
-
-.contact button{
-    padding:12px 35px;
-    border:none;
-    background:var(--accent);
-    color:#fff;
-    cursor:pointer;
-    transition:0.3s;
-}
-
-.contact button:hover{
-    opacity:0.85;
-}
-
-/* FOOTER */
-
-footer{
-    padding:50px 0;
-    text-align:center;
-    font-size:0.9rem;
-    border-top:1px solid #eee;
-}
-
-@media(max-width:768px){
-    .hero h1{
-        font-size:2.5rem;
-    }
-}
-
-</style>
+            nav ul li {
+                margin: 0 10px;
+            }
+        }
+    </style>
 </head>
-
 <body>
 
-<nav>
-    <div class="container nav-flex">
-        <div class="logo">dudu</div>
-        <ul>
-            <li><a href="#about">About</a></li>
-            <li><a href="#gallery">Collection</a></li>
-            <li><a href="#exhibitions">Exhibitions</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </div>
-</nav>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="logo">dudu art gallery</div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-<section class="hero">
-    <div>
-        <h1>Contemporary Expression</h1>
-        <p>A curated experience of modern artistic vision.</p>
-        <a href="#gallery" class="btn">View Collection</a>
-    </div>
-</section>
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <h1>dudu art gallery</h1>
+        <p>Discover a world of contemporary abstract art featuring bold colors and geometric designs.</p>
+        <button class="cta-button">Explore Gallery</button>
+    </section>
 
-<section class="about" id="about">
-    <div class="container">
-        <h2>About dudu</h2>
-        <p>
-            dudu is a contemporary art gallery dedicated to showcasing refined modern works.
-            We collaborate with emerging and established artists to present exhibitions that
-            reflect cultural depth, emotion, and artistic innovation.
-        </p>
-    </div>
-</section>
-
-<section id="gallery">
-    <div class="container">
-        <h2 style="text-align:center; margin-bottom:50px;">Featured Works</h2>
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery">
+        <h2>Our Collection</h2>
         <div class="gallery-grid">
-            <img src="images/cubism1.jpeg" alt="business card">
-    </div>
-</section>
-
-<section class="exhibitions" id="exhibitions">
-    <div class="container">
-        <h2>Upcoming Exhibitions</h2>
-        <div class="exhibit">
-            <h3>Shades of Silence</h3>
-            <p>April 10 – May 28, 2026</p>
+            <div class="art-item">
+                <img src="https://via.placeholder.com/400x300?text=Abstract+Art+1" alt="Abstract Art 1">
+                <div class="art-info">
+                    <h3>Red Triangle Harmony</h3>
+                    <p>Artist: Jane Doe | Year: 2023</p>
+                </div>
+            </div>
+            <div class="art-item">
+                <img src="https://via.placeholder.com/400x300?text=Abstract+Art+2" alt="Abstract Art 2">
+                <div class="art-info">
+                    <h3>Black Lines Symphony</h3>
+                    <p>Artist: John Smith | Year: 2024</p>
+                </div>
+            </div>
+            <div class="art-item">
+                <img src="https://via.placeholder.com/400x300?text=Abstract+Art+3" alt="Abstract Art 3">
+                <div class="art-info">
+                    <h3>Geometric Red Fusion</h3>
+                    <p>Artist: Alex Johnson | Year: 2022</p>
+                </div>
+            </div>
+            <div class="art-item">
+                <img src="https://via.placeholder.com/400x300?text=Abstract+Art+4" alt="Abstract Art 4">
+                <div class="art-info">
+                    <h3>White Space Dynamics</h3>
+                    <p>Artist: Emily Davis | Year: 2025</p>
+                </div>
+            </div>
         </div>
-        <div class="exhibit">
-            <h3>Red Horizons</h3>
-            <p>June 12 – July 30, 2026</p>
-        </div>
-    </div>
-</section>
+    </section>
 
-<section class="contact" id="contact">
-    <div class="container">
-        <h2 style="text-align:center; margin-bottom:40px;">Contact</h2>
-        <form>
-            <input type="text" placeholder="Your Name" required>
-            <input type="email" placeholder="Your Email" required>
-            <textarea rows="5" placeholder="Your Message"></textarea>
-            <button type="submit">Send Message</button>
-        </form>
-    </div>
-</section>
+    <!-- About Section -->
+    <section id="about" class="about">
+        <h2>About Us</h2>
+        <p>We are a premier online art gallery specializing in modern abstract works. Our mission is to bring innovative art to enthusiasts worldwide, focusing on themes of geometry, color, and form.</p>
+    </section>
 
-<footer>
-    © 2026 dudu Art Gallery. All rights reserved.
-</footer>
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Modern Art Gallery. All rights reserved.</p>
+    </footer>
 
 </body>
 </html>
