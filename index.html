@@ -3,16 +3,33 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>dudu art gallery</title>
-
+<title>Éclat Art Gallery</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-/* Base Styles */
-body {
+
+:root {
+    --primary: #111111;
+    --accent: #c8a96a;
+    --light: #f8f8f8;
+    --grey: #777;
+}
+
+* {
     margin: 0;
-    font-family: "Helvetica Neue", Arial, sans-serif;
-    background-color: #f5f5f5;
-    color: #111;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--light);
+    color: var(--primary);
     line-height: 1.6;
+}
+
+h1, h2, h3 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
 }
 
 .container {
@@ -21,398 +38,266 @@ body {
     margin: auto;
 }
 
-header {
-    padding: 100px 20px 70px;
-    text-align: center;
-    background: #f7f7f7;
-    border-bottom: 1px solid #dcdcdc;
-}
-
-/* ===== High-End Gallery Header Upgrade ===== */
-
-.header-inner {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 18px;
-}
-
-/* Logo */
-.logo {
-    width: 90px;
-    height: auto;
-    opacity: 0.9;
-}
-
-header h1 {
-    font-weight: 500;
-    font-size: 34px;
-    margin: 0;
-    letter-spacing: 3px;
-    text-transform: lowercase;
-}
-
-header p {
-    margin-top: 0;
-    font-size: 14px;
-    letter-spacing: 2px;
-    color: #666;
-    font-style: normal;
-}
-
-section {
-    margin-bottom: 80px;
-}
-
-section h2 {
-    font-weight: 500;
-    margin-bottom: 40px;
-    font-size: 26px;
-    text-transform: lowercase;
-    border-bottom: 2px solid #ddd;
-    display: inline-block;
-    padding-bottom: 5px;
-    color: #333;
-}
-
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 50px;
-}
-
-.artwork {
-    background: #fff;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.artwork:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 25px rgba(0,0,0,0.15);
-}
-
-.artwork img {
+/* NAVBAR */
+nav {
+    position: fixed;
     width: 100%;
-    display: block;
-    object-fit: cover;
-    height: 300px;
-    transition: transform 0.3s, filter 0.3s;
+    background: white;
+    padding: 20px 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    z-index: 1000;
 }
 
-.artwork img:hover {
-    transform: scale(1.05);
-    filter: brightness(1.1);
-}
-
-.art-info {
+nav .nav-container {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
-    padding: 15px 20px;
-    font-size: 14px;
-    border-top: 1px solid #eee;
+    align-items: center;
 }
 
-.art-info div {
-    line-height: 1.5;
-}
-
-.art-info em {
-    font-style: italic;
-    color: #555;
-}
-
-/* Price & PayPal Button */
-.price {
-    font-style: italic;
-    color: #777;
+nav ul {
     display: flex;
-    flex-direction: column;
-    gap: 8px;
+    list-style: none;
 }
 
-.price a {
-    display: inline-block;
-    font-size: 14px;
-    color: #fff;
+nav ul li {
+    margin-left: 30px;
+}
+
+nav ul li a {
     text-decoration: none;
-    padding: 6px 12px;
-    border-radius: 5px;
-    background-color: #e53935;
-    text-align: center;
-    transition: background 0.3s;
-}
-
-.price a:hover {
-    background-color: #b71c1c;
-}
-
-/* History Button Styles */
-.history-btn {
-    display: block;
-    width: 100%;
-    padding: 8px 0;
-    border: none;
-    background-color: #333;
-    color: #fff;
-    cursor: pointer;
-    font-size: 14px;
-    margin-top: 5px;
-    border-radius: 0 0 10px 10px;
-    transition: background-color 0.3s;
-}
-
-.history-btn:hover {
-    background-color: #555;
-}
-
-.history-text {
-    padding: 0 15px;
-    font-size: 13px;
-    color: #444;
-    background-color: #f0f0f0;
-    border-top: 1px solid #ddd;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s ease, padding 0.4s ease;
-}
-
-/* Quote Section */
-hr {
-    border: none;
-    border-top: 1px solid #ccc;
-    margin: 80px 0;
-}
-
-.quote-section {
-    text-align: center;
-    margin-bottom: 60px;
-}
-
-.quote-section h3 {
+    color: var(--primary);
     font-weight: 500;
-    font-size: 28px;
-    margin-bottom: 20px;
-    color: #333;
+    transition: 0.3s;
 }
 
-.quote {
-    max-width: 700px;
-    margin: auto;
-    font-size: 16px;
-    color: #555;
-    font-style: italic;
-    line-height: 1.7;
+nav ul li a:hover {
+    color: var(--accent);
 }
 
-footer {
-    font-size: 14px;
-    padding: 40px 0 60px;
+/* HERO */
+.hero {
+    height: 100vh;
+    background: url('https://images.unsplash.com/photo-1541961017774-22349e4a126f') center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
-    color: #444;
-    background-color: #f9f9f9;
-    border-top: 1px solid #ccc;
+    color: white;
 }
 
-footer .contact {
-    line-height: 1.8;
+.hero-overlay {
+    background: rgba(0,0,0,0.6);
+    padding: 60px;
 }
 
-footer .contact strong {
-    font-weight: 600;
+.hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
 }
 
-/* Responsive */
-@media(max-width: 768px) {
-    header h1 { font-size: 26px; letter-spacing: 2px; }
-    .logo { width: 70px; }
-    section h2 { font-size: 22px; }
-    .artwork img { height: 250px; }
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
 }
 
-@media(max-width: 480px) {
-    .artwork img { height: 200px; }
+.btn {
+    padding: 12px 30px;
+    background: var(--accent);
+    color: white;
+    text-decoration: none;
+    border-radius: 3px;
+    transition: 0.3s;
 }
+
+.btn:hover {
+    background: #b89552;
+}
+
+/* ABOUT */
+.about {
+    padding: 100px 0;
+    text-align: center;
+}
+
+.about p {
+    max-width: 800px;
+    margin: 20px auto;
+    color: var(--grey);
+}
+
+/* GALLERY */
+.gallery {
+    padding: 80px 0;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.gallery-grid img {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+    transition: 0.4s;
+}
+
+.gallery-grid img:hover {
+    transform: scale(1.05);
+}
+
+/* EXHIBITIONS */
+.exhibitions {
+    padding: 100px 0;
+    background: #111;
+    color: white;
+    text-align: center;
+}
+
+.exhibitions h2 {
+    margin-bottom: 40px;
+}
+
+.exhibit-item {
+    margin-bottom: 30px;
+}
+
+.exhibit-item h3 {
+    color: var(--accent);
+}
+
+/* CONTACT */
+.contact {
+    padding: 100px 0;
+    text-align: center;
+}
+
+.contact form {
+    max-width: 600px;
+    margin: auto;
+}
+
+.contact input,
+.contact textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+}
+
+.contact button {
+    padding: 12px 30px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.contact button:hover {
+    background: var(--accent);
+}
+
+/* FOOTER */
+footer {
+    padding: 40px 0;
+    text-align: center;
+    background: #000;
+    color: white;
+    font-size: 0.9rem;
+}
+
+@media(max-width:768px) {
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+}
+
 </style>
 </head>
 <body>
 
-<div class="container">
+<!-- NAVIGATION -->
+<nav>
+    <div class="container nav-container">
+        <h2>Éclat</h2>
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#gallery">Collection</a></li>
+            <li><a href="#exhibitions">Exhibitions</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </div>
+</nav>
 
-<header>
-    <div class="header-inner">
-        <img src="images/logo.png">
-            </div>
-</header>
-<body>
-
-<div class="container">
-
-<header>
-        <p>every masterpiece was once a scretch</p>
-</header>
-
-<section>
-    <h2>abstract</h2>
-    <div class="grid">
-
-        <div class="artwork">
-            <img src="images/abstract1.jpeg" alt="lost in voices">
-            <div class="art-info">
-                <div>
-                    <em>lost in voices</em><br>dudu
-                </div>
-                <div class="price">
-                    240€
-                    <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=duralidemir948@gmail.com&item_name=Lost+in+Voices&amount=240&currency_code=EUR" target="_blank">Buy with PayPal</a>
-                </div>
-            </div>
-            <button class="history-btn" onclick="toggleHistory(this)">History</button>
-            <div class="history-text">
-                Created in 2025, inspired by the artist's inner thoughts and unspoken emotions. It is the voices that insure the mind. What is real? Where am I? Who am I?
-            </div>
-        </div>
-
-        <div class="artwork">
-            <img src="images/abstract2.jpg" alt="bloody chains">
-            <div class="art-info">
-                <div>
-                    <em>bloody chains</em><br>dudu
-                </div>
-                <div class="price">
-                    60€
-                    <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=duralidemir948@gmail.com&item_name=Bloody+Chains&amount=60&currency_code=EUR" target="_blank">Buy with PayPal</a>
-                </div>
-            </div>
-            <button class="history-btn" onclick="toggleHistory(this)">History</button>
-            <div class="history-text">
-                It is February 2025, waking up but life does not seem the way it was once. Every morning whishes the returning of nigth. It is a painfull time. Trapped in chains. It is a bloody figth to unbind from the chains.
-            </div>
-        </div>
-
+<!-- HERO SECTION -->
+<section class="hero">
+    <div class="hero-overlay">
+        <h1>Where Contemporary Art Lives</h1>
+        <p>Discover curated masterpieces from visionary artists around the world.</p>
+        <a href="#gallery" class="btn">Explore Collection</a>
     </div>
 </section>
 
-<section>
-    <h2>cubism</h2>
-    <div class="grid">
-
-        <div class="artwork">
-            <img src="images/cubism1.jpeg" alt="business card">
-            <div class="art-info">
-                <div>
-                    <em>business card</em><br>dudu
-                </div>
-                <div class="price">
-                    210€
-                    <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=duralidemir948@gmail.com&item_name=Business+Card&amount=210&currency_code=EUR" target="_blank">Buy with PayPal</a>
-                </div>
-            </div>
-            <button class="history-btn" onclick="toggleHistory(this)">History</button>
-            <div class="history-text">
-                The business card, is a creation that reflects order, precision and emphasis. A time in which these attributes are necessary for regeneration. Coming back to life, so life gets colour.
-            </div>
-        </div>
-
-        <div class="artwork">
-            <img src="images/cubism2.jpg" alt="lost in the room">
-            <div class="art-info">
-                <div>
-                    <em>lost in the room</em><br>dudu
-                </div>
-                <div class="price">
-                    100€
-                    <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=duralidemir948@gmail.com&item_name=Lost+in+the+Room&amount=100&currency_code=EUR" target="_blank">Buy with PayPal</a>
-                </div>
-            </div>
-            <button class="history-btn" onclick="toggleHistory(this)">History</button>
-            <div class="history-text">
-                A room of isolation to find back to life. The path is a struggle. It is disorienting. But no body said " It will be an easy way."
-            </div>
-        </div>
-
+<!-- ABOUT -->
+<section class="about" id="about">
+    <div class="container">
+        <h2>About Our Gallery</h2>
+        <p>
+            Éclat Art Gallery is dedicated to showcasing exceptional contemporary and modern art.
+            We collaborate with emerging and established artists to curate exhibitions that inspire,
+            challenge perspectives, and celebrate creativity in its finest form.
+        </p>
     </div>
 </section>
 
-<section>
-    <h2>landscape</h2>
-    <div class="grid">
-
-        <div class="artwork">
-            <img src="images/landscape1.jpg" alt="wisdom of light">
-            <div class="art-info">
-                <div>
-                    <em>wisdom of light</em><br>dudu
-                </div>
-                <div class="price">not for sale</div>
-            </div>
-            <button class="history-btn" onclick="toggleHistory(this)">History</button>
-            <div class="history-text">
-                You have to earn wisdom. It is not capable to buy.
-            </div>
+<!-- GALLERY -->
+<section class="gallery" id="gallery">
+    <div class="container">
+        <h2 style="text-align:center; margin-bottom:40px;">Featured Collection</h2>
+        <div class="gallery-grid">
+            <img src="https://images.unsplash.com/photo-1504198453319-5ce911bafcde" alt="">
+            <img src="https://images.unsplash.com/photo-1511765224389-37f0e77cf0eb" alt="">
+            <img src="https://images.unsplash.com/photo-1520697222865-9e66f3bdf8f3" alt="">
+            <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee" alt="">
+            <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429" alt="">
+            <img src="https://images.unsplash.com/photo-1504203700781-78d9d9e07b7b" alt="">
         </div>
-
-        <div class="artwork">
-            <img src="images/landscape2.jpg" alt="bridge of the darkness">
-            <div class="art-info">
-                <div>
-                    <em>bridge of the darkness</em><br>dudu
-                </div>
-                <div class="price">
-                    80€
-                    <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=duralidemir948@gmail.com&item_name=Bridge+of+the+Darkness&amount=80&currency_code=EUR" target="_blank">Buy with PayPal</a>
-                </div>
-            </div>
-            <button class="history-btn" onclick="toggleHistory(this)">History</button>
-            <div class="history-text">
-                the painting „bridge of the darkness“ was painted early 2025. Even though it’s one of the more cheaper paintings, it has the most deeply meaning. It was a time in which death was at the edge of the life. It was a point of excepting the death and an agreement of ending the life. But at exactly that point the death turned his back to the life and let him live. Not because it’s on his hand whom sole he takes but only and only because of the graciousness of God the all mighty.
-            </div>
-        </div>
-
     </div>
 </section>
 
-<hr>
-
-<div class="quote-section">
-    <h3>dudu</h3>
-    <div class="quote">
-        September, 2024: sitting on the sofa all alone, extremely depressed and not able to move,
-        not because I am physically disabled but because I felt ashamed
+<!-- EXHIBITIONS -->
+<section class="exhibitions" id="exhibitions">
+    <div class="container">
+        <h2>Upcoming Exhibitions</h2>
+        <div class="exhibit-item">
+            <h3>Reflections of Light</h3>
+            <p>March 15 – April 30, 2026</p>
+        </div>
+        <div class="exhibit-item">
+            <h3>Modern Abstractions</h3>
+            <p>May 12 – June 28, 2026</p>
+        </div>
     </div>
-</div>
+</section>
 
-<hr>
+<!-- CONTACT -->
+<section class="contact" id="contact">
+    <div class="container">
+        <h2>Contact Us</h2>
+        <form>
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea rows="5" placeholder="Your Message"></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+    </div>
+</section>
 
+<!-- FOOTER -->
 <footer>
-    <div class="contact">
-        <strong>dudu art gallery</strong><br>
-        81929 Munich<br>
-        Munich, Bavaria<br><br>
-        +49 176 416 292 50<br>
-        d.demir@dudu-art-gallery.com
-    </div>
+    © 2026 Éclat Art Gallery. All Rights Reserved.
 </footer>
-
-</div>
-
-<script>
-function toggleHistory(button) {
-    const historyDiv = button.nextElementSibling;
-    if (historyDiv.style.maxHeight && historyDiv.style.maxHeight !== "0px") {
-        historyDiv.style.maxHeight = "0";
-        historyDiv.style.padding = "0 15px";
-        button.textContent = "History";
-    } else {
-        historyDiv.style.maxHeight = historyDiv.scrollHeight + "px";
-        historyDiv.style.padding = "10px 15px";
-        button.textContent = "Hide History";
-    }
-}
-</script>
 
 </body>
 </html>
