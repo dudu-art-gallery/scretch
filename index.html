@@ -3,224 +3,223 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Éclat Art Gallery</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<title>dudu | Art Gallery</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
 <style>
 
-:root {
-    --primary: #111111;
-    --accent: #c8a96a;
-    --light: #f8f8f8;
-    --grey: #777;
+:root{
+    --bg: #ffffff;
+    --text: #000000;
+    --accent: #9e1b1b; /* slightly deep red tone */
+    --soft-grey: #777;
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-body {
+body{
     font-family: 'Inter', sans-serif;
-    background: var(--light);
-    color: var(--primary);
-    line-height: 1.6;
+    background: var(--bg);
+    color: var(--text);
+    line-height:1.6;
 }
 
-h1, h2, h3 {
-    font-family: 'Playfair Display', serif;
-    font-weight: 600;
+/* NAVIGATION */
+
+nav{
+    position:fixed;
+    width:100%;
+    background:#fff;
+    padding:25px 0;
+    border-bottom:1px solid #eee;
+    z-index:1000;
 }
 
-.container {
-    width: 90%;
-    max-width: 1200px;
-    margin: auto;
+.container{
+    width:90%;
+    max-width:1200px;
+    margin:auto;
 }
 
-/* NAVBAR */
-nav {
-    position: fixed;
-    width: 100%;
-    background: white;
-    padding: 20px 0;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-    z-index: 1000;
+.nav-flex{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 }
 
-nav .nav-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.logo{
+    font-family:'Playfair Display', serif;
+    font-size:1.8rem;
+    font-weight:700;
+    letter-spacing:2px;
 }
 
-nav ul {
-    display: flex;
-    list-style: none;
+nav ul{
+    list-style:none;
+    display:flex;
 }
 
-nav ul li {
-    margin-left: 30px;
+nav ul li{
+    margin-left:40px;
 }
 
-nav ul li a {
-    text-decoration: none;
-    color: var(--primary);
-    font-weight: 500;
-    transition: 0.3s;
+nav ul li a{
+    text-decoration:none;
+    color:#000;
+    font-weight:500;
+    transition:0.3s ease;
 }
 
-nav ul li a:hover {
-    color: var(--accent);
+nav ul li a:hover{
+    color:var(--accent);
 }
 
 /* HERO */
-.hero {
-    height: 100vh;
-    background: url('https://images.unsplash.com/photo-1541961017774-22349e4a126f') center/cover no-repeat;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: white;
+
+.hero{
+    height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding-top:80px;
 }
 
-.hero-overlay {
-    background: rgba(0,0,0,0.6);
-    padding: 60px;
+.hero h1{
+    font-family:'Playfair Display', serif;
+    font-size:4rem;
+    margin-bottom:20px;
 }
 
-.hero h1 {
-    font-size: 3.5rem;
-    margin-bottom: 20px;
+.hero p{
+    font-size:1.2rem;
+    color:var(--soft-grey);
+    margin-bottom:35px;
 }
 
-.hero p {
-    font-size: 1.2rem;
-    margin-bottom: 30px;
+.btn{
+    padding:12px 35px;
+    border:1px solid var(--accent);
+    color:var(--accent);
+    text-decoration:none;
+    transition:0.3s ease;
+    font-weight:500;
 }
 
-.btn {
-    padding: 12px 30px;
-    background: var(--accent);
-    color: white;
-    text-decoration: none;
-    border-radius: 3px;
-    transition: 0.3s;
-}
-
-.btn:hover {
-    background: #b89552;
+.btn:hover{
+    background:var(--accent);
+    color:#fff;
 }
 
 /* ABOUT */
-.about {
-    padding: 100px 0;
-    text-align: center;
+
+section{
+    padding:120px 0;
 }
 
-.about p {
-    max-width: 800px;
-    margin: 20px auto;
-    color: var(--grey);
+.about{
+    text-align:center;
+}
+
+.about p{
+    max-width:750px;
+    margin:20px auto;
+    color:var(--soft-grey);
 }
 
 /* GALLERY */
-.gallery {
-    padding: 80px 0;
+
+.gallery-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:25px;
 }
 
-.gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
+.gallery-grid img{
+    width:100%;
+    height:380px;
+    object-fit:cover;
+    transition:0.4s ease;
 }
 
-.gallery-grid img {
-    width: 100%;
-    height: 350px;
-    object-fit: cover;
-    transition: 0.4s;
-}
-
-.gallery-grid img:hover {
-    transform: scale(1.05);
+.gallery-grid img:hover{
+    transform:scale(1.03);
 }
 
 /* EXHIBITIONS */
-.exhibitions {
-    padding: 100px 0;
-    background: #111;
-    color: white;
-    text-align: center;
+
+.exhibitions{
+    text-align:center;
+    background:#fafafa;
 }
 
-.exhibitions h2 {
-    margin-bottom: 40px;
+.exhibit{
+    margin-top:30px;
 }
 
-.exhibit-item {
-    margin-bottom: 30px;
-}
-
-.exhibit-item h3 {
-    color: var(--accent);
+.exhibit h3{
+    color:var(--accent);
+    font-family:'Playfair Display', serif;
+    margin-bottom:5px;
 }
 
 /* CONTACT */
-.contact {
-    padding: 100px 0;
-    text-align: center;
-}
 
-.contact form {
-    max-width: 600px;
-    margin: auto;
+.contact form{
+    max-width:600px;
+    margin:auto;
 }
 
 .contact input,
-.contact textarea {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 15px;
-    border: 1px solid #ddd;
+.contact textarea{
+    width:100%;
+    padding:12px;
+    margin-bottom:15px;
+    border:1px solid #ddd;
+    font-family:'Inter', sans-serif;
 }
 
-.contact button {
-    padding: 12px 30px;
-    background: var(--primary);
-    color: white;
-    border: none;
-    cursor: pointer;
+.contact button{
+    padding:12px 35px;
+    border:none;
+    background:var(--accent);
+    color:#fff;
+    cursor:pointer;
+    transition:0.3s;
 }
 
-.contact button:hover {
-    background: var(--accent);
+.contact button:hover{
+    opacity:0.85;
 }
 
 /* FOOTER */
-footer {
-    padding: 40px 0;
-    text-align: center;
-    background: #000;
-    color: white;
-    font-size: 0.9rem;
+
+footer{
+    padding:50px 0;
+    text-align:center;
+    font-size:0.9rem;
+    border-top:1px solid #eee;
 }
 
-@media(max-width:768px) {
-    .hero h1 {
-        font-size: 2.5rem;
+@media(max-width:768px){
+    .hero h1{
+        font-size:2.5rem;
     }
 }
 
 </style>
 </head>
+
 <body>
 
-<!-- NAVIGATION -->
 <nav>
-    <div class="container nav-container">
-        <h2>Éclat</h2>
+    <div class="container nav-flex">
+        <div class="logo">dudu</div>
         <ul>
             <li><a href="#about">About</a></li>
             <li><a href="#gallery">Collection</a></li>
@@ -230,61 +229,56 @@ footer {
     </div>
 </nav>
 
-<!-- HERO SECTION -->
 <section class="hero">
-    <div class="hero-overlay">
-        <h1>Where Contemporary Art Lives</h1>
-        <p>Discover curated masterpieces from visionary artists around the world.</p>
-        <a href="#gallery" class="btn">Explore Collection</a>
+    <div>
+        <h1>Contemporary Expression</h1>
+        <p>A curated experience of modern artistic vision.</p>
+        <a href="#gallery" class="btn">View Collection</a>
     </div>
 </section>
 
-<!-- ABOUT -->
 <section class="about" id="about">
     <div class="container">
-        <h2>About Our Gallery</h2>
+        <h2>About dudu</h2>
         <p>
-            Éclat Art Gallery is dedicated to showcasing exceptional contemporary and modern art.
-            We collaborate with emerging and established artists to curate exhibitions that inspire,
-            challenge perspectives, and celebrate creativity in its finest form.
+            dudu is a contemporary art gallery dedicated to showcasing refined modern works.
+            We collaborate with emerging and established artists to present exhibitions that
+            reflect cultural depth, emotion, and artistic innovation.
         </p>
     </div>
 </section>
 
-<!-- GALLERY -->
-<section class="gallery" id="gallery">
+<section id="gallery">
     <div class="container">
-        <h2 style="text-align:center; margin-bottom:40px;">Featured Collection</h2>
+        <h2 style="text-align:center; margin-bottom:50px;">Featured Works</h2>
         <div class="gallery-grid">
-            <img src="https://images.unsplash.com/photo-1504198453319-5ce911bafcde" alt="">
-            <img src="https://images.unsplash.com/photo-1511765224389-37f0e77cf0eb" alt="">
-            <img src="https://images.unsplash.com/photo-1520697222865-9e66f3bdf8f3" alt="">
-            <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee" alt="">
-            <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429" alt="">
-            <img src="https://images.unsplash.com/photo-1504203700781-78d9d9e07b7b" alt="">
+            <img src="https://images.unsplash.com/photo-1504198453319-5ce911bafcde">
+            <img src="https://images.unsplash.com/photo-1511765224389-37f0e77cf0eb">
+            <img src="https://images.unsplash.com/photo-1520697222865-9e66f3bdf8f3">
+            <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee">
+            <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429">
+            <img src="https://images.unsplash.com/photo-1504203700781-78d9d9e07b7b">
         </div>
     </div>
 </section>
 
-<!-- EXHIBITIONS -->
 <section class="exhibitions" id="exhibitions">
     <div class="container">
         <h2>Upcoming Exhibitions</h2>
-        <div class="exhibit-item">
-            <h3>Reflections of Light</h3>
-            <p>March 15 – April 30, 2026</p>
+        <div class="exhibit">
+            <h3>Shades of Silence</h3>
+            <p>April 10 – May 28, 2026</p>
         </div>
-        <div class="exhibit-item">
-            <h3>Modern Abstractions</h3>
-            <p>May 12 – June 28, 2026</p>
+        <div class="exhibit">
+            <h3>Red Horizons</h3>
+            <p>June 12 – July 30, 2026</p>
         </div>
     </div>
 </section>
 
-<!-- CONTACT -->
 <section class="contact" id="contact">
     <div class="container">
-        <h2>Contact Us</h2>
+        <h2 style="text-align:center; margin-bottom:40px;">Contact</h2>
         <form>
             <input type="text" placeholder="Your Name" required>
             <input type="email" placeholder="Your Email" required>
@@ -294,9 +288,8 @@ footer {
     </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
-    © 2026 Éclat Art Gallery. All Rights Reserved.
+    © 2026 dudu Art Gallery. All rights reserved.
 </footer>
 
 </body>
