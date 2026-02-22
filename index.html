@@ -10,7 +10,7 @@
 <style>
 
 :root {
-  --bg:#fff;
+  --bg:#ffffff;
   --text:#111;
   --soft:#f5f5f5;
 }
@@ -21,7 +21,11 @@ body.dark {
   --soft:#1a1a1a;
 }
 
-* { margin:0; padding:0; box-sizing:border-box; }
+* {
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
 
 body {
   font-family:'Montserrat',sans-serif;
@@ -137,6 +141,7 @@ nav a {
 
 .card img {
   width:100%;
+  cursor:pointer;
 }
 
 .card-info {
@@ -153,13 +158,16 @@ button {
   background:transparent;
   font-size:14px;
   letter-spacing:2px;
+  cursor:pointer;
+  transition:.3s ease;
 }
 
-button:active {
-  transform:scale(.97);
+button:hover {
+  background:var(--text);
+  color:var(--bg);
 }
 
-/* ================= MODAL ================= */
+/* ================= IMAGE MODAL ================= */
 
 .modal {
   position:fixed;
@@ -181,15 +189,45 @@ button:active {
   display:flex;
 }
 
+/* ================= DESCRIPTION PANEL ================= */
 
-/* ================= DESKTOP ================= */
+.description-panel {
+  position:fixed;
+  bottom:-100%;
+  left:0;
+  width:100%;
+  background:var(--bg);
+  padding:40px 25px;
+  box-shadow:0 -20px 50px rgba(0,0,0,0.15);
+  transition:.4s ease;
+  z-index:2100;
+  max-height:80vh;
+  overflow-y:auto;
+}
 
+.description-panel.active {
+  bottom:0;
+}
+
+.description-content h2 {
+  margin-bottom:15px;
+  letter-spacing:2px;
+}
+
+.description-content p {
+  line-height:1.6;
+  color:gray;
+}
+
+.close-description {
+  margin-top:30px;
+}
+
+/* Desktop panel */
 @media(min-width:900px){
 
   .menu-toggle { display:none; }
-
   nav { display:flex; }
-
   .mobile-menu { display:none; }
 
   .hero {
@@ -208,6 +246,19 @@ button:active {
 
   .section { padding:120px 100px; }
 
+  .description-panel {
+    top:0;
+    right:-500px;
+    bottom:auto;
+    left:auto;
+    width:500px;
+    height:100%;
+    box-shadow:-20px 0 50px rgba(0,0,0,0.15);
+  }
+
+  .description-panel.active {
+    right:0;
+  }
 }
 
 @media(max-width:899px){
@@ -238,25 +289,28 @@ button:active {
 <section class="hero">
   <h1>dudu art gallery</h1>
   <p>every masterpiece was once a scratch</p>
-  <img src="images/busniess card.jpeg">
+  <img src="images/busniess card.jpeg" onclick="openModal(this)">
 </section>
 
 <section class="section" id="collection">
   <div class="grid">
 
-    <div class="card" onclick="openModal(this)">
-      <img src="images/P1.jpeg">
+    <div class="card">
+      <img src="images/P1.jpeg" onclick="openModal(this)">
       <div class="card-info">P1</div>
+      <button onclick="showDescription('P1','P1 is a cubist exploration of fractured identity and geometric harmony. The composition reflects emotional tension through structured abstraction.')">DETAILS</button>
     </div>
 
-    <div class="card" onclick="openModal(this)">
-      <img src="images/fell in love.jpeg">
+    <div class="card">
+      <img src="images/fell in love.jpeg" onclick="openModal(this)">
       <div class="card-info">FELL IN LOVE</div>
+      <button onclick="showDescription('Fell in Love','This piece captures vulnerability and connection through layered geometric forms and subtle tonal contrast.')">DETAILS</button>
     </div>
 
-    <div class="card" onclick="openModal(this)">
-      <img src="images/P2.jpeg">
+    <div class="card">
+      <img src="images/P2.jpeg" onclick="openModal(this)">
       <div class="card-info">P2</div>
+      <button onclick="showDescription('P2','P2 investigates structural minimalism within cubist tradition, merging architectural discipline with expressive spontaneity.')">DETAILS</button>
     </div>
 
   </div>
@@ -269,12 +323,21 @@ button:active {
   d.demir@dudu-art-gallery.com
 </footer>
 
+<!-- IMAGE MODAL -->
 <div class="modal" id="modal" onclick="closeModal()">
   <img id="modal-img">
 </div>
 
-<script>
+<!-- DESCRIPTION PANEL -->
+<div class="description-panel" id="descriptionPanel">
+  <div class="description-content">
+    <h2 id="desc-title"></h2>
+    <p id="desc-text"></p>
+    <button class="close-description" onclick="closeDescription()">CLOSE</button>
+  </div>
+</div>
 
+<script>
 
 function toggleMenu(){
   document.getElementById("mobileMenu").classList.toggle("active");
@@ -284,14 +347,23 @@ function toggleDark(){
   document.body.classList.toggle("dark");
 }
 
-function openModal(card){
-  const img = card.querySelector("img").src;
-  document.getElementById("modal-img").src = img;
+function openModal(img){
+  document.getElementById("modal-img").src = img.src;
   document.getElementById("modal").classList.add("active");
 }
 
 function closeModal(){
   document.getElementById("modal").classList.remove("active");
+}
+
+function showDescription(title,text){
+  document.getElementById("desc-title").innerText = title;
+  document.getElementById("desc-text").innerText = text;
+  document.getElementById("descriptionPanel").classList.add("active");
+}
+
+function closeDescription(){
+  document.getElementById("descriptionPanel").classList.remove("active");
 }
 
 </script>
