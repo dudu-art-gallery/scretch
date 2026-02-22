@@ -4,10 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>dudu art gallery</title>
-<!-- Google Font -->
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
+
+/* ================= GLOBAL ================= */
 
 * {
   margin: 0;
@@ -16,48 +18,68 @@
 }
 
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   background: #ffffff;
   color: #111;
   overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
 }
 
 /* ================= NAVIGATION ================= */
 
 header {
   width: 100%;
-  padding: 20px 60px;
+  padding: 25px 80px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   position: fixed;
   top: 0;
-  background: rgba(255,255,255,0.95);
-  backdrop-filter: blur(10px);
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(12px);
   z-index: 1000;
+  transition: 0.4s ease;
 }
 
 .logo {
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 500;
-  letter-spacing: 2px;
+  letter-spacing: 4px;
 }
 
 nav ul {
   list-style: none;
   display: flex;
-  gap: 40px;
+  gap: 50px;
 }
 
 nav a {
   text-decoration: none;
   color: #111;
   font-weight: 400;
-  transition: 0.3s;
+  font-size: 14px;
+  letter-spacing: 2px;
+  position: relative;
 }
 
-nav a:hover {
-  opacity: 0.5;
+nav a::after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 1px;
+  bottom: -6px;
+  left: 0;
+  background: #111;
+  transition: 0.4s ease;
+}
+
+nav a:hover::after {
+  width: 100%;
 }
 
 .hamburger {
@@ -69,30 +91,35 @@ nav a:hover {
 /* ================= HERO ================= */
 
 .hero {
-  margin-top: 120px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 80px;
   text-align: center;
-  padding: 40px 20px;
 }
 
 .hero h1 {
-  font-size: 48px;
-  font-weight: 500;
-  margin-bottom: 10px;
+  font-size: 56px;
+  font-weight: 400;
+  letter-spacing: 3px;
+  margin-bottom: 15px;
   animation: fadeDown 1.2s ease forwards;
 }
 
 .hero p {
-  font-size: 20px;
-  color: #555;
-  margin-bottom: 40px;
+  font-size: 18px;
+  color: #666;
+  margin-bottom: 50px;
   animation: fadeUp 1.5s ease forwards;
 }
 
 .hero img {
-  width: 80%;
-  max-width: 1000px;
-  border-radius: 4px;
-  transition: transform 0.6s ease;
+  width: 70%;
+  max-width: 1100px;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+  transition: 0.6s ease;
   animation: fadeUp 2s ease forwards;
 }
 
@@ -100,55 +127,59 @@ nav a:hover {
   transform: scale(1.02);
 }
 
-/* ================= CATEGORY SECTION ================= */
+/* ================= SECTION ================= */
 
 .section {
-  padding: 100px 60px;
+  padding: 140px 100px;
 }
 
-.section h2 {
-  font-size: 26px;
-  margin-bottom: 30px;
-  text-transform: lowercase;
+.section-title {
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: 3px;
+  margin-bottom: 60px;
 }
+
+/* ================= GRID ================= */
 
 .grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
+  gap: 50px;
 }
 
 .card {
-  background: #f8f8f8;
-  padding: 15px;
-  transition: 0.4s;
+  position: relative;
+  overflow: hidden;
   cursor: pointer;
   opacity: 0;
-  transform: translateY(40px);
+  transform: translateY(60px);
+  transition: 0.8s ease;
 }
 
 .card img {
   width: 100%;
-  margin-bottom: 10px;
+  transition: 0.8s ease;
 }
 
-.card:hover {
-  transform: translateY(-5px);
+.card:hover img {
+  transform: scale(1.05);
 }
 
-.card-title {
+.card-info {
+  margin-top: 20px;
   font-size: 14px;
-  display: flex;
-  justify-content: space-between;
+  letter-spacing: 2px;
 }
 
 /* ================= FOOTER ================= */
 
 footer {
-  background: #f2f2f2;
-  padding: 60px;
+  padding: 100px;
+  background: #f5f5f5;
   font-size: 14px;
-  line-height: 1.8;
+  letter-spacing: 1px;
+  line-height: 2;
 }
 
 /* ================= ANIMATIONS ================= */
@@ -165,10 +196,10 @@ footer {
 
 /* ================= MOBILE ================= */
 
-@media (max-width: 900px) {
+@media (max-width: 1000px) {
 
   header {
-    padding: 20px;
+    padding: 20px 30px;
   }
 
   nav ul {
@@ -177,9 +208,10 @@ footer {
     right: 0;
     background: white;
     flex-direction: column;
-    width: 200px;
-    padding: 30px;
+    width: 220px;
+    padding: 40px;
     display: none;
+    box-shadow: -10px 10px 30px rgba(0,0,0,0.05);
   }
 
   nav ul.active {
@@ -190,25 +222,26 @@ footer {
     display: block;
   }
 
-  .grid {
-    grid-template-columns: 1fr;
-  }
-
   .hero h1 {
     font-size: 32px;
   }
 
   .hero img {
-    width: 100%;
+    width: 90%;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
   }
 
   .section {
-    padding: 60px 20px;
+    padding: 80px 30px;
   }
 
   footer {
-    padding: 40px 20px;
+    padding: 60px 30px;
   }
+
 }
 
 </style>
@@ -216,13 +249,13 @@ footer {
 <body>
 
 <header>
-  <div class="logo">dudu</div>
+  <div class="logo">DUDU</div>
 
   <nav>
     <div class="hamburger" onclick="toggleMenu()">☰</div>
     <ul id="menu">
-      <li><a href="#cubism">cubism</a></li>
-      <li><a href="#contact">contact</a></li>
+      <li><a href="#cubism">CUBISM</a></li>
+      <li><a href="#contact">CONTACT</a></li>
     </ul>
   </nav>
 </header>
@@ -230,42 +263,35 @@ footer {
 <section class="hero">
   <h1>dudu art gallery</h1>
   <p>every masterpiece was once a scratch</p>
-  <img src="images/busnieess card.jpeg">
+  <img src="images/busniess card.jpeg" alt="Main Artwork">
 </section>
 
 <section class="section" id="cubism">
-    <div class="grid">
+  <div class="section-title">CUBISM COLLECTION</div>
+
+  <div class="grid">
     <div class="card">
       <img src="images/P1.jpeg">
-      <div class="card-title">
-        <span>P1</span>
-      </div>
+      <div class="card-info">P1</div>
     </div>
-    <div class="grid">
+
     <div class="card">
       <img src="images/fell in love.jpeg">
-      <div class="card-title">
-        <span>fell in love</span>
-      </div>
+      <div class="card-info">FELL IN LOVE</div>
     </div>
-  </div>
-</section>
-    <div class="grid">
+
     <div class="card">
       <img src="images/P2.jpeg">
-      <div class="card-title">
-        <span>P2</span>
-      </div>
+      <div class="card-info">P2</div>
     </div>
   </div>
 </section>
 
-
 <footer id="contact">
-  <p><strong>dudu art gallery</strong></p>
-    <p>81929 Munich</p>
-  <p>+49 176 416 292 50</p>
-  <p>d.demir@dudu-art-gallery.com</p>
+  <strong>DUDU ART GALLERY</strong><br>
+  81929 Munich<br>
+  +49 176 416 292 50<br>
+  d.demir@dudu-art-gallery.com
 </footer>
 
 <script>
@@ -274,7 +300,7 @@ function toggleMenu() {
   document.getElementById("menu").classList.toggle("active");
 }
 
-/* Scroll Animation */
+/* Scroll Reveal */
 const cards = document.querySelectorAll('.card');
 
 const observer = new IntersectionObserver(entries => {
