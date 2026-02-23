@@ -80,7 +80,7 @@ body::before {
   pointer-events:none;
 }
 
-/* ================= FADE TO BLACK TRANSITION ================= */
+/* ================= FADE TO BLACK ================= */
 
 .fade-layer {
   position:fixed;
@@ -132,6 +132,7 @@ body::before {
   align-items:center;
   opacity:0;
   transition:1.5s ease;
+  position:relative;
 }
 
 .artwork.visible { opacity:1; }
@@ -179,7 +180,18 @@ button:hover {
   color:#000;
 }
 
-/* ================= PRIVATE VIEW SCREEN ================= */
+/* ================= RUPTURE ROOM STYLE ================= */
+
+#ruptureRoom {
+  display:none;
+}
+
+#ruptureRoom img {
+  filter: contrast(1.2) saturate(0.85);
+  transform: scale(1.05);
+}
+
+/* ================= PRIVATE VIEW ================= */
 
 .private-view {
   position:fixed;
@@ -271,22 +283,30 @@ button:hover {
   <button onclick="openPrivate()">Collector Inquiry</button>
 </section>
 
+<!-- ENTRY TO RESTRICTED WORK -->
+<section class="artwork">
+  <button onclick="enterRupture()">Enter Restricted Work</button>
+</section>
+
+<!-- SCHIZOPHRENIA ROOM -->
+<section class="artwork" id="ruptureRoom">
+  <div class="artwork-number">R</div>
+  <img src="images/schizophrenia.jpeg">
+  <h3>Schizophrenia</h3>
+  <span> Mixed media on paper · 2025</span>
+  <button onclick="openPrivate()">Collector Inquiry</button>
+</section>
+
 <!-- PRIVATE VIEW -->
 <div class="private-view" id="privateView">
   <h2>Request Private Viewing</h2>
 
   <form action="https://formsubmit.co/d.demir@dudu-art-gallery.com" method="POST">
     <input type="email" name="email" placeholder="Your Email" required>
-    
-    <!-- Disable captcha -->
     <input type="hidden" name="_captcha" value="false">
-    
-    <!-- Redirect back to site -->
-   <input type="hidden" name="_next" value="https://dudu-art-gallery.com/">
-
+    <input type="hidden" name="_next" value="https://dudu-art-gallery.com/">
     <button type="submit">Submit Request</button>
   </form>
-
 </div>
 
 <!-- AMBIENT AUDIO -->
@@ -327,15 +347,14 @@ document.addEventListener("mousemove",e=>{
   spot.style.top=e.clientY+"px";
 });
 
-/* AUDIO FADE IN */
+/* AUDIO */
 document.addEventListener("click",function startAudio(){
   const audio=document.getElementById("ambience");
   audio.volume=0;
   audio.play();
   let fade=setInterval(()=>{
-    if(audio.volume<0.15){
-      audio.volume+=0.01;
-    } else clearInterval(fade);
+    if(audio.volume<0.15){ audio.volume+=0.01; }
+    else clearInterval(fade);
   },200);
   document.removeEventListener("click",startAudio);
 });
@@ -344,8 +363,16 @@ document.addEventListener("click",function startAudio(){
 function openPrivate(){
   document.getElementById("privateView").classList.add("active");
 }
-function closePrivate(){
-  document.getElementById("privateView").classList.remove("active");
+
+/* ENTER RUPTURE ROOM */
+function enterRupture(){
+  const layer=document.getElementById("fadeLayer");
+  layer.style.opacity=1;
+  setTimeout(()=>{
+    document.getElementById("ruptureRoom").style.display="flex";
+    window.scrollTo({top:document.body.scrollHeight, behavior:"smooth"});
+    layer.style.opacity=0;
+  },1200);
 }
 
 </script>
