@@ -274,8 +274,19 @@ button:hover {
 <!-- PRIVATE VIEW -->
 <div class="private-view" id="privateView">
   <h2>Request Private Viewing</h2>
-  <input type="email" placeholder="d.demir@dudu-art-gallery.com">
-  <button onclick="closePrivate()">Submit Request</button>
+
+  <form action="https://formsubmit.co/d.demir@dudu-art-gallery.com" method="POST">
+    <input type="email" name="email" placeholder="Your Email" required>
+    
+    <!-- Disable captcha -->
+    <input type="hidden" name="_captcha" value="false">
+    
+    <!-- Redirect back to site -->
+    <input type="hidden" name="_next" value="https://yourwebsite.com">
+
+    <button type="submit">Submit Request</button>
+  </form>
+
 </div>
 
 <!-- AMBIENT AUDIO -->
