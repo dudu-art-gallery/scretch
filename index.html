@@ -2,304 +2,138 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>DUDU Art Gallery</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DUDU — Exhibition</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
 
 :root {
-  --bg:#ffffff;
-  --text:#111;
-  --soft:#f5f5f5;
+  --bg: #ffffff;
+  --text: #111;
+  --muted: #777;
 }
 
 body.dark {
-  --bg:#0e0e0e;
-  --text:#f5f5f5;
-  --soft:#1a1a1a;
+  --bg: #0e0e0e;
+  --text: #f5f5f5;
+  --muted: #999;
 }
 
 * {
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  font-family:'Montserrat',sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  transition:.3s ease;
-  overflow-x:hidden;
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  transition: 0.4s ease;
 }
 
-/* ================= HEADER ================= */
+/* HEADER */
 
 header {
-  position:fixed;
-  width:100%;
-  padding:20px 25px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  background:rgba(255,255,255,.85);
-  backdrop-filter:blur(12px);
-  z-index:1000;
+  position: fixed;
+  width: 100%;
+  padding: 30px 60px;
+  display: flex;
+  justify-content: space-between;
+  background: rgba(255,255,255,0.8);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
 }
 
 body.dark header {
-  background:rgba(15,15,15,.85);
+  background: rgba(15,15,15,0.8);
 }
 
-.logo {
-  letter-spacing:3px;
-  font-weight:500;
+header a {
+  text-decoration: none;
+  color: var(--text);
+  font-size: 14px;
+  letter-spacing: 2px;
+  margin-left: 40px;
 }
 
-.menu-toggle {
-  font-size:26px;
-  cursor:pointer;
-  display:none;
+/* EXHIBITION INTRO */
+
+.intro {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 15%;
 }
 
-nav {
-  display:flex;
-  gap:30px;
-  align-items:center;
+.intro h1 {
+  font-size: 48px;
+  font-weight: 400;
+  letter-spacing: 3px;
+  margin-bottom: 40px;
 }
 
-nav a {
-  text-decoration:none;
-  color:var(--text);
-  font-size:14px;
-  letter-spacing:2px;
+.intro p {
+  max-width: 600px;
+  line-height: 1.8;
+  color: var(--muted);
 }
 
-/* ================= MOBILE MENU ================= */
+/* ARTWORK SECTION */
 
-.mobile-menu {
-  position:fixed;
-  top:0;
-  right:-100%;
-  width:70%;
-  height:100%;
-  background:var(--bg);
-  padding:100px 30px;
-  display:flex;
-  flex-direction:column;
-  gap:30px;
-  transition:.4s ease;
-  z-index:1500;
+.artwork {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 100px 10%;
+  text-align: center;
 }
 
-.mobile-menu.active {
-  right:0;
+.artwork img {
+  max-width: 900px;
+  width: 80%;
+  margin-bottom: 40px;
+  transition: 0.6s ease;
 }
 
-.mobile-menu a {
-  font-size:18px;
+.artwork img:hover {
+  transform: scale(1.02);
 }
 
-/* ================= HERO ================= */
-
-.hero {
-  padding-top:120px;
-  padding-bottom:80px;
-  text-align:center;
+.artwork h2 {
+  font-size: 20px;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
 }
 
-.hero h1 {
-  font-size:32px;
-  margin-bottom:15px;
+.artwork span {
+  color: var(--muted);
+  font-size: 14px;
 }
 
-.hero p {
-  font-size:15px;
-  margin-bottom:40px;
-  color:gray;
+/* FOOTER */
+
+footer {
+  padding: 120px 15%;
+  line-height: 2;
 }
 
-.hero img {
-  width:92%;
-  max-width:1000px;
-  box-shadow:0 20px 40px rgba(0,0,0,.15);
-  border-radius:6px;
-  transition:.4s ease;
-}
+/* MOBILE */
 
-.hero img:hover {
-  transform:scale(1.02);
-}
-
-/* ================= COLLECTION ================= */
-
-.section {
-  padding:70px 20px;
-}
-
-.grid {
-  display:grid;
-  grid-template-columns:1fr;
-  gap:40px;
-}
-
-.card img {
-  width:100%;
-  border-radius:6px;
-  cursor:pointer;
-  transition:.4s ease;
-}
-
-.card img:hover {
-  transform:scale(1.02);
-}
-
-.card-info {
-  margin-top:15px;
-  font-size:14px;
-  letter-spacing:2px;
-}
-
-button {
-  width:100%;
-  padding:14px;
-  margin-top:10px;
-  border:1px solid var(--text);
-  background:transparent;
-  font-size:14px;
-  letter-spacing:2px;
-  cursor:pointer;
-  transition:.3s ease;
-  border-radius:6px;
-}
-
-button:hover {
-  background:var(--text);
-  color:var(--bg);
-}
-
-/* ================= IMAGE MODAL ================= */
-
-.modal {
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.95);
-  display:none;
-  justify-content:center;
-  align-items:center;
-  padding:20px;
-  z-index:2000;
-}
-
-.modal img {
-  max-width:100%;
-  max-height:90%;
-}
-
-.modal.active {
-  display:flex;
-}
-
-/* ================= DESCRIPTION PANEL ================= */
-
-.description-panel {
-  position:fixed;
-  bottom:-100%;
-  left:50%;
-  transform:translateX(-50%);
-  width:92%;
-  background:var(--bg);
-  padding:30px 25px 40px;
-  border-radius:20px 20px 0 0;
-  box-shadow:0 -15px 50px rgba(0,0,0,0.25);
-  transition:all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-  z-index:2100;
-  max-height:60vh;
-  overflow-y:auto;
-  opacity:0;
-  backdrop-filter:blur(12px);
-}
-
-.description-panel.active {
-  bottom:0;
-  opacity:1;
-}
-
-.description-content h2 {
-  margin-bottom:10px;
-  letter-spacing:2px;
-  font-size:18px;
-}
-
-.description-content p {
-  line-height:1.6;
-  color:gray;
-  font-size:14px;
-}
-
-.close-description {
-  margin-top:20px;
-  padding:10px;
-  border-radius:6px;
-  border:1px solid var(--text);
-  background:transparent;
-  letter-spacing:2px;
-  cursor:pointer;
-  width:100%;
-  transition:.3s ease;
-}
-
-.close-description:hover {
-  background:var(--text);
-  color:var(--bg);
-}
-
-/* Desktop */
-
-@media(min-width:900px){
-  .menu-toggle { display:none; }
-  nav { display:flex; }
-  .mobile-menu { display:none; }
-
-  .hero {
-    height:100vh;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-  }
-
-  .hero h1 { font-size:50px; }
-
-  .grid {
-    grid-template-columns:repeat(3,1fr);
-    gap:60px;
-  }
-
-  .section { padding:120px 100px; }
-
-  .description-panel {
-    bottom:auto;
-    left:auto;
-    right:-450px;
-    top:0;
-    height:100%;
-    width:450px;
-    border-radius:0;
-    box-shadow:-20px 0 40px rgba(0,0,0,0.2);
-    transform:none;
-  }
-
-  .description-panel.active {
-    right:0;
-    opacity:1;
-  }
-}
-
-@media(max-width:899px){
-  nav { display:none; }
-  .menu-toggle { display:block; }
+@media(max-width:900px){
+  header { padding: 20px 30px; }
+  .intro { padding: 0 30px; }
+  .artwork { padding: 80px 30px; }
+  .artwork img { width: 100%; }
 }
 
 </style>
@@ -307,109 +141,51 @@ button:hover {
 <body>
 
 <header>
-  <div class="logo">DUDU</div>
-  <div class="menu-toggle" onclick="toggleMenu()">☰</div>
-  <nav>
-    <a href="#collection">COLLECTION</a>
-    <a href="#contact">CONTACT</a>
+  <div>DUDU</div>
+  <div>
     <a href="#" onclick="toggleDark()">MODE</a>
-  </nav>
+  </div>
 </header>
 
-<div class="mobile-menu" id="mobileMenu">
-  <a href="#collection" onclick="toggleMenu()">COLLECTION</a>
-  <a href="#contact" onclick="toggleMenu()">CONTACT</a>
-  <a href="#" onclick="toggleDark()">MODE</a>
-</div>
-
-<section class="hero">
-  <h1>dudu art gallery</h1>
-  <p>every masterpiece was once a scratch</p>
-  <img src="images/busniess card.jpeg" onclick="openModal(this)">
+<section class="intro">
+  <h1>Fragments of Becoming</h1>
+  <p>
+    This exhibition explores emotional fragmentation, identity,
+    and reconstruction through geometric abstraction.
+    Each piece exists as both rupture and resolution —
+    inviting the viewer into a quiet confrontation
+    with transformation.
+  </p>
 </section>
 
-<section class="section" id="collection">
-  <div class="grid">
-
-    <div class="card">
-      <img src="images/P1.jpeg" onclick="openModal(this)">
-      <div class="card-info">P1</div>
-      <button onclick="showDescription('P1','P1 is a cubist exploration of fractured identity and geometric harmony.')">DETAILS</button>
-      <button onclick="showPrice('P1','€1,250')">PRICE</button>
-    </div>
-
-    <div class="card">
-      <img src="images/fell in love.jpeg" onclick="openModal(this)">
-      <div class="card-info">FELL IN LOVE</div>
-      <button onclick="showDescription('Fell in Love','This piece captures vulnerability and connection through layered geometric forms.')">DETAILS</button>
-    </div>
-
-    <div class="card">
-      <img src="images/P2.jpeg" onclick="openModal(this)">
-      <div class="card-info">P2</div>
-      <button onclick="showDescription('P2','P2 investigates structural minimalism within cubist tradition.')">DETAILS</button>
-      <button onclick="showPrice('P2','€1050')">PRICE</button>
-    </div>
-
-  </div>
+<section class="artwork">
+  <img src="images/P1.jpeg">
+  <h2>P1</h2>
+  <span>Oil on canvas · 2024</span>
 </section>
 
-<footer id="contact" class="section">
-  <strong>DUDU ART GALLERY</strong><br><br>
-  81929 Munich<br>
-  +49 176 416 292 50<br>
+<section class="artwork">
+  <img src="images/fell in love.jpeg">
+  <h2>Fell in Love</h2>
+  <span>Acrylic on canvas · 2024</span>
+</section>
+
+<section class="artwork">
+  <img src="images/P2.jpeg">
+  <h2>P2</h2>
+  <span>Mixed media · 2024</span>
+</section>
+
+<footer>
+  <strong>DUDU ART GALLERY</strong><br>
+  Munich, Germany<br>
   d.demir@dudu-art-gallery.com
 </footer>
 
-<div class="modal" id="modal" onclick="closeModal()">
-  <img id="modal-img">
-</div>
-
-<div class="description-panel" id="descriptionPanel">
-  <div class="description-content">
-    <h2 id="desc-title"></h2>
-    <p id="desc-text"></p>
-    <button class="close-description" onclick="closeDescription()">CLOSE</button>
-  </div>
-</div>
-
 <script>
-
-function toggleMenu(){
-  document.getElementById("mobileMenu").classList.toggle("active");
-}
-
 function toggleDark(){
   document.body.classList.toggle("dark");
 }
-
-function openModal(img){
-  document.getElementById("modal-img").src = img.src;
-  document.getElementById("modal").classList.add("active");
-}
-
-function closeModal(){
-  document.getElementById("modal").classList.remove("active");
-}
-
-function showDescription(title,text){
-  const panel = document.getElementById("descriptionPanel");
-  document.getElementById("desc-title").innerText = title;
-  document.getElementById("desc-text").innerText = text;
-  panel.classList.add("active");
-}
-
-function showPrice(title,price){
-  const panel = document.getElementById("descriptionPanel");
-  document.getElementById("desc-title").innerText = title + " – Price";
-  document.getElementById("desc-text").innerText = "This artwork is available for " + price + ". For purchase inquiries, please contact the gallery.";
-  panel.classList.add("active");
-}
-
-function closeDescription(){
-  document.getElementById("descriptionPanel").classList.remove("active");
-}
-
 </script>
 
 </body>
