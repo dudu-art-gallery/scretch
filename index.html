@@ -3,7 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DUDU — Private Viewing</title>
+
+<title>Dudu Art Gallery | Contemporary Paintings by DUDU</title>
+
+<meta name="description" content="Dudu Art Gallery presents contemporary paintings and original artworks by Dudu Harel. Explore modern art collections and request private viewing.">
+
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://dudu-art-gallery.com/">
+
+<meta property="og:title" content="Dudu Art Gallery">
+<meta property="og:description" content="Contemporary paintings and original artworks by Dudu Harel">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://dudu-art-gallery.com/">
 
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Inter:wght@300;400&display=swap" rel="stylesheet">
 
@@ -180,18 +191,12 @@ button:hover {
   color:#000;
 }
 
-/* ================= RUPTURE ROOM STYLE ================= */
-
-#ruptureRoom {
-  display:none;
-}
+#ruptureRoom { display:none; }
 
 #ruptureRoom img {
   filter: contrast(1.2) saturate(0.85);
   transform: scale(1.05);
 }
-
-/* ================= PRIVATE VIEW ================= */
 
 .private-view {
   position:fixed;
@@ -237,17 +242,16 @@ button:hover {
 
 </style>
 </head>
+
 <body>
 
 <div id="spotlight"></div>
 <div class="fade-layer" id="fadeLayer"></div>
 
-<!-- ENTRY -->
 <div class="entry" id="entry">
   <h1>DUDU</h1>
 </div>
 
-<!-- INTRO -->
 <section class="intro">
   <h2>Voices in the Darkness</h2>
   <p>
@@ -258,62 +262,57 @@ button:hover {
   </p>
 </section>
 
-<!-- ARTWORKS -->
- 
 <section class="artwork">
   <div class="artwork-number">01</div>
-  <img src="images/P1.jpeg">
+  <img src="images/P1.jpeg" alt="P1 painting by Dudu Harel">
   <h3>P1</h3>
-  <span> Gouache on acrylic paper · 2025</span>
+  <span>Gouache on acrylic paper · 2025</span>
   <button onclick="openPrivate()">Collector Inquiry</button>
 </section>
 
 <section class="artwork">
   <div class="artwork-number">02</div>
-  <img src="images/fell in love.jpeg">
+  <img src="images/fell in love.jpeg" alt="Fell in Love painting by Dudu Harel">
   <h3>Fell in Love</h3>
-  <span> Gouache on acrylic paper · 2024</span>
+  <span>Gouache on acrylic paper · 2024</span>
 </section>
 
 <section class="artwork">
   <div class="artwork-number">03</div>
-  <img src="images/P2.jpeg">
+  <img src="images/P2.jpeg" alt="P2 painting by Dudu Harel">
   <h3>P2</h3>
-  <span> Gouache on acrylic paper · 2025</span>
+  <span>Gouache on acrylic paper · 2025</span>
   <button onclick="openPrivate()">Collector Inquiry</button>
 </section>
 
 <section class="artwork">
   <div class="artwork-number">04</div>
-  <img src="images/lucid.jpeg">
+  <img src="images/lucid.jpeg" alt="Lucid painting by Dudu Harel">
   <h3>Lucid</h3>
-  <span> Gouache on acrylic paper · 2025</span>
-  <button onclick="openPrivate()">Collector Inquiry</button>
-</section>
-  
-<section class="artwork">
-  <div class="artwork-number">05</div>
-  <img src="images/hope in the darkness.jpeg">
-  <h3>Hope in the  Darkness</h3>
-  <span> Gouache on acrylic paper · 2025</span>
+  <span>Gouache on acrylic paper · 2025</span>
   <button onclick="openPrivate()">Collector Inquiry</button>
 </section>
 
-<!-- ENTRY TO RESTRICTED WORK -->
+<section class="artwork">
+  <div class="artwork-number">05</div>
+  <img src="images/hope in the darkness.jpeg" alt="Hope in the Darkness painting by Dudu Harel">
+  <h3>Hope in the Darkness</h3>
+  <span>Gouache on acrylic paper · 2025</span>
+  <button onclick="openPrivate()">Collector Inquiry</button>
+</section>
+
 <section class="artwork">
   <button onclick="enterRupture()">Enter Restricted Work</button>
 </section>
 
-<!-- SCHIZOPHRENIA ROOM -->
 <section class="artwork" id="ruptureRoom">
   <div class="artwork-number">R</div>
-  <img src="images/schizophrenia.jpeg">
+  <img src="images/schizophrenia.jpeg" alt="Lost in Voices painting by Dudu Harel">
   <h3>Lost in Voices</h3>
-  <span> Mixed media on paper · 2025</span>
+  <span>Mixed media on paper · 2025</span>
   <button onclick="openPrivate()">Collector Inquiry</button>
 </section>
 
-<!-- PRIVATE VIEW -->
 <div class="private-view" id="privateView">
   <h2>Request Private Viewing</h2>
 
@@ -325,19 +324,15 @@ button:hover {
   </form>
 </div>
 
-<!-- AMBIENT AUDIO -->
 <audio id="ambience" loop>
   <source src="audio/gallery-ambience.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-
-/* ENTRY FADE */
 setTimeout(()=>{
   document.getElementById("entry").classList.add("hidden");
 },4000);
 
-/* SCROLL REVEAL */
 const sections=document.querySelectorAll(".intro,.artwork");
 const observer=new IntersectionObserver(entries=>{
   entries.forEach(entry=>{
@@ -349,21 +344,18 @@ const observer=new IntersectionObserver(entries=>{
 },{threshold:0.4});
 sections.forEach(sec=>observer.observe(sec));
 
-/* FADE TO BLACK */
 function fadeEffect(){
   const layer=document.getElementById("fadeLayer");
   layer.style.opacity=1;
   setTimeout(()=>{layer.style.opacity=0;},800);
 }
 
-/* CURSOR SPOTLIGHT */
 document.addEventListener("mousemove",e=>{
   const spot=document.getElementById("spotlight");
   spot.style.left=e.clientX+"px";
   spot.style.top=e.clientY+"px";
 });
 
-/* AUDIO */
 document.addEventListener("click",function startAudio(){
   const audio=document.getElementById("ambience");
   audio.volume=0;
@@ -375,12 +367,10 @@ document.addEventListener("click",function startAudio(){
   document.removeEventListener("click",startAudio);
 });
 
-/* PRIVATE VIEW */
 function openPrivate(){
   document.getElementById("privateView").classList.add("active");
 }
 
-/* ENTER RUPTURE ROOM */
 function enterRupture(){
   const layer=document.getElementById("fadeLayer");
   layer.style.opacity=1;
@@ -390,7 +380,6 @@ function enterRupture(){
     layer.style.opacity=0;
   },1200);
 }
-
 </script>
 
 </body>
