@@ -37,62 +37,63 @@ body{
   transition:background 1s ease;
 }
 
-section{
-  min-height:100vh;
+/* ===== INTRO ===== */
+section.intro{
   display:flex;
   flex-direction:column;
   justify-content:center;
   align-items:center;
+  text-align:center;
+  min-height:100vh;
   padding:60px 20px;
-  transition:1s ease;
 }
-
 .intro h2{
   font-family:'Cormorant Garamond',serif;
   font-size:60px;
   margin-bottom:40px;
 }
-
 .intro p{
   max-width:600px;
   line-height:2;
   color:var(--muted);
 }
 
-.artwork img{
-  width:70%;
-  max-width:900px;
-  margin-bottom:30px;
-  border-radius:var(--radius);
-  transition:1s ease;
+/* ===== ARTWORK CENTRING ===== */
+.artwork {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 100vh;
+  transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
-body.cubism .artwork img{
-  clip-path:polygon(0 0, 100% 10%, 90% 100%, 10% 90%);
-  transform:rotate(-2deg);
+.artwork img {
+  width: 70%;
+  max-width: 900px;
+  margin-bottom: 30px;
+  border-radius: var(--radius);
+  transition: 1s ease;
+}
+
+body.cubism .artwork img {
+  clip-path: polygon(0 0, 100% 10%, 90% 100%, 10% 90%);
+  transform: rotate(-2deg);
 }
 
 /* ===== MODE VISIBILITY ===== */
 .abstract-art,
 .cubism-art {
-  display: none;   /* hide inactive artworks completely */
-  opacity: 0;
-  pointer-events: none;
+  display: none; /* hide inactive artworks */
 }
 
-body.abstract .abstract-art {
-  display: block;  /* show active artworks */
-  opacity: 1;
-  pointer-events: auto;
-}
-
+body.abstract .abstract-art,
 body.cubism .cubism-art {
-  display: block;
-  opacity: 1;
-  pointer-events: auto;
+  display: flex; /* show active artworks as flex */
 }
 
-/* ===== TOGGLE + CONTACT BUTTON ===== */
+/* ===== MODE SWITCH + CONTACT BUTTON ===== */
 .mode-switch{
   position:fixed;
   top:30px;
