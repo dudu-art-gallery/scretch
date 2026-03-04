@@ -123,7 +123,7 @@ body.cubism .art-container img{
   left:0;
   width:100%;
   height:100%;
-  background: rgba(0,0,0,0.8);
+  background: rgba(0,0,0,0.85);
   color:#fff;
   display:flex;
   justify-content:center;
@@ -131,10 +131,22 @@ body.cubism .art-container img{
   text-align:center;
   opacity:0;
   pointer-events:none;
-  border-radius: inherit;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease, clip-path 0.3s ease, border-radius 0.3s ease;
   padding:20px;
+  font-size:1.1rem;
 }
+
+/* Shape based on mode */
+body.abstract .art-container .note {
+  border-radius: var(--radius);
+  clip-path: none;
+}
+body.cubism .art-container .note {
+  border-radius:0;
+  clip-path: polygon(0 0, 100% 10%, 90% 100%, 10% 90%);
+}
+
+/* Active note */
 .art-container.active .note{
   opacity:1;
   pointer-events:auto;
