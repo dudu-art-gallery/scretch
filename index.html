@@ -171,16 +171,16 @@ body.cubism .cubism-art {
   flex-direction: column;
 }
 
-/* MODE SWITCH + CONTACT BUTTON + ART-RENTAL */
+/* MODE SWITCH + CONTACT + ART-RENTAL BUTTON */
 .mode-switch{
   position:fixed;
   top:30px;
   right:40px;
   display:flex;
-  gap:15px;
+  gap:10px;
   z-index:1000;
   align-items:center;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 }
 .switch{
   width:70px;
@@ -268,11 +268,19 @@ body.cubism .switch::before{
 @media(max-width:900px){
   .intro h2{font-size:36px;}
   .art-container{width:90%;}
+  .mode-switch{
+    right:20px;
+    gap:8px;
+  }
 }
 @media(max-width:600px){
   .pdf-preview {
     width:95%;
     height:70vh;
+  }
+  .mode-switch{
+    flex-wrap: wrap;
+    gap:5px;
   }
 }
 
@@ -288,7 +296,7 @@ body.cubism .switch::before{
   <h1>DUDU</h1>
 </div>
 
-<!-- MODE SWITCH + CONTACT + ART-RENTAL BUTTON -->
+<!-- MODE SWITCH + ART-RENTAL + CONTACT BUTTON -->
 <div class="mode-switch">
   <span>Abstract</span>
   <div class="switch" onclick="toggleMode()"></div>
@@ -398,12 +406,12 @@ window.onload = function() {
   }
 }
 
-/* Contact Overlay */
+/* Overlay Functions */
 function openContact(){ document.getElementById("contactPanel").classList.add("active"); }
 function openRental(){ document.getElementById("rentalPanel").classList.add("active"); }
 function closePanels(){ document.querySelectorAll(".overlay").forEach(p=>p.classList.remove("active")); }
 
-/* Toggle Notes with click on image and note itself */
+/* Toggle Notes */
 document.querySelectorAll('.art-container').forEach(container => {
   const img = container.querySelector('img');
   const note = container.querySelector('.note');
