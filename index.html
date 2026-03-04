@@ -116,7 +116,7 @@ body.cubism .art-container img{
   transform: rotate(-2deg);
 }
 
-/* NOTE OVERLAY ANIMATION */
+/* NOTE OVERLAY ANIMATION + SHADOW/REFLECTION */
 .art-container .note {
   position: absolute;
   top:0;
@@ -136,6 +136,10 @@ body.cubism .art-container img{
   padding:20px;
   font-size:1.1rem;
   z-index:5;
+
+  /* Shadow + Light Reflection */
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.6), 0 4px 15px rgba(0,0,0,0.3);
+  background-image: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(0,0,0,0) 50%);
 }
 
 /* Shape based on mode */
@@ -344,9 +348,7 @@ body.cubism .switch::before{
 /* ENTRANCE LOGO */
 window.addEventListener("load", () => {
   const entry = document.getElementById("entryScreen");
-  setTimeout(() => {
-    entry.classList.add("hidden");
-  }, 3000);
+  setTimeout(() => { entry.classList.add("hidden"); }, 3000);
 });
 
 /* Toggle Mode */
