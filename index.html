@@ -4,30 +4,35 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>DUDU Art Gallery | Contemporary Paintings by DUDU</title>
-
-<meta name="description" content="Dudu Art Gallery presents contemporary paintings and original artworks by DUDU. Explore modern art collections and request private viewing.">
-
-<meta name="robots" content="index, follow">
-<link rel="canonical" href="https://dudu-art-gallery.com/">
-<link rel="icon" type="image/png" href="/images/favicon.png/favicon.png">
-  
-<meta property="og:title" content="DUDU Art Gallery">
-<meta property="og:description" content="Contemporary paintings and original artworks by DUDU">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://dudu-art-gallery.com/">
+<title>DUDU Art Gallery</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Inter:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
 
-/* ================= GLOBAL ================= */
+/* ================= ROOT VARIABLES ================= */
 
 :root {
-  --bg: #050505;
+  --bg: #0a0a0a;
   --text: #f2f2f2;
-  --muted: #777;
+  --muted: #888;
+  --accent: #ffffff;
+  --radius: 0px;
 }
+
+body.abstract {
+  --bg: #140f1f;
+  --accent: #a855f7;
+  --radius: 30px;
+}
+
+body.cubism {
+  --bg: #0d0d0d;
+  --accent: #ff0033;
+  --radius: 0px;
+}
+
+/* ================= BASE ================= */
 
 * { margin:0; padding:0; box-sizing:border-box; }
 html { scroll-behavior:smooth; }
@@ -35,78 +40,101 @@ html { scroll-behavior:smooth; }
 body {
   background: var(--bg);
   color: var(--text);
-  font-family: 'Inter', sans-serif;
-  overflow-x: hidden;
-  cursor: none;
+  font-family:'Inter',sans-serif;
+  overflow-x:hidden;
+  cursor:none;
+  transition:background 1s ease;
 }
 
-/* ================= GRAIN TEXTURE ================= */
+/* Disable spotlight on touch */
+@media (hover:none){
+  #spotlight{display:none;}
+  body{cursor:auto;}
+}
 
-body::before {
+/* ================= ABSTRACT ANIMATED BACKGROUND ================= */
+
+body.abstract::before {
   content:"";
   position:fixed;
   inset:0;
-  background:url("https://www.transparenttextures.com/patterns/asfalt-dark.png");
-  opacity:0.15;
+  background:linear-gradient(-45deg,#1a102b,#2d1b4d,#0e0e1a,#2c1245);
+  background-size:400% 400%;
+  animation:gradientFlow 15s ease infinite;
+  opacity:.6;
+  z-index:-1;
+}
+
+@keyframes gradientFlow{
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
+}
+
+/* ================= SPOTLIGHT ================= */
+
+#spotlight{
+  position:fixed;
+  width:600px;
+  height:600px;
+  background:radial-gradient(circle,rgba(255,255,255,0.08)0%,rgba(0,0,0,0.95)70%);
   pointer-events:none;
+  mix-blend-mode:lighten;
+  transform:translate(-50%,-50%);
   z-index:5;
+  transition:.5s;
 }
 
-/* ================= CURSOR SPOTLIGHT ================= */
-
-#spotlight {
-  position: fixed;
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, rgba(0,0,0,0.95) 70%);
-  border-radius: 50%;
-  pointer-events: none;
-  mix-blend-mode: lighten;
-  z-index: 10;
-  transform: translate(-50%, -50%);
+body.cubism #spotlight{
+  border-radius:0;
 }
 
-/* ================= ENTRY SCREEN ================= */
+body.abstract #spotlight{
+  border-radius:50%;
+}
 
-.entry {
+/* ================= ARTISTIC TOGGLE ================= */
+
+.mode-switch{
   position:fixed;
-  inset:0;
-  background:#000;
-  display:flex;
-  justify-content:center;
-  align-items:center;
+  top:30px;
+  right:40px;
   z-index:1000;
-  transition:2s ease;
+  display:flex;
+  align-items:center;
+  gap:15px;
 }
 
-.entry h1 {
-  font-family:'Cormorant Garamond', serif;
-  font-size:50px;
-  letter-spacing:8px;
-  opacity:0;
-  animation:fadeIn 3s forwards;
+.switch{
+  width:70px;
+  height:30px;
+  border:1px solid var(--text);
+  border-radius:50px;
+  position:relative;
+  cursor:pointer;
+  transition:.4s;
 }
 
-.entry.hidden {
-  opacity:0;
-  pointer-events:none;
+.switch::before{
+  content:"";
+  position:absolute;
+  width:24px;
+  height:24px;
+  background:var(--accent);
+  top:2px;
+  left:3px;
+  border-radius:50%;
+  transition:.4s;
 }
 
-/* ================= FADE TO BLACK ================= */
-
-.fade-layer {
-  position:fixed;
-  inset:0;
-  background:#000;
-  opacity:0;
-  pointer-events:none;
-  z-index:900;
-  transition:1.5s ease;
+body.cubism .switch::before{
+  transform:translateX(38px);
+  border-radius:0;
 }
 
 /* ================= INTRO ================= */
 
-.intro {
+.intro{
   height:100vh;
   display:flex;
   flex-direction:column;
@@ -117,18 +145,18 @@ body::before {
   transition:1.5s ease;
 }
 
-.intro.visible {
+.intro.visible{
   opacity:1;
   transform:translateY(0);
 }
 
-.intro h2 {
-  font-family:'Cormorant Garamond', serif;
+.intro h2{
+  font-family:'Cormorant Garamond',serif;
   font-size:60px;
   margin-bottom:40px;
 }
 
-.intro p {
+.intro p{
   max-width:650px;
   line-height:2;
   color:var(--muted);
@@ -136,70 +164,53 @@ body::before {
 
 /* ================= ARTWORK ================= */
 
-.artwork {
-  min-height:130vh;
+.artwork{
+  min-height:100vh;
   display:flex;
   flex-direction:column;
   justify-content:center;
   align-items:center;
   opacity:0;
   transition:1.5s ease;
-  position:relative;
 }
 
-.artwork.visible { opacity:1; }
+.artwork.visible{opacity:1;}
 
-.artwork-number {
-  font-size:12px;
-  letter-spacing:6px;
-  color:var(--muted);
-  margin-bottom:40px;
-}
-
-.artwork img {
+.artwork img{
   width:70%;
   max-width:900px;
-  margin-bottom:50px;
-  transition:6s ease;
-}
-
-.artwork.visible img { transform:scale(1.03); }
-
-.artwork h3 {
-  font-family:'Cormorant Garamond', serif;
-  font-size:28px;
-  margin-bottom:10px;
-}
-
-.artwork span {
-  color:var(--muted);
-  font-size:14px;
   margin-bottom:30px;
+  transition:1s ease;
+  border-radius:var(--radius);
 }
 
-button {
+/* Cubism aggressive layout */
+body.cubism .artwork img{
+  clip-path:polygon(0 0, 100% 10%, 90% 100%, 10% 90%);
+  transform:rotate(-2deg);
+}
+
+/* ================= BUTTON ================= */
+
+button{
   border:1px solid var(--text);
   background:transparent;
   color:var(--text);
   padding:12px 40px;
-  letter-spacing:3px;
+  letter-spacing:2px;
   cursor:pointer;
-  transition:.5s ease;
+  transition:.4s;
+  border-radius:var(--radius);
 }
 
-button:hover {
-  background:var(--text);
+button:hover{
+  background:var(--accent);
   color:#000;
 }
 
-#ruptureRoom { display:none; }
+/* ================= PANELS ================= */
 
-#ruptureRoom img {
-  filter: contrast(1.2) saturate(0.85);
-  transform: scale(1.05);
-}
-
-.private-view {
+.overlay{
   position:fixed;
   inset:0;
   background:#000;
@@ -209,49 +220,52 @@ button:hover {
   flex-direction:column;
   opacity:0;
   pointer-events:none;
-  transition:1.5s ease;
-  z-index:950;
+  transition:1s ease;
+  z-index:2000;
 }
 
-.private-view.active {
+.overlay.active{
   opacity:1;
   pointer-events:auto;
 }
 
-.private-view h2 {
-  font-family:'Cormorant Garamond', serif;
+.overlay h2{
+  font-family:'Cormorant Garamond',serif;
   font-size:40px;
   margin-bottom:30px;
 }
 
-.private-view input {
+.overlay input{
   background:transparent;
   border:1px solid var(--text);
   padding:10px;
-  color:var(--text);
   margin-bottom:20px;
+  color:var(--text);
   width:250px;
 }
 
-@keyframes fadeIn { to { opacity:1; } }
+/* ================= MOBILE ================= */
 
 @media(max-width:900px){
   .intro{padding:0 30px;}
-  .artwork img{width:90%;}
   .intro h2{font-size:36px;}
+  .artwork img{width:90%;}
 }
 
 </style>
 </head>
 
-<body>
+<body class="abstract">
+
+<div class="mode-switch">
+  <span>Abstract</span>
+  <div class="switch" onclick="toggleMode()"></div>
+  <span>Cubism</span>
+  <button onclick="openContact()">Contact</button>
+  <button onclick="openCollector()">Collector</button>
+</div>
 
 <div id="spotlight"></div>
-<div class="fade-layer" id="fadeLayer"></div>
-
-<div class="entry" id="entry">
-  <h1>DUDU</h1>
-</div>
 
 <section class="intro">
   <h2>Voices in the Darkness</h2>
@@ -259,128 +273,95 @@ button:hover {
     Between rupture and reconstruction,
     silence becomes structure.
     Each surface carries memory —
-    tension suspended in darkness...
+    tension suspended in darkness.
   </p>
 </section>
 
 <section class="artwork">
-  <div class="artwork-number">01</div>
-  <img src="images/P1.jpeg" alt="P1 painting by Dudu Harel">
+  <img src="images/P1.jpeg">
   <h3>P1</h3>
   <span>Gouache on acrylic paper · 2025</span>
-  <button onclick="openPrivate()">Collector Inquiry</button>
 </section>
 
 <section class="artwork">
-  <div class="artwork-number">02</div>
-  <img src="images/fell in love.jpeg" alt="Fell in Love painting by Dudu Harel">
-  <h3>Fell in Love</h3>
-  <span>Gouache on acrylic paper · 2024</span>
-</section>
-
-<section class="artwork">
-  <div class="artwork-number">03</div>
-  <img src="images/P2.jpeg" alt="P2 painting by Dudu Harel">
+  <img src="images/P2.jpeg">
   <h3>P2</h3>
   <span>Gouache on acrylic paper · 2025</span>
-  <button onclick="openPrivate()">Collector Inquiry</button>
 </section>
 
-<section class="artwork">
-  <div class="artwork-number">04</div>
-  <img src="images/lucid.jpeg" alt="Lucid painting by Dudu Harel">
-  <h3>Lucid</h3>
-  <span>Gouache on acrylic paper · 2025</span>
-  <button onclick="openPrivate()">Collector Inquiry</button>
-</section>
-
-<section class="artwork">
-  <div class="artwork-number">05</div>
-  <img src="images/hope in the darkness.jpeg" alt="Hope in the Darkness painting by Dudu Harel">
-  <h3>Hope in the Darkness</h3>
-  <span>Gouache on acrylic paper · 2025</span>
-  <button onclick="openPrivate()">Collector Inquiry</button>
-</section>
-
-<section class="artwork">
-  <button onclick="enterRupture()">Enter Restricted Work</button>
-</section>
-
-<section class="artwork" id="ruptureRoom">
-  <div class="artwork-number">R</div>
-  <img src="images/schizophrenia.jpeg" alt="Lost in Voices painting by Dudu Harel">
-  <h3>Lost in Voices</h3>
-  <span>Mixed media on paper · 2025</span>
-  <button onclick="openPrivate()">Collector Inquiry</button>
-</section>
-
-<div class="private-view" id="privateView">
-  <h2>Request Private Viewing</h2>
-
-  <form action="https://formsubmit.co/d.demir@dudu-art-gallery.com" method="POST">
-    <input type="email" name="email" placeholder="Your Email" required>
-    <input type="hidden" name="_captcha" value="false">
-    <input type="hidden" name="_next" value="https://dudu-art-gallery.com/">
-    <button type="submit">Submit Request</button>
-  </form>
+<!-- CONTACT -->
+<div class="overlay" id="contactPanel">
+  <h2>Contact</h2>
+  <p>d.demir@dudu-art-gallery.com</p>
+  <p>@dudu.art</p>
+  <button onclick="closePanels()">Close</button>
 </div>
 
-<audio id="ambience" loop>
-  <source src="audio/gallery-ambience.mp3" type="audio/mpeg">
-</audio>
+<!-- COLLECTOR LOGIN -->
+<div class="overlay" id="collectorPanel">
+  <h2>Collector Access</h2>
+  <input type="email" placeholder="Email">
+  <input type="password" placeholder="Password">
+  <button>Enter</button>
+  <button onclick="closePanels()">Close</button>
+</div>
 
 <script>
-setTimeout(()=>{
-  document.getElementById("entry").classList.add("hidden");
-},4000);
 
+/* Fade in */
 const sections=document.querySelectorAll(".intro,.artwork");
 const observer=new IntersectionObserver(entries=>{
   entries.forEach(entry=>{
     if(entry.isIntersecting){
       entry.target.classList.add("visible");
-      fadeEffect();
     }
   });
-},{threshold:0.4});
+},{threshold:0.3});
 sections.forEach(sec=>observer.observe(sec));
 
-function fadeEffect(){
-  const layer=document.getElementById("fadeLayer");
-  layer.style.opacity=1;
-  setTimeout(()=>{layer.style.opacity=0;},800);
-}
-
+/* Spotlight */
 document.addEventListener("mousemove",e=>{
   const spot=document.getElementById("spotlight");
-  spot.style.left=e.clientX+"px";
-  spot.style.top=e.clientY+"px";
+  if(spot){
+    spot.style.left=e.clientX+"px";
+    spot.style.top=e.clientY+"px";
+  }
 });
 
-document.addEventListener("click",function startAudio(){
-  const audio=document.getElementById("ambience");
-  audio.volume=0;
-  audio.play();
-  let fade=setInterval(()=>{
-    if(audio.volume<0.15){ audio.volume+=0.01; }
-    else clearInterval(fade);
-  },200);
-  document.removeEventListener("click",startAudio);
-});
-
-function openPrivate(){
-  document.getElementById("privateView").classList.add("active");
+/* Toggle Mode */
+function toggleMode(){
+  if(document.body.classList.contains("abstract")){
+    document.body.classList.remove("abstract");
+    document.body.classList.add("cubism");
+    localStorage.setItem("mode","cubism");
+  }else{
+    document.body.classList.remove("cubism");
+    document.body.classList.add("abstract");
+    localStorage.setItem("mode","abstract");
+  }
 }
 
-function enterRupture(){
-  const layer=document.getElementById("fadeLayer");
-  layer.style.opacity=1;
-  setTimeout(()=>{
-    document.getElementById("ruptureRoom").style.display="flex";
-    window.scrollTo({top:document.body.scrollHeight, behavior:"smooth"});
-    layer.style.opacity=0;
-  },1200);
+window.onload=function(){
+  const saved=localStorage.getItem("mode");
+  if(saved){
+    document.body.classList.remove("abstract","cubism");
+    document.body.classList.add(saved);
+  }
 }
+
+/* Panels */
+function openContact(){
+  document.getElementById("contactPanel").classList.add("active");
+}
+
+function openCollector(){
+  document.getElementById("collectorPanel").classList.add("active");
+}
+
+function closePanels(){
+  document.querySelectorAll(".overlay").forEach(p=>p.classList.remove("active"));
+}
+
 </script>
 
 </body>
