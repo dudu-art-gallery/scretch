@@ -84,7 +84,7 @@ section.intro{
   color:var(--muted);
 }
 
-/* ARTWORK CENTRING */
+/* ARTWORK CENTRING & CONTAINERS */
 .artwork {
   display: flex;
   flex-direction: column;
@@ -143,7 +143,7 @@ body.cubism .art-container img{
 
 /* Dramatic shapes */
 body.abstract .art-container .note {
-  border-radius: 50px; /* exaggerated round */
+  border-radius: 50px; 
   clip-path: ellipse(80% 60% at 50% 50%);
 }
 body.cubism .art-container .note {
@@ -172,7 +172,7 @@ body.cubism .cubism-art {
   flex-direction: column;
 }
 
-/* MODE SWITCH + CONTACT BUTTON */
+/* MODE SWITCH + CONTACT + ART-RENTAL BUTTONS */
 .mode-switch{
   position:fixed;
   top:30px;
@@ -207,8 +207,8 @@ body.cubism .switch::before{
   background: var(--accent);
 }
 
-/* CONTACT BUTTON */
-.contact-btn{
+/* CONTACT & RENTAL BUTTONS */
+.contact-btn, .rental-btn{
   border:1px solid var(--text);
   background:transparent;
   color:var(--text);
@@ -217,7 +217,7 @@ body.cubism .switch::before{
   border-radius:var(--radius);
   transition:.3s;
 }
-.contact-btn:hover{
+.contact-btn:hover, .rental-btn:hover{
   background:var(--accent);
   color:#000;
 }
@@ -249,6 +249,9 @@ body.cubism .switch::before{
   color:var(--muted);
   margin-bottom:10px;
 }
+.overlay iframe{
+  border:none;
+}
 
 /* MOBILE */
 @media(max-width:900px){
@@ -268,11 +271,12 @@ body.cubism .switch::before{
   <h1>DUDU</h1>
 </div>
 
-<!-- MODE SWITCH + CONTACT BUTTON -->
+<!-- MODE SWITCH + ART-RENTAL + CONTACT -->
 <div class="mode-switch">
   <span>Abstract</span>
   <div class="switch" onclick="toggleMode()"></div>
   <span>Cubism</span>
+  <button class="rental-btn" onclick="openRental()">Art-Rental</button>
   <button class="contact-btn" onclick="openContact()">Contact</button>
 </div>
 
@@ -321,7 +325,7 @@ body.cubism .switch::before{
   </div>
   <div class="art-container">
     <img src="images/hope in the darkness.jpeg" alt="Hope in the Darkness">
-    <div class="note"><p> Cubist contrast of light and shadow.</p></div>
+    <div class="note"><p>Cubist contrast of light and shadow.</p></div>
     <h3>Hope in the Darkness</h3>
     <span>Gouache on acrylic paper · 2025</span>
   </div>
@@ -335,6 +339,14 @@ body.cubism .switch::before{
   <p>d.demir@dudu-art-gallery.com</p>
   <p>Munich, Germany</p>
   <button onclick="closePanels()">Close</button>
+</div>
+
+<!-- ART-RENTAL OVERLAY -->
+<div class="overlay" id="rentalPanel">
+  <h2>Art-Rental Preview</h2>
+  <iframe src="images/Art-Rental.pdf" width="80%" height="80%"></iframe>
+  <a href="images/Art-Rental.pdf" download style="margin-top:20px; color:#fff; border:1px solid var(--text); padding:10px 20px; text-decoration:none; border-radius:5px;">Download PDF</a>
+  <button onclick="closePanels()" style="margin-top:10px;">Close</button>
 </div>
 
 <script>
@@ -373,20 +385,23 @@ window.onload = function() {
 function openContact(){
   document.getElementById("contactPanel").classList.add("active");
 }
+
+/* Art-Rental Overlay */
+function openRental(){
+  document.getElementById("rentalPanel").classList.add("active");
+}
+
+/* Close Overlays */
 function closePanels(){
   document.querySelectorAll(".overlay").forEach(p=>p.classList.remove("active"));
 }
 
-/* Toggle Notes with click on image and note itself */
+/* Toggle Notes on click */
 document.querySelectorAll('.art-container').forEach(container => {
   const img = container.querySelector('img');
   const note = container.querySelector('.note');
-
   img.addEventListener('click', () => { container.classList.add('active'); });
-  note.addEventListener('click', (e) => {
-    e.stopPropagation();
-    container.classList.remove('active');
-  });
+  note.addEventListener('click', (e) => { e.stopPropagation(); container.classList.remove('active'); });
 });
 </script>
 
