@@ -10,7 +10,6 @@
 <style>
 
 /* ===== VARIABLES ===== */
-
 :root {
   --bg:#0a0a0a;
   --text:#f2f2f2;
@@ -32,7 +31,6 @@ body.cubism {
 }
 
 /* ===== BASE ===== */
-
 *{margin:0;padding:0;box-sizing:border-box;}
 body{
   background:var(--bg);
@@ -41,7 +39,6 @@ body{
   overflow-x:hidden;
   transition:background 1s ease;
 }
-
 section{
   min-height:100vh;
   display:flex;
@@ -53,13 +50,11 @@ section{
 }
 
 /* ===== INTRO ===== */
-
 .intro h2{
   font-family:'Cormorant Garamond',serif;
   font-size:60px;
   margin-bottom:40px;
 }
-
 .intro p{
   max-width:600px;
   line-height:2;
@@ -67,12 +62,10 @@ section{
 }
 
 /* ===== ARTWORK ===== */
-
 .artwork{
   position:relative;
   transition:opacity .8s ease, transform .8s ease;
 }
-
 .artwork img{
   width:70%;
   max-width:900px;
@@ -80,37 +73,30 @@ section{
   border-radius:var(--radius);
   transition:1s ease;
 }
-
-/* Cubism distortion */
 body.cubism .artwork img{
   clip-path:polygon(0 0, 100% 10%, 90% 100%, 10% 90%);
   transform:rotate(-2deg);
 }
 
 /* ===== MODE VISIBILITY ===== */
-
-/* Hide with opacity instead of display */
 .abstract-art,
 .cubism-art{
   opacity:0;
   pointer-events:none;
   position:absolute;
 }
-
 body.abstract .abstract-art{
   opacity:1;
   pointer-events:auto;
   position:relative;
 }
-
 body.cubism .cubism-art{
   opacity:1;
   pointer-events:auto;
   position:relative;
 }
 
-/* ===== TOGGLE ===== */
-
+/* ===== TOGGLE + CONTACT BUTTON ===== */
 .mode-switch{
   position:fixed;
   top:30px;
@@ -119,7 +105,6 @@ body.cubism .cubism-art{
   gap:15px;
   z-index:1000;
 }
-
 .switch{
   width:70px;
   height:30px;
@@ -128,7 +113,6 @@ body.cubism .cubism-art{
   position:relative;
   cursor:pointer;
 }
-
 .switch::before{
   content:"";
   position:absolute;
@@ -140,13 +124,13 @@ body.cubism .cubism-art{
   border-radius:50%;
   transition:.4s;
 }
-
 body.cubism .switch::before{
   transform:translateX(38px);
   border-radius:0;
 }
 
-button{
+/* CONTACT BUTTON */
+.contact-btn{
   border:1px solid var(--text);
   background:transparent;
   color:var(--text);
@@ -155,18 +139,65 @@ button{
   border-radius:var(--radius);
   transition:.3s;
 }
-
-button:hover{
+.contact-btn:hover{
   background:var(--accent);
   color:#000;
 }
 
-/* ===== MOBILE ===== */
+/* ===== OVERLAY ===== */
+.overlay{
+  position:fixed;
+  inset:0;
+  background:#000;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  opacity:0;
+  pointer-events:none;
+  transition:1s ease;
+  z-index:2000;
+}
+.overlay.active{
+  opacity:1;
+  pointer-events:auto;
+}
+.overlay h2{
+  font-family:'Cormorant Garamond',serif;
+  font-size:40px;
+  margin-bottom:30px;
+}
+.overlay p{
+  color:var(--muted);
+  margin-bottom:10px;
+}
 
+/* ===== MOBILE ===== */
 @media(max-width:900px){
   .intro h2{font-size:36px;}
   .artwork img{width:90%;}
 }
+
+</style>
+</head>
+
+<body class="abstract">
+
+<!-- MODE SWITCH + CONTACT BUTTON -->
+<div class="mode-switch">
+  <span>Abstract</span>
+  <div class="switch" onclick="toggleMode()"></div>
+  <span>Cubism</span>
+  <button class="contact-btn" onclick="openContact()">Contact</button>
+</div>
+
+<section class="intro">
+  <h2>Voices in the Darkness</h2>
+  <p>
+    Between rupture and reconstruction,
+    silence becomes structure.
+  </p>
+</section>
 
 </style>
 </head>
@@ -235,8 +266,17 @@ button:hover{
 
 </section>
 
-<script>
+<!-- CONTACT OVERLAY -->
+<div class="overlay" id="contactPanel">
+  <h2>Contact</h2>
+  <p>Durali Demir</p>
+  <p>Email: d.demir@dudu-art-gallery.com</p>
+  <p> Munich </p>
+  <p> </p>
+  <button onclick="closePanels()">Close</button>
+</div>
 
+<script>
 /* Toggle Mode */
 function toggleMode(){
   if(document.body.classList.contains("abstract")){
@@ -250,7 +290,7 @@ function toggleMode(){
   }
 }
 
-/* Load Saved */
+/* Load Saved Mode */
 window.onload=function(){
   const saved=localStorage.getItem("mode");
   if(saved){
@@ -259,6 +299,13 @@ window.onload=function(){
   }
 }
 
+/* Contact Overlay */
+function openContact(){
+  document.getElementById("contactPanel").classList.add("active");
+}
+function closePanels(){
+  document.querySelectorAll(".overlay").forEach(p=>p.classList.remove("active"));
+}
 </script>
 
 </body>
