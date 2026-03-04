@@ -84,7 +84,7 @@ section.intro{
   color:var(--muted);
 }
 
-/* ARTWORKS */
+/* ARTWORK CENTRING */
 .artwork {
   display: flex;
   flex-direction: column;
@@ -99,7 +99,7 @@ section.intro{
   display: inline-block;
   width:70%;
   max-width:900px;
-  margin-bottom: 240px;
+  margin-bottom: 240px; /* space between paintings */
 }
 .art-container img {
   width:100%;
@@ -141,7 +141,7 @@ body.cubism .art-container img{
   overflow:hidden;
 }
 
-/* Dramatic shapes for notes */
+/* Dramatic shapes */
 body.abstract .art-container .note {
   border-radius: 50px;
   clip-path: ellipse(80% 60% at 50% 50%);
@@ -171,7 +171,7 @@ body.cubism .cubism-art {
   flex-direction: column;
 }
 
-/* MODE SWITCH + CONTACT + ART-RENTAL BUTTON */
+/* MODE SWITCH + CONTACT BUTTON + ART-RENTAL */
 .mode-switch{
   position:fixed;
   top:30px;
@@ -180,6 +180,7 @@ body.cubism .cubism-art {
   gap:15px;
   z-index:1000;
   align-items:center;
+  flex-wrap: wrap;
 }
 .switch{
   width:70px;
@@ -205,6 +206,8 @@ body.cubism .switch::before{
   border-radius:0;
   background: var(--accent);
 }
+
+/* CONTACT & ART-RENTAL BUTTON */
 .contact-btn, .rental-btn{
   border:1px solid var(--text);
   background:transparent;
@@ -219,7 +222,7 @@ body.cubism .switch::before{
   color:#000;
 }
 
-/* OVERLAYS */
+/* OVERLAY */
 .overlay{
   position:fixed;
   inset:0;
@@ -246,25 +249,30 @@ body.cubism .switch::before{
   color:var(--muted);
   margin-bottom:10px;
 }
-#rentalPanel .pdf-wrapper {
+
+/* PDF PREVIEW */
+.pdf-preview {
   width: 80%;
-  height: 80%;
   max-width: 900px;
+  height: 80vh;
   max-height: 80vh;
   overflow: auto;
-  -webkit-overflow-scrolling: touch;
 }
-#rentalPanel iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
+.pdf-preview iframe {
+  width:100%;
+  height:100%;
+  border:none;
+}
+
+/* MOBILE ADJUSTMENTS */
+@media(max-width:900px){
+  .intro h2{font-size:36px;}
+  .art-container{width:90%;}
 }
 @media(max-width:600px){
-  .intro h2{font-size:36px;}
-  .art-container{width:95%;}
-  #rentalPanel .pdf-wrapper {
-    width: 95%;
-    height: 70vh;
+  .pdf-preview {
+    width:95%;
+    height:70vh;
   }
 }
 
@@ -280,7 +288,7 @@ body.cubism .switch::before{
   <h1>DUDU</h1>
 </div>
 
-<!-- MODE SWITCH + ART-RENTAL + CONTACT -->
+<!-- MODE SWITCH + CONTACT + ART-RENTAL BUTTON -->
 <div class="mode-switch">
   <span>Abstract</span>
   <div class="switch" onclick="toggleMode()"></div>
@@ -291,9 +299,7 @@ body.cubism .switch::before{
 
 <section class="intro">
   <h2>Voices in the Darkness</h2>
-  <p>
-    Between rupture and reconstruction, silence becomes structure.
-  </p>
+  <p>Between rupture and reconstruction, silence becomes structure.</p>
 </section>
 
 <!-- ABSTRACT ARTWORKS -->
@@ -350,14 +356,14 @@ body.cubism .switch::before{
   <button onclick="closePanels()">Close</button>
 </div>
 
-<!-- ART-RENTAL OVERLAY -->
+<!-- ART-RENTAL PDF OVERLAY -->
 <div class="overlay" id="rentalPanel">
-  <h2>Art-Rental Preview</h2>
-  <div class="pdf-wrapper">
+  <h2>Art-Rental</h2>
+  <div class="pdf-preview">
     <iframe src="images/Art-Rental.pdf"></iframe>
   </div>
-  <a href="images/Art-Rental.pdf" download style="margin-top:20px; color:#fff; border:1px solid var(--text); padding:10px 20px; text-decoration:none; border-radius:5px;">Download PDF</a>
-  <button onclick="closePanels()" style="margin-top:10px;">Close</button>
+  <a href="images/Art-Rental.pdf" download style="margin-top:15px;color:var(--accent);text-decoration:underline;">Download PDF</a>
+  <button style="margin-top:20px;" onclick="closePanels()">Close</button>
 </div>
 
 <script>
@@ -397,11 +403,10 @@ function openContact(){ document.getElementById("contactPanel").classList.add("a
 function openRental(){ document.getElementById("rentalPanel").classList.add("active"); }
 function closePanels(){ document.querySelectorAll(".overlay").forEach(p=>p.classList.remove("active")); }
 
-/* Toggle Notes */
+/* Toggle Notes with click on image and note itself */
 document.querySelectorAll('.art-container').forEach(container => {
   const img = container.querySelector('img');
   const note = container.querySelector('.note');
-
   img.addEventListener('click', () => { container.classList.add('active'); });
   note.addEventListener('click', (e) => { e.stopPropagation(); container.classList.remove('active'); });
 });
