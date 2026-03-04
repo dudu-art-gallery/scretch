@@ -141,17 +141,11 @@ body.cubism .art-container img{
   overflow:hidden;
 }
 
-/* Dramatic abstract shapes */
+/* Dramatic shapes */
 body.abstract .art-container .note {
-  border-radius: 0;
-  clip-path: polygon(
-    5% 10%, 70% 0%, 95% 25%, 85% 50%, 
-    100% 85%, 60% 90%, 20% 75%, 0% 55%
-  ); 
-  transform: rotate(-5deg) skew(4deg, -3deg);
+  border-radius: 50px; /* exaggerated round */
+  clip-path: ellipse(80% 60% at 50% 50%);
 }
-
-/* Cubism notes: angular */
 body.cubism .art-container .note {
   border-radius:0;
   clip-path: polygon(0 0, 100% 5%, 95% 100%, 5% 95%);
@@ -295,13 +289,7 @@ body.cubism .switch::before{
     <img src="images/schizophrenia.jpeg" alt="Lost in Voices">
     <div class="note"><p>Lost in Voices: Abstract exploration of chaos and calm.</p></div>
     <h3>Lost in Voices</h3>
-    <span>Abstract Series · 2025</span>
-  </div>
-  <div class="art-container">
-    <img src="images/the face.jpeg" alt="The Face">
-    <div class="note"><p>The Face: Contemplating identity through abstraction.</p></div>
-    <h3>The Face</h3>
-    <span>Abstract Series · 2025</span>
+    <span>Gouache on acrylic paper · 2025</span>
   </div>
 </section>
 
@@ -345,7 +333,7 @@ body.cubism .switch::before{
   <img src="images/Durali Demir.jpg">
   <p>Durali Demir</p>
   <p>d.demir@dudu-art-gallery.com</p>
-  <p>Munich</p>
+  <p>Munich, Germany</p>
   <button onclick="closePanels()">Close</button>
 </div>
 
