@@ -259,7 +259,8 @@ button:hover{
   <div class="switch" onclick="toggleMode()"></div>
   <span>Cubism</span>
   <button onclick="openContact()">Contact</button>
-/div>
+  <button onclick="openCollector()">Collector</button>
+</div>
 
 <div id="spotlight"></div>
 
@@ -275,14 +276,8 @@ button:hover{
 
 <!-- ABSTRACT PAINTINGS -->
 <section class="artwork abstract-art">
-  <img src="images/schizophrenia.jpeg">
-  <h3>Lost in Voices</h3>
-  <span>Abstract Series · 2025</span>
-</section>
-
- <section class="artwork abstract-art">
-  <img src="images/the face.jpeg">
-  <h3>The Face</h3>
+  <img src="images/P2.jpeg">
+  <h3>P2</h3>
   <span>Abstract Series · 2025</span>
 </section>
 
@@ -290,43 +285,25 @@ button:hover{
 <section class="artwork cubism-art">
   <img src="images/P1.jpeg">
   <h3>P1</h3>
-  <span>Gouache on acrylic paper · 2025</span>
+  <span>Cubism Series · 2025</span>
 </section>
-
-<section class="artwork cubism-art">
-    <img src="images/P2.jpeg">
-  <h3>P2</h3>
-  <span>Gouache on acrylic paper · 2025</span>
-</section>
-  
-<section class="artwork cubism-art">
-    <img src="images/fell in love.jpeg">
-  <h3>Fell in Love</h3>
-  <span>Gouache on acrylic paper · 2025</span>
-</section>
-  
-<section class="artwork cubism-art">
-    <img src="images/lucid.jpeg">
-  <h3>Lucid</h3>
-  <span>Gouache on acrylic paper · 2025</span>
-</section>
-  
-<section class="artwork cubism-art">
-    <img src="images/hope in the darkness.jpeg">
-  <h3>Hop in the Darkness</h3>
-  <span>Gouache on acrylic paper · 2025</span>
-</section>
-  
 
 <!-- CONTACT -->
 <div class="overlay" id="contactPanel">
   <h2>Contact</h2>
-  <p>Durali Demir</p>
-  <p>Founder & Curator</p>
   <p>d.demir@dudu-art-gallery.com</p>
+  <p>@dudu.art</p>
   <button onclick="closePanels()">Close</button>
 </div>
 
+<!-- COLLECTOR -->
+<div class="overlay" id="collectorPanel">
+  <h2>Collector Access</h2>
+  <input type="email" placeholder="Email">
+  <input type="password" placeholder="Password">
+  <button>Enter</button>
+  <button onclick="closePanels()">Close</button>
+</div>
 
 <script>
 
