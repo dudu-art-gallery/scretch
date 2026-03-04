@@ -26,7 +26,7 @@ body.abstract {
 /* Cubism mode */
 body.cubism {
   --bg:#0d0d0d;
-  --accent:#ff0033;
+  --accent:#8B2C2C;
   --radius:0px;
 }
 
@@ -99,7 +99,7 @@ section.intro{
   display: inline-block;
   width:70%;
   max-width:900px;
-  margin-bottom: 60px; /* space between paintings */
+  margin-bottom: 240px; /* space between paintings */
 }
 .art-container img {
   width:100%;
@@ -141,11 +141,17 @@ body.cubism .art-container img{
   overflow:hidden;
 }
 
-/* Dramatic shapes */
+/* Dramatic abstract shapes */
 body.abstract .art-container .note {
-  border-radius: 50px; /* exaggerated round */
-  clip-path: ellipse(80% 60% at 50% 50%);
+  border-radius: 0;
+  clip-path: polygon(
+    5% 10%, 70% 0%, 95% 25%, 85% 50%, 
+    100% 85%, 60% 90%, 20% 75%, 0% 55%
+  ); 
+  transform: rotate(-5deg) skew(4deg, -3deg);
 }
+
+/* Cubism notes: angular */
 body.cubism .art-container .note {
   border-radius:0;
   clip-path: polygon(0 0, 100% 5%, 95% 100%, 5% 95%);
@@ -336,6 +342,7 @@ body.cubism .switch::before{
 <!-- CONTACT OVERLAY -->
 <div class="overlay" id="contactPanel">
   <h2>Contact</h2>
+  <img src="images/Durali Demir.jpg">
   <p>Durali Demir</p>
   <p>d.demir@dudu-art-gallery.com</p>
   <p>Munich</p>
