@@ -1,148 +1,397 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>DUDU Virtual Gallery</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DUDU Art Gallery</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+
 <style>
-body { margin:0; overflow:hidden; background:#000; }
-#info {
-  position:absolute;
-  top:20px;
-  left:20px;
-  color:white;
-  font-family:Arial;
-  z-index:10;
+
+/* ================= ROOT VARIABLES ================= */
+
+:root {
+  --bg: #0a0a0a;
+  --text: #f2f2f2;
+  --muted: #888;
+  --accent: #ffffff;
+  --radius: 0px;
 }
-button {
-  padding:10px 20px;
-  background:black;
-  color:white;
-  border:1px solid white;
+
+body.abstract {
+  --bg: #140f1f;
+  --accent: #a855f7;
+  --radius: 30px;
+}
+
+body.cubism {
+  --bg: #0d0d0d;
+  --accent: #ff0033;
+  --radius: 0px;
+}
+
+/* ================= BASE ================= */
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family:'Inter',sans-serif;
+  overflow-x:hidden;
+  cursor:none;
+  transition:background 1s ease;
+}
+
+@media (hover:none){
+  #spotlight{display:none;}
+  body{cursor:auto;}
+}
+
+/* ================= ABSTRACT BACKGROUND ================= */
+
+body.abstract::before {
+  content:"";
+  position:fixed;
+  inset:0;
+  background:linear-gradient(-45deg,#1a102b,#2d1b4d,#0e0e1a,#2c1245);
+  background-size:400% 400%;
+  animation:gradientFlow 15s ease infinite;
+  opacity:.6;
+  z-index:-1;
+}
+
+@keyframes gradientFlow{
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
+}
+
+/* ================= SPOTLIGHT ================= */
+
+#spotlight{
+  position:fixed;
+  width:600px;
+  height:600px;
+  background:radial-gradient(circle,rgba(255,255,255,0.08)0%,rgba(0,0,0,0.95)70%);
+  pointer-events:none;
+  mix-blend-mode:lighten;
+  transform:translate(-50%,-50%);
+  z-index:5;
+  transition:.5s;
+}
+
+body.cubism #spotlight{ border-radius:0; }
+body.abstract #spotlight{ border-radius:50%; }
+
+/* ================= MODE SWITCH ================= */
+
+.mode-switch{
+  position:fixed;
+  top:30px;
+  right:40px;
+  z-index:1000;
+  display:flex;
+  align-items:center;
+  gap:15px;
+}
+
+.switch{
+  width:70px;
+  height:30px;
+  border:1px solid var(--text);
+  border-radius:50px;
+  position:relative;
   cursor:pointer;
 }
+
+.switch::before{
+  content:"";
+  position:absolute;
+  width:24px;
+  height:24px;
+  background:var(--accent);
+  top:2px;
+  left:3px;
+  border-radius:50%;
+  transition:.4s;
+}
+
+body.cubism .switch::before{
+  transform:translateX(38px);
+  border-radius:0;
+}
+
+/* ================= INTRO ================= */
+
+.intro{
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding:0 20%;
+  opacity:0;
+  transform:translateY(40px);
+  transition:1.5s ease;
+}
+
+.intro.visible{
+  opacity:1;
+  transform:translateY(0);
+}
+
+.intro h2{
+  font-family:'Cormorant Garamond',serif;
+  font-size:60px;
+  margin-bottom:40px;
+}
+
+.intro p{
+  max-width:650px;
+  line-height:2;
+  color:var(--muted);
+}
+
+/* ================= ARTWORK ================= */
+
+.artwork{
+  min-height:100vh;
+  display:none;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  opacity:0;
+  transition:1s ease;
+}
+
+.artwork.visible{
+  opacity:1;
+}
+
+/* Show artworks based on mode */
+body.abstract .artwork.abstract-art{ display:flex; }
+body.cubism .artwork.cubism-art{ display:flex; }
+
+.artwork img{
+  width:70%;
+  max-width:900px;
+  margin-bottom:30px;
+  transition:1s ease;
+  border-radius:var(--radius);
+}
+
+body.cubism .artwork img{
+  clip-path:polygon(0 0, 100% 10%, 90% 100%, 10% 90%);
+  transform:rotate(-2deg);
+}
+
+/* ================= BUTTON ================= */
+
+button{
+  border:1px solid var(--text);
+  background:transparent;
+  color:var(--text);
+  padding:12px 40px;
+  letter-spacing:2px;
+  cursor:pointer;
+  transition:.4s;
+  border-radius:var(--radius);
+}
+
+button:hover{
+  background:var(--accent);
+  color:#000;
+}
+
+/* ================= OVERLAY ================= */
+
+.overlay{
+  position:fixed;
+  inset:0;
+  background:#000;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  opacity:0;
+  pointer-events:none;
+  transition:1s ease;
+  z-index:2000;
+}
+
+.overlay.active{
+  opacity:1;
+  pointer-events:auto;
+}
+
+.overlay h2{
+  font-family:'Cormorant Garamond',serif;
+  font-size:40px;
+  margin-bottom:30px;
+}
+
+.overlay input{
+  background:transparent;
+  border:1px solid var(--text);
+  padding:10px;
+  margin-bottom:20px;
+  color:var(--text);
+  width:250px;
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:900px){
+  .intro{padding:0 30px;}
+  .intro h2{font-size:36px;}
+  .artwork img{width:90%;}
+}
+
 </style>
 </head>
-<body>
 
-<div id="info">
-  <button onclick="goBack()">Back to Gallery</button>
-  <p>WASD to move · Mouse to look</p>
+<body class="abstract">
+
+<div class="mode-switch">
+  <span>Abstract</span>
+  <div class="switch" onclick="toggleMode()"></div>
+  <span>Cubism</span>
+  <button onclick="openContact()">Contact</button>
+  <button onclick="openCollector()">Collector</button>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128/examples/js/controls/PointerLockControls.js"></script>
+<div id="spotlight"></div>
+
+<section class="intro">
+  <h2>Voices in the Darkness</h2>
+  <p>
+    Between rupture and reconstruction,
+    silence becomes structure.
+    Each surface carries memory —
+    tension suspended in darkness.
+  </p>
+</section>
+
+<!-- ABSTRACT PAINTINGS -->
+<section class="artwork abstract-art">
+  <img src="images/schizophrenia.jpeg">
+  <h3>Lost in Voices</h3>
+  <span>Abstract Series · 2025</span>
+</section>
+
+ <section class="artwork abstract-art">
+  <img src="images/the face.jpeg">
+  <h3>The Face</h3>
+  <span>Abstract Series · 2025</span>
+</section>
+
+<!-- CUBISM PAINTINGS -->
+<section class="artwork cubism-art">
+  <img src="images/P1.jpeg">
+  <h3>P1</h3>
+  <span>Gouache on acrylic paper · 2025</span>
+</section>
+
+<section class="artwork cubism-art">
+    <img src="images/P2.jpeg">
+  <h3>P2</h3>
+  <span>Gouache on acrylic paper · 2025</span>
+</section>
+  
+<section class="artwork cubism-art">
+    <img src="images/fell in love.jpeg">
+  <h3>Fell in Love</h3>
+  <span>Gouache on acrylic paper · 2025</span>
+</section>
+  
+<section class="artwork cubism-art">
+    <img src="images/lucid.jpeg">
+  <h3>Lucid</h3>
+  <span>Gouache on acrylic paper · 2025</span>
+</section>
+  
+<section class="artwork cubism-art">
+    <img src="images/hope in th darkness.jpeg">
+  <h3>Hop in the Darkness</h3>
+  <span>Gouache on acrylic paper · 2025</span>
+</section>
+  
+
+<!-- CONTACT -->
+<div class="overlay" id="contactPanel">
+  <h2>Contact</h2>
+  <p>Durali Demir</p>
+  <p>Founder & Curator</p>
+  <p>d.demir@dudu-art-gallery.com</p>
+  <button onclick="closePanels()">Close</button>
+</div>
+
+<!-- COLLECTOR -->
+<div class="overlay" id="collectorPanel">
+  <h2>Collector Access</h2>
+  <input type="email" placeholder="Email">
+  <input type="password" placeholder="Password">
+  <button>Enter</button>
+  <button onclick="closePanels()">Close</button>
+</div>
 
 <script>
 
-let scene = new THREE.Scene();
-scene.background = new THREE.Color(0x0a0a0a);
+/* Fade in observer */
+const sections=document.querySelectorAll(".intro,.artwork");
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add("visible");
+    }
+  });
+},{threshold:0.3});
+sections.forEach(sec=>observer.observe(sec));
 
-let camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
-camera.position.y = 1.6;
+/* Spotlight */
+document.addEventListener("mousemove",e=>{
+  const spot=document.getElementById("spotlight");
+  if(spot){
+    spot.style.left=e.clientX+"px";
+    spot.style.top=e.clientY+"px";
+  }
+});
 
-let renderer = new THREE.WebGLRenderer({ antialias:true });
-renderer.setSize(window.innerWidth, window.innerHeight);
-document.body.appendChild(renderer.domElement);
-
-/* Lighting */
-let ambient = new THREE.AmbientLight(0xffffff, 0.4);
-scene.add(ambient);
-
-let spotLight = new THREE.SpotLight(0xffffff, 1);
-spotLight.position.set(0,5,0);
-scene.add(spotLight);
-
-/* Floor */
-let floorGeometry = new THREE.PlaneGeometry(20,20);
-let floorMaterial = new THREE.MeshStandardMaterial({ color:0x111111 });
-let floor = new THREE.Mesh(floorGeometry, floorMaterial);
-floor.rotation.x = -Math.PI/2;
-scene.add(floor);
-
-/* Walls */
-let wallMaterial = new THREE.MeshStandardMaterial({ color:0x1a1a1a });
-
-function createWall(x,z,rot){
-  let wall = new THREE.Mesh(
-    new THREE.PlaneGeometry(20,5),
-    wallMaterial
-  );
-  wall.position.set(x,2.5,z);
-  wall.rotation.y = rot;
-  scene.add(wall);
+/* Mode toggle */
+function toggleMode(){
+  if(document.body.classList.contains("abstract")){
+    document.body.classList.remove("abstract");
+    document.body.classList.add("cubism");
+    localStorage.setItem("mode","cubism");
+  }else{
+    document.body.classList.remove("cubism");
+    document.body.classList.add("abstract");
+    localStorage.setItem("mode","abstract");
+  }
 }
 
-createWall(0,-10,0);
-createWall(0,10,Math.PI);
-createWall(-10,0,Math.PI/2);
-createWall(10,0,-Math.PI/2);
-
-/* Add Paintings */
-let textureLoader = new THREE.TextureLoader();
-
-function addPainting(url,x,y,z,rot){
-  let texture = textureLoader.load(url);
-  let painting = new THREE.Mesh(
-    new THREE.PlaneGeometry(3,4),
-    new THREE.MeshStandardMaterial({ map:texture })
-  );
-  painting.position.set(x,y,z);
-  painting.rotation.y = rot;
-  scene.add(painting);
+/* Load saved mode */
+window.onload=function(){
+  const saved=localStorage.getItem("mode");
+  if(saved){
+    document.body.classList.remove("abstract","cubism");
+    document.body.classList.add(saved);
+  }
 }
 
-addPainting("images/P1.jpeg", -5,2,-9.9,0);
-addPainting("images/P2.jpeg", 5,2,-9.9,0);
-
-/* Controls */
-let controls = new THREE.PointerLockControls(camera, document.body);
-
-document.body.addEventListener("click", () => {
-  controls.lock();
-});
-
-scene.add(controls.getObject());
-
-let moveForward=false, moveBackward=false, moveLeft=false, moveRight=false;
-
-document.addEventListener("keydown", e=>{
-  if(e.code==="KeyW") moveForward=true;
-  if(e.code==="KeyS") moveBackward=true;
-  if(e.code==="KeyA") moveLeft=true;
-  if(e.code==="KeyD") moveRight=true;
-});
-
-document.addEventListener("keyup", e=>{
-  if(e.code==="KeyW") moveForward=false;
-  if(e.code==="KeyS") moveBackward=false;
-  if(e.code==="KeyA") moveLeft=false;
-  if(e.code==="KeyD") moveRight=false;
-});
-
-function animate(){
-  requestAnimationFrame(animate);
-
-  let speed = 0.1;
-
-  if(moveForward) controls.moveForward(speed);
-  if(moveBackward) controls.moveForward(-speed);
-  if(moveLeft) controls.moveRight(-speed);
-  if(moveRight) controls.moveRight(speed);
-
-  renderer.render(scene,camera);
+/* Panels */
+function openContact(){
+  document.getElementById("contactPanel").classList.add("active");
 }
 
-animate();
+function openCollector(){
+  document.getElementById("collectorPanel").classList.add("active");
+}
 
-/* Resize */
-window.addEventListener("resize", ()=>{
-  camera.aspect = window.innerWidth/window.innerHeight;
-  camera.updateProjectionMatrix();
-  renderer.setSize(window.innerWidth, window.innerHeight);
-});
-
-function goBack(){
-  window.location.href = "index.html";
+function closePanels(){
+  document.querySelectorAll(".overlay").forEach(p=>p.classList.remove("active"));
 }
 
 </script>
