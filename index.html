@@ -26,7 +26,7 @@ body.abstract {
 /* Cubism mode */
 body.cubism {
   --bg:#0d0d0d;
-  --accent:#8B2C2C;
+  --accent:#ff0033;
   --radius:0px;
 }
 
@@ -384,10 +384,20 @@ function closePanels(){
   document.querySelectorAll(".overlay").forEach(p=>p.classList.remove("active"));
 }
 
-/* Toggle Notes with animation */
-document.querySelectorAll('.art-container img').forEach(img=>{
-  img.addEventListener('click', ()=>{
-    img.parentElement.classList.toggle('active');
+/* Toggle Notes with click on image and note itself */
+document.querySelectorAll('.art-container').forEach(container => {
+  const img = container.querySelector('img');
+  const note = container.querySelector('.note');
+
+  // Click on painting shows note
+  img.addEventListener('click', () => {
+    container.classList.add('active');
+  });
+
+  // Click on note hides note
+  note.addEventListener('click', (e) => {
+    e.stopPropagation();
+    container.classList.remove('active');
   });
 });
 </script>
