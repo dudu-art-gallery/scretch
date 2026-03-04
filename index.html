@@ -259,8 +259,7 @@ button:hover{
   <div class="switch" onclick="toggleMode()"></div>
   <span>Cubism</span>
   <button onclick="openContact()">Contact</button>
-  <button onclick="openCollector()">Collector</button>
-</div>
+/div>
 
 <div id="spotlight"></div>
 
@@ -313,7 +312,7 @@ button:hover{
 </section>
   
 <section class="artwork cubism-art">
-    <img src="images/hope in th darkness.jpeg">
+    <img src="images/hope in the darkness.jpeg">
   <h3>Hop in the Darkness</h3>
   <span>Gouache on acrylic paper · 2025</span>
 </section>
@@ -325,17 +324,10 @@ button:hover{
   <p>Durali Demir</p>
   <p>Founder & Curator</p>
   <p>d.demir@dudu-art-gallery.com</p>
+  <p></p>
   <button onclick="closePanels()">Close</button>
 </div>
 
-<!-- COLLECTOR -->
-<div class="overlay" id="collectorPanel">
-  <h2>Collector Access</h2>
-  <input type="email" placeholder="Email">
-  <input type="password" placeholder="Password">
-  <button>Enter</button>
-  <button onclick="closePanels()">Close</button>
-</div>
 
 <script>
 
@@ -386,9 +378,6 @@ function openContact(){
   document.getElementById("contactPanel").classList.add("active");
 }
 
-function openCollector(){
-  document.getElementById("collectorPanel").classList.add("active");
-}
 
 function closePanels(){
   document.querySelectorAll(".overlay").forEach(p=>p.classList.remove("active"));
