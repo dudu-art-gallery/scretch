@@ -84,7 +84,7 @@ section.intro{
   color:var(--muted);
 }
 
-/* ARTWORK CENTRING & CONTAINERS */
+/* ARTWORKS */
 .artwork {
   display: flex;
   flex-direction: column;
@@ -99,7 +99,7 @@ section.intro{
   display: inline-block;
   width:70%;
   max-width:900px;
-  margin-bottom: 240px; /* space between paintings */
+  margin-bottom: 240px;
 }
 .art-container img {
   width:100%;
@@ -141,16 +141,15 @@ body.cubism .art-container img{
   overflow:hidden;
 }
 
-/* Dramatic shapes */
+/* Dramatic shapes for notes */
 body.abstract .art-container .note {
-  border-radius: 50px; 
+  border-radius: 50px;
   clip-path: ellipse(80% 60% at 50% 50%);
 }
 body.cubism .art-container .note {
   border-radius:0;
   clip-path: polygon(0 0, 100% 5%, 95% 100%, 5% 95%);
 }
-
 .art-container.active .note{
   opacity:1;
   pointer-events:auto;
@@ -172,7 +171,7 @@ body.cubism .cubism-art {
   flex-direction: column;
 }
 
-/* MODE SWITCH + CONTACT + ART-RENTAL BUTTONS */
+/* MODE SWITCH + CONTACT + ART-RENTAL BUTTON */
 .mode-switch{
   position:fixed;
   top:30px;
@@ -206,8 +205,6 @@ body.cubism .switch::before{
   border-radius:0;
   background: var(--accent);
 }
-
-/* CONTACT & RENTAL BUTTONS */
 .contact-btn, .rental-btn{
   border:1px solid var(--text);
   background:transparent;
@@ -222,7 +219,7 @@ body.cubism .switch::before{
   color:#000;
 }
 
-/* OVERLAY */
+/* OVERLAYS */
 .overlay{
   position:fixed;
   inset:0;
@@ -249,14 +246,26 @@ body.cubism .switch::before{
   color:var(--muted);
   margin-bottom:10px;
 }
-.overlay iframe{
-  border:none;
+#rentalPanel .pdf-wrapper {
+  width: 80%;
+  height: 80%;
+  max-width: 1000px;
+  max-height: 90vh;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
 }
-
-/* MOBILE */
+#rentalPanel iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
 @media(max-width:900px){
   .intro h2{font-size:36px;}
-  .art-container{width:90%;}
+  .art-container{width:95%;}
+  #rentalPanel .pdf-wrapper {
+    width: 95%;
+    height: 70vh;
+  }
 }
 
 /* ANIMATION */
@@ -293,6 +302,12 @@ body.cubism .switch::before{
     <img src="images/schizophrenia.jpeg" alt="Lost in Voices">
     <div class="note"><p>Abstract exploration of chaos and calm.</p></div>
     <h3>Lost in Voices</h3>
+    <span>Gouache on acrylic paper · 2025</span>
+  </div>
+  <div class="art-container">
+    <img src="images/the face.jpeg" alt="The Face">
+    <div class="note"><p>Bold organic shapes expressing emotion.</p></div>
+    <h3>The Face</h3>
     <span>Gouache on acrylic paper · 2025</span>
   </div>
 </section>
@@ -344,7 +359,9 @@ body.cubism .switch::before{
 <!-- ART-RENTAL OVERLAY -->
 <div class="overlay" id="rentalPanel">
   <h2>Art-Rental Preview</h2>
-  <iframe src="images/Art-Rental.pdf" width="80%" height="80%"></iframe>
+  <div class="pdf-wrapper">
+    <iframe src="images/Art-Rental.pdf"></iframe>
+  </div>
   <a href="images/Art-Rental.pdf" download style="margin-top:20px; color:#fff; border:1px solid var(--text); padding:10px 20px; text-decoration:none; border-radius:5px;">Download PDF</a>
   <button onclick="closePanels()" style="margin-top:10px;">Close</button>
 </div>
@@ -382,24 +399,15 @@ window.onload = function() {
 }
 
 /* Contact Overlay */
-function openContact(){
-  document.getElementById("contactPanel").classList.add("active");
-}
+function openContact(){ document.getElementById("contactPanel").classList.add("active"); }
+function openRental(){ document.getElementById("rentalPanel").classList.add("active"); }
+function closePanels(){ document.querySelectorAll(".overlay").forEach(p=>p.classList.remove("active")); }
 
-/* Art-Rental Overlay */
-function openRental(){
-  document.getElementById("rentalPanel").classList.add("active");
-}
-
-/* Close Overlays */
-function closePanels(){
-  document.querySelectorAll(".overlay").forEach(p=>p.classList.remove("active"));
-}
-
-/* Toggle Notes on click */
+/* Toggle Notes */
 document.querySelectorAll('.art-container').forEach(container => {
   const img = container.querySelector('img');
   const note = container.querySelector('.note');
+
   img.addEventListener('click', () => { container.classList.add('active'); });
   note.addEventListener('click', (e) => { e.stopPropagation(); container.classList.remove('active'); });
 });
