@@ -26,7 +26,7 @@ body.abstract {
 /* Cubism mode */
 body.cubism {
   --bg:#0d0d0d;
-  --accent:#ff0033;
+  --accent:#ff0033; /* red knob */
   --radius:0px;
 }
 
@@ -149,9 +149,11 @@ body.cubism .cubism-art {
   border-radius:50%;
   transition:.4s;
 }
+/* Cubism toggle knob red */
 body.cubism .switch::before{
-  transform:translateX(38px);
+  transform: translateX(38px);
   border-radius:0;
+  background: var(--accent);
 }
 
 /* CONTACT BUTTON */
