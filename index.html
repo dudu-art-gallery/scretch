@@ -18,15 +18,15 @@
 
 /* Abstract mode: calm red background & black toggle knob */
 body.abstract {
-  --bg: #8B2C2C; /* soft muted red */
-  --accent: #000000; /* toggle knob black */
+  --bg: #8B2C2C;
+  --accent: #000000;
   --radius:30px;
 }
 
 /* Cubism mode */
 body.cubism {
   --bg:#0d0d0d;
-  --accent:#8B2C2C; /* red knob */
+  --accent:#ff0033;
   --radius:0px;
 }
 
@@ -39,7 +39,7 @@ body{
   transition:background 1s ease;
 }
 
-/* ===== ENTRANCE LOGO ===== */
+/* ENTRANCE LOGO */
 .entry {
   position: fixed;
   inset:0;
@@ -63,7 +63,7 @@ body{
   pointer-events:none;
 }
 
-/* ===== INTRO ===== */
+/* INTRO */
 section.intro{
   display:flex;
   flex-direction:column;
@@ -84,7 +84,7 @@ section.intro{
   color:var(--muted);
 }
 
-/* ===== ARTWORK CENTRING ===== */
+/* ARTWORK CENTRING */
 .artwork {
   display: flex;
   flex-direction: column;
@@ -94,19 +94,53 @@ section.intro{
   min-height: 100vh;
   transition: opacity 0.8s ease, transform 0.8s ease;
 }
-.artwork img {
-  width: 70%;
-  max-width: 900px;
-  margin-bottom: 30px;
-  border-radius: var(--radius);
-  transition: 1s ease;
+.art-container {
+  position: relative;
+  display: inline-block;
+  width:70%;
+  max-width:900px;
+  margin-bottom:30px;
 }
-body.cubism .artwork img {
+.art-container img {
+  width:100%;
+  display:block;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+.art-container img:hover{
+  transform: scale(1.02);
+}
+body.cubism .art-container img{
   clip-path: polygon(0 0, 100% 10%, 90% 100%, 10% 90%);
   transform: rotate(-2deg);
 }
 
-/* ===== MODE VISIBILITY ===== */
+/* NOTE OVERLAY */
+.art-container .note {
+  position: absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background: rgba(0,0,0,0.8);
+  color:#fff;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  opacity:0;
+  pointer-events:none;
+  border-radius: inherit;
+  transition: opacity 0.3s ease;
+  padding:20px;
+}
+.art-container.active .note{
+  opacity:1;
+  pointer-events:auto;
+}
+
+/* MODE VISIBILITY */
 .abstract-art,
 .cubism-art {
   display: none;
@@ -118,9 +152,10 @@ body.cubism .cubism-art {
   display: flex;
   opacity:1;
   pointer-events: auto;
+  flex-direction: column;
 }
 
-/* ===== MODE SWITCH + CONTACT BUTTON ===== */
+/* MODE SWITCH + CONTACT BUTTON */
 .mode-switch{
   position:fixed;
   top:30px;
@@ -149,7 +184,6 @@ body.cubism .cubism-art {
   border-radius:50%;
   transition:.4s;
 }
-/* Cubism toggle knob red */
 body.cubism .switch::before{
   transform: translateX(38px);
   border-radius:0;
@@ -171,7 +205,7 @@ body.cubism .switch::before{
   color:#000;
 }
 
-/* ===== OVERLAY ===== */
+/* OVERLAY */
 .overlay{
   position:fixed;
   inset:0;
@@ -199,13 +233,13 @@ body.cubism .switch::before{
   margin-bottom:10px;
 }
 
-/* ===== MOBILE ===== */
+/* MOBILE */
 @media(max-width:900px){
   .intro h2{font-size:36px;}
-  .artwork img{width:90%;}
+  .art-container{width:90%;}
 }
 
-/* ===== ANIMATION ===== */
+/* ANIMATION */
 @keyframes fadeIn { to { opacity:1; } }
 </style>
 </head>
@@ -234,52 +268,57 @@ body.cubism .switch::before{
 
 <!-- ABSTRACT ARTWORKS -->
 <section class="artwork abstract-art">
-  <img src="images/schizophrenia.jpeg">
-  <h3>Lost in Voices</h3>
-  <span>Abstract Series · 2025</span>
-</section>
-
-<section class="artwork abstract-art">
-  <img src="images/the face.jpeg">
-  <h3>The Face</h3>
-  <span>Abstract Series · 2025</span>
+  <div class="art-container">
+    <img src="images/schizophrenia.jpeg" alt="Lost in Voices">
+    <div class="note"><p>Lost in Voices: Abstract exploration of chaos and calm.</p></div>
+    <h3>Lost in Voices</h3>
+    <span>Abstract Series · 2025</span>
+  </div>
+  <div class="art-container">
+    <img src="images/the face.jpeg" alt="The Face">
+    <div class="note"><p>The Face: Contemplating identity through abstraction.</p></div>
+    <h3>The Face</h3>
+    <span>Abstract Series · 2025</span>
+  </div>
 </section>
 
 <!-- CUBISM ARTWORKS -->
 <section class="artwork cubism-art">
-  <img src="images/P1.jpeg">
-  <h3>P1</h3>
-  <span>Gouache on acrylic paper · 2025</span>
-</section>
-
-<section class="artwork cubism-art">
-  <img src="images/P2.jpeg">
-  <h3>P2</h3>
-  <span>Gouache on acrylic paper · 2025</span>
-</section>
-
-<section class="artwork cubism-art">
-  <img src="images/fell in love.jpeg">
-  <h3>Fell in Love</h3>
-  <span>Gouache on acrylic paper · 2025</span>
-</section>
-
-<section class="artwork cubism-art">
-  <img src="images/lucid.jpeg">
-  <h3>Lucid</h3>
-  <span>Gouache on acrylic paper · 2025</span>
-</section>
-
-<section class="artwork cubism-art">
-  <img src="images/hope in the darkness.jpeg">
-  <h3>Hope in the Darkness</h3>
-  <span>Gouache on acrylic paper · 2025</span>
+  <div class="art-container">
+    <img src="images/P1.jpeg" alt="P1">
+    <div class="note"><p>P1: Geometric exploration of light and shadow.</p></div>
+    <h3>P1</h3>
+    <span>Gouache on acrylic paper · 2025</span>
+  </div>
+  <div class="art-container">
+    <img src="images/P2.jpeg" alt="P2">
+    <div class="note"><p>P2: Cubist breakdown of perception and form.</p></div>
+    <h3>P2</h3>
+    <span>Gouache on acrylic paper · 2025</span>
+  </div>
+  <div class="art-container">
+    <img src="images/fell in love.jpeg" alt="Fell in Love">
+    <div class="note"><p>Fell in Love: Emotional geometry and vibrant color.</p></div>
+    <h3>Fell in Love</h3>
+    <span>Gouache on acrylic paper · 2025</span>
+  </div>
+  <div class="art-container">
+    <img src="images/lucid.jpeg" alt="Lucid">
+    <div class="note"><p>Lucid: Fragmented visions of the mind in Cubist form.</p></div>
+    <h3>Lucid</h3>
+    <span>Gouache on acrylic paper · 2025</span>
+  </div>
+  <div class="art-container">
+    <img src="images/hope in the darkness.jpeg" alt="Hope in the Darkness">
+    <div class="note"><p>Hope in the Darkness: Cubist contrast of light and shadow.</p></div>
+    <h3>Hope in the Darkness</h3>
+    <span>Gouache on acrylic paper · 2025</span>
+  </div>
 </section>
 
 <!-- CONTACT OVERLAY -->
 <div class="overlay" id="contactPanel">
   <h2>Contact</h2>
-  <img src="images/Durali Demir.jpg">
   <p>Durali Demir</p>
   <p>d.demir@dudu-art-gallery.com</p>
   <p>Munich</p>
@@ -287,12 +326,12 @@ body.cubism .switch::before{
 </div>
 
 <script>
-/* ===== ENTRANCE LOGO ===== */
+/* ENTRANCE LOGO */
 window.addEventListener("load", () => {
   const entry = document.getElementById("entryScreen");
   setTimeout(() => {
     entry.classList.add("hidden");
-  }, 3000); // shows for 3 seconds
+  }, 3000);
 });
 
 /* Toggle Mode */
@@ -316,7 +355,7 @@ window.onload = function() {
     document.body.classList.remove("abstract","cubism");
     document.body.classList.add(saved);
   } else {
-    document.body.classList.add("cubism"); // default Cubism
+    document.body.classList.add("cubism");
   }
 }
 
@@ -327,6 +366,13 @@ function openContact(){
 function closePanels(){
   document.querySelectorAll(".overlay").forEach(p=>p.classList.remove("active"));
 }
+
+/* Toggle Notes */
+document.querySelectorAll('.art-container img').forEach(img=>{
+  img.addEventListener('click', ()=>{
+    img.parentElement.classList.toggle('active');
+  });
+});
 </script>
 
 </body>
