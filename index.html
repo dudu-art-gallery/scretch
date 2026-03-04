@@ -26,7 +26,7 @@ body.abstract {
 /* Cubism mode */
 body.cubism {
   --bg:#0d0d0d;
-  --accent:#8B2C2C;
+  --accent:#ff0033;
   --radius:0px;
 }
 
@@ -99,7 +99,7 @@ section.intro{
   display: inline-block;
   width:70%;
   max-width:900px;
-  margin-bottom: 240px; /* increased space between paintings */
+  margin-bottom: 60px; /* space between paintings */
 }
 .art-container img {
   width:100%;
@@ -140,14 +140,17 @@ body.cubism .art-container img{
   background-image: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(0,0,0,0) 50%);
   overflow:hidden;
 }
+
+/* Dramatic shapes */
 body.abstract .art-container .note {
-  border-radius: var(--radius);
-  clip-path: none;
+  border-radius: 50px; /* exaggerated round */
+  clip-path: ellipse(80% 60% at 50% 50%);
 }
 body.cubism .art-container .note {
   border-radius:0;
-  clip-path: polygon(0 0, 100% 10%, 90% 100%, 10% 90%);
+  clip-path: polygon(0 0, 100% 5%, 95% 100%, 5% 95%);
 }
+
 .art-container.active .note{
   opacity:1;
   pointer-events:auto;
