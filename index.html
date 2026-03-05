@@ -4,356 +4,533 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DUDU Art Gallery</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+
 <style>
+
 :root{
-  --bg:#0d0d0d;
-  --text:#f2f2f2;
-  --muted:#888;
-  --accent:#8B2C2C;
+--bg:#0d0d0d;
+--text:#f2f2f2;
+--muted:#888;
+--accent:#8B2C2C;
 }
 
 body.abstract{
-  --bg:#8B2C2C;
-  --accent:#000000;
+--bg:#8B2C2C;
+--accent:#000000;
 }
 
 *{margin:0;padding:0;box-sizing:border-box;}
+
 body{
-  background:var(--bg);
-  color:var(--text);
-  font-family:'Inter',sans-serif;
-  transition:background 0.8s ease;
-  overflow-x:hidden;
+background:var(--bg);
+color:var(--text);
+font-family:'Inter',sans-serif;
+transition:background 0.8s ease;
+overflow-x:hidden;
 }
 
-/* ================= ENTRANCE BADGE ================= */
+/* ENTRY */
+
 .entry{
-  position:fixed;
-  inset:0;
-  background:#000;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  z-index:10000;
-  transition:opacity 1s ease;
+position:fixed;
+inset:0;
+background:#000;
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:10000;
+transition:opacity 1s ease;
 }
-.entry.hidden{opacity:0;pointer-events:none;}
+
+.entry.hidden{
+opacity:0;
+pointer-events:none;
+}
+
 .entry h1{
-  font-family:'Cormorant Garamond',serif;
-  font-size:80px;
-  color:#fff;
-  letter-spacing:8px;
-  animation:fadeIn 2s forwards;
+font-family:'Cormorant Garamond',serif;
+font-size:80px;
+letter-spacing:8px;
+animation:fadeIn 2s forwards;
 }
 
-/* ================= TOP BAR ================= */
+/* TOP BAR */
+
 .mode-switch{
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  z-index:1000;
-  padding:10px 8px;
-  gap:4px;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+display:flex;
+flex-direction:column;
+align-items:center;
+z-index:1000;
+padding:10px 8px;
+gap:4px;
 }
+
 .mode-switch.scrolled{
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  background: rgba(0,0,0,0.35);
-  border-bottom:1px solid rgba(255,255,255,0.1);
+backdrop-filter:blur(14px);
+background:rgba(0,0,0,0.35);
+border-bottom:1px solid rgba(255,255,255,0.1);
 }
 
-/* First row buttons */
 .top-row{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap:8px;
-  flex-wrap:wrap;
-  width:100%;
+display:flex;
+justify-content:center;
+gap:8px;
+flex-wrap:wrap;
+width:100%;
 }
 
-/* Second row toggle */
 .bottom-row{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap:8px;
-}
-
-/* Buttons and switch */
-button, .switch, span{
-  flex-shrink:0;
-}
-
-.switch{
-  width:60px;
-  height:28px;
-  border:1px solid var(--text);
-  border-radius:50px;
-  position:relative;
-  cursor:pointer;
-}
-.switch::before{
-  content:"";
-  position:absolute;
-  width:22px;
-  height:22px;
-  background:var(--accent);
-  top:2px;
-  left:3px;
-  border-radius:50%;
-  transition:0.4s ease;
-}
-body.cubism .switch::before{
-  transform:translateX(32px);
-  border-radius:0;
+display:flex;
+align-items:center;
+gap:8px;
 }
 
 .contact-btn,.rental-btn,.lang-btn{
-  border:1px solid var(--text);
-  background:transparent;
-  color:var(--text);
-  padding:8px 14px;
-  font-size:13px;
-  cursor:pointer;
-  transition:0.3s;
-  white-space:nowrap;
+border:1px solid var(--text);
+background:transparent;
+color:var(--text);
+padding:8px 14px;
+font-size:13px;
+cursor:pointer;
+transition:0.3s;
+white-space:nowrap;
 }
+
 .contact-btn:hover,.rental-btn:hover,.lang-btn:hover{
-  background:var(--accent);
-  color:#000;
+background:var(--accent);
+color:#000;
 }
 
-/* ================= INTRO ================= */
-section.intro{
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  padding:120px 20px 60px;
-}
-section.intro h2{font-family:'Cormorant Garamond',serif;font-size:60px;margin-bottom:30px;}
-section.intro p{max-width:600px;color:var(--muted);line-height:2;}
+/* MODE SWITCH */
 
-/* ================= ARTWORK ================= */
-.artwork{display:none;flex-direction:column;align-items:center;}
+.switch{
+width:60px;
+height:28px;
+border:1px solid var(--text);
+border-radius:50px;
+position:relative;
+cursor:pointer;
+}
+
+.switch::before{
+content:"";
+position:absolute;
+width:22px;
+height:22px;
+background:var(--accent);
+top:2px;
+left:3px;
+border-radius:50%;
+transition:0.4s ease;
+}
+
+body.cubism .switch::before{
+transform:translateX(32px);
+border-radius:0;
+}
+
+/* INTRO */
+
+.intro{
+min-height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:120px 20px 60px;
+}
+
+.intro h2{
+font-family:'Cormorant Garamond',serif;
+font-size:60px;
+margin-bottom:30px;
+}
+
+.intro p{
+max-width:600px;
+color:var(--muted);
+line-height:2;
+}
+
+/* ARTWORK */
+
+.artwork{
+display:none;
+flex-direction:column;
+align-items:center;
+}
+
 body.cubism .cubism-art,
-body.abstract .abstract-art{display:flex;}
+body.abstract .abstract-art{
+display:flex;
+}
 
 .art-container{
-  width:90%;
-  max-width:900px;
-  margin-bottom:220px;
-  position:relative;
-  text-align:center;
+width:90%;
+max-width:900px;
+margin-bottom:220px;
+position:relative;
+text-align:center;
 }
+
 .art-container img{
-  width:100%;
-  cursor:pointer;
-  transition:0.3s ease;
+width:100%;
+cursor:pointer;
+transition:0.4s ease;
 }
-.art-container img:hover{transform:scale(1.02);}
+
+.art-container img:hover{
+transform:scale(1.02);
+}
+
 body.cubism .art-container img{
-  clip-path: polygon(0 0, 100% 10%, 90% 100%, 10% 90%);
-  transform: rotate(-2deg);
+clip-path:polygon(0 0,100% 10%,90% 100%,10% 90%);
+transform:rotate(-2deg);
 }
 
-/* ================= TITLES ================= */
-.art-title{margin-top:20px;font-family:'Cormorant Garamond',serif;font-size:28px;}
-.art-subtitle{color:var(--muted);margin-top:5px;font-size:14px;}
+/* TITLES */
 
-/* ================= NOTES ================= */
+.art-title{
+margin-top:20px;
+font-family:'Cormorant Garamond',serif;
+font-size:28px;
+}
+
+.art-subtitle{
+color:var(--muted);
+margin-top:5px;
+font-size:14px;
+}
+
+/* NOTE OVERLAY */
+
 .note{
-  position:absolute;inset:0;
-  display:flex;justify-content:center;align-items:center;text-align:center;
-  padding:30px;
-  background:rgba(0,0,0,0.9);
-  opacity:0;
-  pointer-events:none;
-  transition:0.4s ease;
-  font-size:1.1rem;
-  letter-spacing:1px;
-}
-body.abstract .note{clip-path: polygon(20% 0%, 100% 10%, 80% 100%, 0% 90%);}
-body.cubism .note{clip-path: polygon(0 0, 100% 5%, 95% 100%, 5% 95%);}
-.art-container.active .note{opacity:1;pointer-events:auto;}
+position:absolute;
+inset:0;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:30px;
+background:rgba(0,0,0,0.92);
 
-/* ================= OVERLAYS ================= */
+opacity:0;
+transform:scale(0.96);
+pointer-events:none;
+
+font-size:1.1rem;
+letter-spacing:1px;
+line-height:1.7;
+
+transition:opacity 0.45s ease, transform 0.45s ease;
+}
+
+body.abstract .note{
+clip-path:polygon(20% 0%,100% 10%,80% 100%,0% 90%);
+}
+
+body.cubism .note{
+clip-path:polygon(0 0,100% 5%,95% 100%,5% 95%);
+}
+
+.art-container.active .note{
+opacity:1;
+transform:scale(1);
+pointer-events:auto;
+animation:whisperReveal 0.7s ease;
+}
+
+.art-container.active img{
+filter:blur(3px) brightness(0.55);
+}
+
+/* OVERLAYS */
+
 .overlay{
-  position:fixed;
-  inset:0;
-  background:#000;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  flex-direction:column;
-  opacity:0;
-  pointer-events:none;
-  transition:0.4s ease;
-  z-index:2000;
-  padding:40px;
-  text-align:center;
+position:fixed;
+inset:0;
+background:#000;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+opacity:0;
+pointer-events:none;
+transition:0.4s ease;
+z-index:2000;
+padding:40px;
+text-align:center;
 }
-.overlay.active{opacity:1;pointer-events:auto;}
-.profile-pic{width:150px;height:150px;object-fit:cover;border-radius:50%;margin-bottom:20px;}
 
-/* PDF PREVIEW */
-.pdf-preview{width:90%;max-width:900px;height:70vh;margin:30px 0;overflow:auto;border:1px solid rgba(255,255,255,0.2);}
-.pdf-preview iframe{width:100%;height:100%;border:none;}
+.overlay.active{
+opacity:1;
+pointer-events:auto;
+}
 
-/* ================= MOBILE ================= */
+.profile-pic{
+width:150px;
+height:150px;
+object-fit:cover;
+border-radius:50%;
+margin-bottom:20px;
+}
+
+/* PDF */
+
+.pdf-preview{
+width:90%;
+max-width:900px;
+height:70vh;
+margin:30px 0;
+overflow:auto;
+border:1px solid rgba(255,255,255,0.2);
+}
+
+.pdf-preview iframe{
+width:100%;
+height:100%;
+border:none;
+}
+
+/* MOBILE */
+
 @media(max-width:380px){
-  .contact-btn,.rental-btn,.lang-btn{padding:6px 10px;font-size:12px;}
-  .switch{width:55px;height:26px;}
+.contact-btn,.rental-btn,.lang-btn{
+padding:6px 10px;
+font-size:12px;
 }
 
-/* ANIMATION */
-@keyframes fadeIn { to { opacity:1; } }
+.switch{
+width:55px;
+height:26px;
+}
+}
+
+/* ANIMATIONS */
+
+@keyframes fadeIn{
+to{opacity:1;}
+}
+
+@keyframes whisperReveal{
+from{
+opacity:0;
+transform:translateY(20px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
 
 </style>
 </head>
+
 <body class="cubism">
 
-<!-- ENTRANCE BADGE -->
-<div class="entry" id="entryScreen"><h1>DUDU</h1></div>
-
-<!-- TOP BAR -->
-<div class="mode-switch" id="topBar">
-  <div class="top-row">
-    <button class="contact-btn">Contact</button>
-    <button class="rental-btn">Art-Rental</button>
-    <button class="lang-btn" onclick="toggleLanguage()">DE</button>
-  </div>
-  <div class="bottom-row">
-    <span>Abstract</span>
-    <div class="switch" onclick="toggleMode()"></div>
-    <span>Cubism</span>
-  </div>
+<div class="entry" id="entryScreen">
+<h1>DUDU</h1>
 </div>
 
-<!-- INTRO -->
+<div class="mode-switch" id="topBar">
+
+<div class="top-row">
+<button class="contact-btn">Contact</button>
+<button class="rental-btn">Art-Rental</button>
+<button class="lang-btn" onclick="toggleLanguage()">DE</button>
+</div>
+
+<div class="bottom-row">
+<span>Abstract</span>
+<div class="switch" onclick="toggleMode()"></div>
+<span>Cubism</span>
+</div>
+
+</div>
+
 <section class="intro">
-  <h2 id="title">Voices in the Darkness</h2>
-  <p id="subtitle">We create upon request.</p>
+<h2 id="title">Voices in the Darkness</h2>
+<p id="subtitle">We create upon request.</p>
 </section>
 
-<!-- CUBISM AND ABSTRACT ARTWORKS (same as before) -->
+<!-- CUBISM -->
+
 <section class="artwork cubism-art">
-  <div class="art-container">
-    <img src="images/P1.jpeg">
-    <div class="note" data-en="Geometric fracture of perception." data-de="Geometrische Zerlegung der Wahrnehmung."></div>
-    <div class="art-title" data-en="P1" data-de="P1">P1</div>
-    <div class="art-subtitle" data-en="Gouache on Acrylic Paper · 2025" data-de="Gouache auf Acrylpapier · 2025">Gouache on Acrylic Paper · 2025</div>
-  </div>
-  <div class="art-container">
-    <img src="images/P2.jpeg">
-    <div class="note" data-en="Emotion reconstructed through structure." data-de="Emotion durch Struktur rekonstruiert."></div>
-    <div class="art-title" data-en="P2" data-de="P2">P2</div>
-    <div class="art-subtitle" data-en="Gouache on Acrylic Paper · 2025" data-de="Gouache auf Acrylpapier · 2025">Gouache on Acrylic Paper · 2025</div>
-  </div>
-  <div class="art-container">
-    <img src="images/fell in love.jpeg">
-    <div class="note" data-en="Love fragmented into form." data-de="Liebe in Form fragmentiert."></div>
-    <div class="art-title" data-en="Fell in Love" data-de="Verliebt Gefallen">Fell in Love</div>
-    <div class="art-subtitle" data-en="Gouache on Acrylic Paper · 2025" data-de="Gouache auf Acrylpapier · 2025">Gouache on Acrylic Paper · 2025</div>
-  </div>
-  <div class="art-container">
-    <img src="images/lucid.jpeg">
-    <div class="note" data-en="Lucidity within distortion." data-de="Klarheit innerhalb von Verzerrung."></div>
-    <div class="art-title" data-en="Lucid" data-de="Klar">Lucid</div>
-    <div class="art-subtitle" data-en="Gouache on Acrylic Paper · 2025" data-de="Gouache auf Acrylpapier · 2025">Gouache on Acrylic Paper · 2025</div>
-  </div>
-  <div class="art-container">
-    <img src="images/hope in the darkness.jpeg">
-    <div class="note" data-en="Hope structured in darkness." data-de="Hoffnung in Dunkelheit strukturiert."></div>
-    <div class="art-title" data-en="Hope in the Darkness" data-de="Hoffnung in der Dunkelheit">Hope in the Darkness</div>
-    <div class="art-subtitle" data-en="Gouache on Acrylic Paper · 2025" data-de="Gouache auf Acrylpapier · 2025">Gouache on Acrylic Paper · 2025</div>
-  </div>
+
+<div class="art-container">
+<img src="images/P1.jpeg">
+<div class="note" data-en="Geometric fracture of perception." data-de="Geometrische Zerlegung der Wahrnehmung."></div>
+<div class="art-title" data-en="P1" data-de="P1"></div>
+<div class="art-subtitle" data-en="Gouache on Acrylic Paper · 2025" data-de="Gouache auf Acrylpapier · 2025"></div>
+</div>
+
+<div class="art-container">
+<img src="images/P2.jpeg">
+<div class="note" data-en="Emotion reconstructed through structure." data-de="Emotion durch Struktur rekonstruiert."></div>
+<div class="art-title" data-en="P2" data-de="P2"></div>
+<div class="art-subtitle" data-en="Gouache on Acrylic Paper · 2025" data-de="Gouache auf Acrylpapier · 2025"></div>
+</div>
+
+<div class="art-container">
+<img src="images/fell in love.jpeg">
+<div class="note" data-en="Love fragmented into form." data-de="Liebe in Form fragmentiert."></div>
+<div class="art-title" data-en="Fell in Love" data-de="Verliebt Gefallen"></div>
+<div class="art-subtitle" data-en="Gouache on Acrylic Paper · 2025" data-de="Gouache auf Acrylpapier · 2025"></div>
+</div>
+
 </section>
+
+<!-- ABSTRACT -->
 
 <section class="artwork abstract-art">
-  <div class="art-container">
-    <img src="images/schizophrenia.jpeg">
-    <div class="note" data-en="Chaos dissolving into silence." data-de="Chaos löst sich in Stille auf."></div>
-    <div class="art-title" data-en="Lost in Voices" data-de="Verloren in Stimmen">Lost in Voices</div>
-    <div class="art-subtitle" data-en="Gouache on Acrylic Paper · 2025" data-de="Gouache auf Acrylpapier · 2025">Gouache on Acrylic Paper · 2025</div>
-  </div>
-  <div class="art-container">
-    <img src="images/the face.jpeg">
-    <div class="note" data-en="Exploration of identity and perception." data-de="Erkundung von Identität und Wahrnehmung."></div>
-    <div class="art-title" data-en="The Face" data-de="Das Gesicht">The Face</div>
-    <div class="art-subtitle" data-en="Gouache on Acrylic Paper · 2025" data-de="Gouache auf Acrylpapier · 2025">Gouache on Acrylic Paper · 2025</div>
-  </div>
+
+<div class="art-container">
+<img src="images/schizophrenia.jpeg">
+<div class="note" data-en="Chaos dissolving into silence." data-de="Chaos löst sich in Stille auf."></div>
+<div class="art-title" data-en="Lost in Voices" data-de="Verloren in Stimmen"></div>
+<div class="art-subtitle" data-en="Gouache on Acrylic Paper · 2025" data-de="Gouache auf Acrylpapier · 2025"></div>
+</div>
+
+<div class="art-container">
+<img src="images/the face.jpeg">
+<div class="note" data-en="Exploration of identity and perception." data-de="Erkundung von Identität und Wahrnehmung."></div>
+<div class="art-title" data-en="The Face" data-de="Das Gesicht"></div>
+<div class="art-subtitle" data-en="Gouache on Acrylic Paper · 2025" data-de="Gouache auf Acrylpapier · 2025"></div>
+</div>
+
 </section>
 
 <!-- CONTACT -->
+
 <div class="overlay" id="contactPanel">
+
 <img src="images/Durali Demir.jpg" class="profile-pic">
+
 <h2>Durali Demir</h2>
 <p>d.demir@dudu-art-gallery.com</p>
 <p>Munich, Germany</p>
+
 <button onclick="closePanels()">Close</button>
+
 </div>
 
 <!-- RENTAL -->
+
 <div class="overlay" id="rentalPanel">
+
 <h2>Art-Rental</h2>
+
 <div class="pdf-preview">
 <iframe src="images/Art-Rental.pdf"></iframe>
 </div>
-<a href="images/Art-Rental.pdf" download style="margin-bottom:20px;">Download PDF</a>
+
+<a href="images/Art-Rental.pdf" download>Download PDF</a>
+
 <button onclick="closePanels()">Close</button>
+
 </div>
 
 <script>
-/* ENTRANCE BADGE */
-window.addEventListener("load",()=>{
-  setTimeout(()=>document.getElementById("entryScreen").classList.add("hidden"),3000);
-});
 
-/* MODE TOGGLE */
+/* ENTRY */
+
+window.addEventListener("load",()=>{
+setTimeout(()=>{
+document.getElementById("entryScreen").classList.add("hidden")
+},3000)
+})
+
+/* MODE */
+
 function toggleMode(){
-  document.body.classList.toggle("abstract");
-  document.body.classList.toggle("cubism");
+document.body.classList.toggle("abstract")
+document.body.classList.toggle("cubism")
 }
 
 /* NOTES */
+
 document.querySelectorAll('.art-container').forEach(container=>{
-  const img=container.querySelector('img');
-  const note=container.querySelector('.note');
-  img.addEventListener('click',()=>container.classList.add('active'));
-  note.addEventListener('click',e=>{e.stopPropagation();container.classList.remove('active');});
-});
 
-/* SCROLL EFFECT */
+const img=container.querySelector('img')
+const note=container.querySelector('.note')
+
+img.addEventListener('click',()=>{
+container.classList.add('active')
+})
+
+note.addEventListener('click',(e)=>{
+e.stopPropagation()
+container.classList.remove('active')
+})
+
+})
+
+/* SCROLL BAR */
+
 window.addEventListener("scroll",()=>{
-  const topBar=document.getElementById("topBar");
-  topBar.classList.toggle("scrolled",window.scrollY>50);
-});
+document.getElementById("topBar")
+.classList.toggle("scrolled",window.scrollY>50)
+})
 
-/* OVERLAYS */
-document.querySelector(".contact-btn").onclick=()=>document.getElementById("contactPanel").classList.add("active");
-document.querySelector(".rental-btn").onclick=()=>document.getElementById("rentalPanel").classList.add("active");
-function closePanels(){document.querySelectorAll(".overlay").forEach(p=>p.classList.remove("active"));}
+/* PANELS */
 
-/* LANGUAGE TOGGLE */
-let lang='en';
-function toggleLanguage(){
-  lang=(lang==='en')?'de':'en';
-  document.querySelectorAll('.art-title').forEach(el=>el.textContent=el.dataset[lang]);
-  document.querySelectorAll('.art-subtitle').forEach(el=>el.textContent=el.dataset[lang]);
-  document.querySelectorAll('.note').forEach(el=>el.textContent=el.dataset[lang]);
-  document.getElementById('title').textContent=(lang==='en')?'Voices in the Darkness':'Stimmen in der Dunkelheit';
-  document.getElementById('subtitle').textContent=(lang==='en')?'We create upon request.':'Wir kreieren auf Anfrage.';
-  document.querySelector(".lang-btn").textContent=(lang==='en')?'DE':'EN';
+document.querySelector(".contact-btn").onclick=()=>{
+document.getElementById("contactPanel").classList.add("active")
 }
+
+document.querySelector(".rental-btn").onclick=()=>{
+document.getElementById("rentalPanel").classList.add("active")
+}
+
+function closePanels(){
+document.querySelectorAll(".overlay")
+.forEach(p=>p.classList.remove("active"))
+}
+
+/* LANGUAGE */
+
+let lang="en"
+
+function applyLanguage(){
+
+document.querySelectorAll(".art-title")
+.forEach(el=>el.textContent=el.dataset[lang])
+
+document.querySelectorAll(".art-subtitle")
+.forEach(el=>el.textContent=el.dataset[lang])
+
+document.querySelectorAll(".note")
+.forEach(el=>el.textContent=el.dataset[lang])
+
+document.getElementById("title").textContent=
+lang==="en"?"Voices in the Darkness":"Stimmen in der Dunkelheit"
+
+document.getElementById("subtitle").textContent=
+lang==="en"?"We create upon request.":"Wir kreieren auf Anfrage."
+
+document.querySelector(".lang-btn").textContent=
+lang==="en"?"DE":"EN"
+
+}
+
+function toggleLanguage(){
+lang = lang==="en" ? "de" : "en"
+applyLanguage()
+}
+
+/* INITIALIZE LANGUAGE */
+
+document.addEventListener("DOMContentLoaded",()=>{
+applyLanguage()
+})
+
 </script>
 
 </body>
