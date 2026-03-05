@@ -292,7 +292,7 @@ function applyLanguage(){
   document.querySelectorAll('.art-title').forEach(el=>el.textContent=el.dataset[lang]);
   document.querySelectorAll('.art-subtitle').forEach(el=>el.textContent=el.dataset[lang]);
   document.querySelectorAll('.note').forEach(el=>el.textContent=el.dataset[lang]);
-  document.getElementById('title').textContent=(lang==='en')?'Voices in the Darkness':'Stimmen in der Dunkelheit';
+  document.getElementById('title').textContent=(lang==='en')?'art rental gallery':'Kunstvermietungsgallerie';
   document.getElementById('subtitle').textContent=(lang==='en')?'We create upon request.':'Wir kreieren auf Anfrage.';
   document.querySelector(".lang-btn").textContent=(lang==='en')?'DE':'EN';
 }
