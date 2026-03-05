@@ -8,221 +8,174 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Inter:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
-:root {
-  --bg:#0a0a0a;
+:root{
+  --bg:#0d0d0d;
   --text:#f2f2f2;
   --muted:#888;
-  --accent:#ffffff;
-  --radius:0px;
-}
-
-/* Abstract mode: calm red background & black toggle knob */
-body.abstract {
-  --bg: #8B2C2C;
-  --accent: #000000;
-  --radius:30px;
-}
-
-/* Cubism mode */
-body.cubism {
-  --bg:#0d0d0d;
   --accent:#8B2C2C;
-  --radius:0px;
+}
+
+body.abstract{
+  --bg:#8B2C2C;
+  --accent:#000000;
 }
 
 *{margin:0;padding:0;box-sizing:border-box;}
+
 body{
   background:var(--bg);
   color:var(--text);
   font-family:'Inter',sans-serif;
+  transition:background 0.8s ease;
   overflow-x:hidden;
-  transition:background 1s ease;
 }
 
-/* ENTRANCE LOGO */
-.entry {
-  position: fixed;
-  inset:0;
-  background:#000;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  z-index:10000;
-  transition: opacity 2s ease;
-}
-.entry h1{
-  font-family:'Cormorant Garamond',serif;
-  font-size:80px;
-  color: var(--text);
-  letter-spacing:8px;
-  opacity:0;
-  animation:fadeIn 3s forwards;
-}
-.entry.hidden{
-  opacity:0;
-  pointer-events:none;
-}
+/* TOP BAR */
 
-/* INTRO */
-section.intro{
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  min-height:100vh;
-  padding:60px 20px;
-}
-.intro h2{
-  font-family:'Cormorant Garamond',serif;
-  font-size:60px;
-  margin-bottom:40px;
-}
-.intro p{
-  max-width:600px;
-  line-height:2;
-  color:var(--muted);
-}
-
-/* ARTWORK CENTRING */
-.artwork {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  min-height: 100vh;
-  transition: opacity 0.8s ease, transform 0.8s ease;
-}
-.art-container {
-  position: relative;
-  display: inline-block;
-  width:70%;
-  max-width:900px;
-  margin-bottom: 240px; /* space between paintings */
-}
-.art-container img {
-  width:100%;
-  display:block;
-  border-radius: var(--radius);
-  cursor: pointer;
-  transition: transform 0.3s ease;
-}
-.art-container img:hover{
-  transform: scale(1.02);
-}
-body.cubism .art-container img{
-  clip-path: polygon(0 0, 100% 10%, 90% 100%, 10% 90%);
-  transform: rotate(-2deg);
-}
-
-/* NOTE OVERLAY */
-.art-container .note {
-  position: absolute;
+.mode-switch{
+  position:fixed;
   top:0;
   left:0;
   width:100%;
-  height:100%;
-  background: rgba(0,0,0,0.85);
-  color:#fff;
   display:flex;
   justify-content:center;
   align-items:center;
-  text-align:center;
-  opacity:0;
-  pointer-events:none;
-  transform: scale(0.95) translateY(20px);
-  transition: opacity 0.4s ease, transform 0.4s ease, clip-path 0.3s ease, border-radius 0.3s ease;
-  padding:20px;
-  font-size:1.1rem;
-  z-index:5;
-  box-shadow: inset 0 0 20px rgba(0,0,0,0.6), 0 4px 15px rgba(0,0,0,0.3);
-  background-image: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(0,0,0,0) 50%);
-  overflow:hidden;
-}
-
-/* Dramatic shapes */
-body.abstract .art-container .note {
-  border-radius: 50px;
-  clip-path: ellipse(80% 60% at 50% 50%);
-}
-body.cubism .art-container .note {
-  border-radius:0;
-  clip-path: polygon(0 0, 100% 5%, 95% 100%, 5% 95%);
-}
-.art-container.active .note{
-  opacity:1;
-  pointer-events:auto;
-  transform: scale(1) translateY(0);
-}
-
-/* MODE VISIBILITY */
-.abstract-art,
-.cubism-art {
-  display: none;
-  opacity:0;
-  pointer-events: none;
-}
-body.abstract .abstract-art,
-body.cubism .cubism-art {
-  display: flex;
-  opacity:1;
-  pointer-events: auto;
-  flex-direction: column;
-}
-
-/* MODE SWITCH + CONTACT + ART-RENTAL BUTTON */
-.mode-switch{
-  position:fixed;
-  top:30px;
-  right:40px;
-  display:flex;
-  gap:10px;
+  gap:14px;
+  padding:18px 20px;
   z-index:1000;
-  align-items:center;
-  flex-wrap: nowrap;
+  transition:0.4s ease;
+  flex-wrap:wrap;
 }
+
+.mode-switch.scrolled{
+  backdrop-filter: blur(14px);
+  background: rgba(0,0,0,0.35);
+  border-bottom:1px solid rgba(255,255,255,0.1);
+}
+
 .switch{
-  width:70px;
-  height:30px;
+  width:60px;
+  height:28px;
   border:1px solid var(--text);
   border-radius:50px;
   position:relative;
   cursor:pointer;
 }
+
 .switch::before{
   content:"";
   position:absolute;
-  width:24px;
-  height:24px;
+  width:22px;
+  height:22px;
   background:var(--accent);
   top:2px;
   left:3px;
   border-radius:50%;
-  transition:.4s;
-}
-body.cubism .switch::before{
-  transform: translateX(38px);
-  border-radius:0;
-  background: var(--accent);
+  transition:0.4s ease;
 }
 
-/* CONTACT & ART-RENTAL BUTTON */
-.contact-btn, .rental-btn{
+body.cubism .switch::before{
+  transform:translateX(32px);
+  border-radius:0;
+}
+
+.contact-btn,.rental-btn,.lang-btn{
   border:1px solid var(--text);
   background:transparent;
   color:var(--text);
-  padding:10px 20px;
+  padding:8px 14px;
+  font-size:13px;
   cursor:pointer;
-  border-radius:var(--radius);
-  transition:.3s;
+  transition:0.3s;
+  white-space:nowrap;
 }
-.contact-btn:hover, .rental-btn:hover{
+
+.contact-btn:hover,
+.rental-btn:hover,
+.lang-btn:hover{
   background:var(--accent);
   color:#000;
 }
 
+/* INTRO */
+
+section.intro{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:120px 20px 60px;
+}
+
+.intro h2{
+  font-family:'Cormorant Garamond',serif;
+  font-size:60px;
+  margin-bottom:30px;
+}
+
+.intro p{
+  max-width:600px;
+  color:var(--muted);
+  line-height:2;
+}
+
+/* ART */
+
+.artwork{
+  display:none;
+  flex-direction:column;
+  align-items:center;
+}
+
+body.cubism .cubism-art,
+body.abstract .abstract-art{
+  display:flex;
+}
+
+.art-container{
+  width:90%;
+  max-width:900px;
+  margin-bottom:220px;
+  position:relative;
+  text-align:center;
+}
+
+.art-container img{
+  width:100%;
+  cursor:pointer;
+  transition:0.3s ease;
+}
+
+body.cubism .art-container img{
+  clip-path: polygon(0 0, 100% 10%, 90% 100%, 10% 90%);
+  transform: rotate(-2deg);
+}
+
+/* NOTES */
+
+.note{
+  position:absolute;
+  inset:0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:30px;
+  background:rgba(0,0,0,0.9);
+  opacity:0;
+  pointer-events:none;
+  transition:0.4s ease;
+}
+
+.art-container.active .note{
+  opacity:1;
+  pointer-events:auto;
+}
+
 /* OVERLAY */
+
 .overlay{
   position:fixed;
   inset:0;
@@ -233,191 +186,115 @@ body.cubism .switch::before{
   flex-direction:column;
   opacity:0;
   pointer-events:none;
-  transition:1s ease;
+  transition:0.4s ease;
   z-index:2000;
 }
+
 .overlay.active{
   opacity:1;
   pointer-events:auto;
 }
-.overlay h2{
-  font-family:'Cormorant Garamond',serif;
-  font-size:40px;
-  margin-bottom:30px;
-}
-.overlay p{
-  color:var(--muted);
-  margin-bottom:10px;
-}
 
-/* PDF PREVIEW */
-.pdf-preview {
-  width: 80%;
-  max-width: 900px;
-  height: 80vh;
-  max-height: 80vh;
-  overflow: auto;
-}
-.pdf-preview iframe {
-  width:100%;
-  height:100%;
-  border:none;
-}
-
-/* MOBILE ADJUSTMENTS */
-@media(max-width:900px){
-  .intro h2{font-size:36px;}
-  .art-container{width:90%;}
-  .mode-switch{
-    right:20px;
-    gap:8px;
-  }
-}
-@media(max-width:600px){
-  .pdf-preview {
-    width:95%;
-    height:70vh;
-  }
-  .mode-switch{
-    flex-wrap: wrap;
-    gap:5px;
-  }
-}
-
-/* ANIMATION */
-@keyframes fadeIn { to { opacity:1; } }
 </style>
 </head>
 
 <body class="cubism">
 
-<!-- ENTRANCE LOGO -->
-<div class="entry" id="entryScreen">
-  <h1>DUDU</h1>
-</div>
-
-<!-- MODE SWITCH + ART-RENTAL + CONTACT BUTTON -->
-<div class="mode-switch">
+<div class="mode-switch" id="topBar">
   <span>Abstract</span>
   <div class="switch" onclick="toggleMode()"></div>
   <span>Cubism</span>
-  <button class="rental-btn" onclick="openRental()">Art-Rental</button>
-  <button class="contact-btn" onclick="openContact()">Contact</button>
+  <button class="rental-btn" data-en="Art-Rental" data-de="Kunstvermietung">Art-Rental</button>
+  <button class="contact-btn" data-en="Contact" data-de="Kontakt">Contact</button>
+  <button class="lang-btn" onclick="toggleLanguage()">DE</button>
 </div>
 
 <section class="intro">
-  <h2>Voices in the Darkness</h2>
-  <p>Between rupture and reconstruction, silence becomes structure.</p>
+  <h2 id="title">Voices in the Darkness</h2>
+  <p id="subtitle">This is just the beginning. We create upon request!</p>
 </section>
 
-<!-- ABSTRACT ARTWORKS -->
-<section class="artwork abstract-art">
-  <div class="art-container">
-    <img src="images/schizophrenia.jpeg" alt="Lost in Voices">
-    <div class="note"><p>Abstract exploration of chaos and calm.</p></div>
-    <h3>Lost in Voices</h3>
-    <span>Gouache on acrylic paper · 2025</span>
-  </div>
-</section>
-
-<!-- CUBISM ARTWORKS -->
 <section class="artwork cubism-art">
   <div class="art-container">
-    <img src="images/P1.jpeg" alt="P1">
-    <div class="note"><p>Geometric exploration of light and shadow.</p></div>
-    <h3>P1</h3>
-    <span>Gouache on acrylic paper · 2025</span>
-  </div>
-  <div class="art-container">
-    <img src="images/P2.jpeg" alt="P2">
-    <div class="note"><p>Cubist breakdown of perception and form.</p></div>
-    <h3>P2</h3>
-    <span>Gouache on acrylic paper · 2025</span>
-  </div>
-  <div class="art-container">
-    <img src="images/fell in love.jpeg" alt="Fell in Love">
-    <div class="note"><p>Emotional geometry and vibrant color.</p></div>
-    <h3>Fell in Love</h3>
-    <span>Gouache on acrylic paper · 2025</span>
-  </div>
-  <div class="art-container">
-    <img src="images/lucid.jpeg" alt="Lucid">
-    <div class="note"><p>Fragmented visions of the mind in Cubist form.</p></div>
-    <h3>Lucid</h3>
-    <span>Gouache on acrylic paper · 2025</span>
-  </div>
-  <div class="art-container">
-    <img src="images/hope in the darkness.jpeg" alt="Hope in the Darkness">
-    <div class="note"><p>Cubist contrast of light and shadow.</p></div>
-    <h3>Hope in the Darkness</h3>
-    <span>Gouache on acrylic paper · 2025</span>
+    <img src="images/P1.jpeg">
+    <div class="note" data-en="Geometric fracture of perception."
+         data-de="Geometrische Fragmentierung der Wahrnehmung.">
+      Geometric fracture of perception.
+    </div>
   </div>
 </section>
 
-<!-- CONTACT OVERLAY -->
+<section class="artwork abstract-art">
+  <div class="art-container">
+    <img src="images/schizophrenia.jpeg">
+    <div class="note"
+         data-en="Chaos dissolving into silence."
+         data-de="Chaos, das sich in Stille auflöst.">
+      Chaos dissolving into silence.
+    </div>
+  </div>
+</section>
+
 <div class="overlay" id="contactPanel">
-  <h2>Contact</h2>
-  <img src="images/Durali Demir.jpg">
+  <h2 data-en="Contact" data-de="Kontakt">Contact</h2>
   <p>Durali Demir</p>
   <p>d.demir@dudu-art-gallery.com</p>
-  <p>Munich, Germany</p>
   <button onclick="closePanels()">Close</button>
 </div>
 
-<!-- ART-RENTAL PDF OVERLAY -->
-<div class="overlay" id="rentalPanel">
-  <h2>Art-Rental</h2>
-  <div class="pdf-preview">
-    <iframe src="images/Art-Rental.pdf"></iframe>
-  </div>
-  <a href="images/Art-Rental.pdf" download style="margin-top:15px;color:var(--accent);text-decoration:underline;">Download PDF</a>
-  <button style="margin-top:20px;" onclick="closePanels()">Close</button>
-</div>
-
 <script>
-/* ENTRANCE LOGO */
-window.addEventListener("load", () => {
-  const entry = document.getElementById("entryScreen");
-  setTimeout(() => { entry.classList.add("hidden"); }, 3000);
-});
 
-/* Toggle Mode */
+/* MODE TOGGLE */
 function toggleMode(){
-  const body = document.body;
-  if(body.classList.contains("abstract")){
-    body.classList.remove("abstract");
-    body.classList.add("cubism");
-    localStorage.setItem("mode","cubism");
-  } else {
-    body.classList.remove("cubism");
-    body.classList.add("abstract");
-    localStorage.setItem("mode","abstract");
-  }
+  const body=document.body;
+  body.classList.toggle("abstract");
+  body.classList.toggle("cubism");
 }
 
-/* Load Saved Mode */
-window.onload = function() {
-  const saved = localStorage.getItem("mode");
-  if (saved) {
-    document.body.classList.remove("abstract","cubism");
-    document.body.classList.add(saved);
-  } else {
-    document.body.classList.add("cubism");
-  }
+/* LANGUAGE TOGGLE */
+let currentLang="en";
+
+function toggleLanguage(){
+  currentLang = currentLang==="en" ? "de" : "en";
+  document.querySelector(".lang-btn").innerText =
+    currentLang==="en" ? "DE" : "EN";
+
+  document.getElementById("title").innerText =
+    currentLang==="en"
+    ? "Voices in the Darkness"
+    : "Stimmen in der Dunkelheit";
+
+  document.getElementById("subtitle").innerText =
+    currentLang==="en"
+    ? "This is just the beginning. We create upon request."
+    : "Dies ist erst der Anfang. Wir schaffen auf Anfrage.";
+
+  document.querySelectorAll("[data-en]").forEach(el=>{
+    el.innerText = el.getAttribute("data-"+currentLang);
+  });
 }
 
-/* Overlay Functions */
-function openContact(){ document.getElementById("contactPanel").classList.add("active"); }
-function openRental(){ document.getElementById("rentalPanel").classList.add("active"); }
-function closePanels(){ document.querySelectorAll(".overlay").forEach(p=>p.classList.remove("active")); }
-
-/* Toggle Notes */
-document.querySelectorAll('.art-container').forEach(container => {
-  const img = container.querySelector('img');
-  const note = container.querySelector('.note');
-  img.addEventListener('click', () => { container.classList.add('active'); });
-  note.addEventListener('click', (e) => { e.stopPropagation(); container.classList.remove('active'); });
+/* NOTES */
+document.querySelectorAll('.art-container').forEach(container=>{
+  const img=container.querySelector('img');
+  const note=container.querySelector('.note');
+  img.addEventListener('click',()=>container.classList.add('active'));
+  note.addEventListener('click',(e)=>{
+    e.stopPropagation();
+    container.classList.remove('active');
+  });
 });
+
+/* SCROLL BLUR */
+window.addEventListener("scroll",()=>{
+  const topBar=document.getElementById("topBar");
+  if(window.scrollY>50){
+    topBar.classList.add("scrolled");
+  }else{
+    topBar.classList.remove("scrolled");
+  }
+});
+
 </script>
 
 </body>
