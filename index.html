@@ -19,7 +19,6 @@ body.abstract{
   --accent:#000000;
 }
 
-/* General */
 *{margin:0;padding:0;box-sizing:border-box;}
 body{
   background:var(--bg);
@@ -212,11 +211,11 @@ body.cubism .note{clip-path: polygon(0 0, 100% 5%, 95% 100%, 5% 95%);}
 <!-- Top Bar -->
 <div class="mode-switch" id="topBar">
   <button class="contact-btn">Contact</button>
+  <button class="rental-btn">Art-Rental</button>
+  <button class="lang-btn" onclick="toggleLanguage()">DE</button>
   <span>Abstract</span>
   <div class="switch" onclick="toggleMode()"></div>
   <span>Cubism</span>
-  <button class="rental-btn">Art-Rental</button>
-  <button class="lang-btn" onclick="toggleLanguage()">DE</button>
 </div>
 
 <section class="intro">
@@ -375,6 +374,5 @@ function toggleLanguage(){
   langBtn.textContent=currentLang==="en"?"DE":"EN";
 }
 </script>
-
 </body>
 </html>
