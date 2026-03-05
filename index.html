@@ -30,7 +30,7 @@ body{
   overflow-x:hidden;
 }
 
-/* TOP BAR */
+/* ================= TOP BAR ================= */
 
 .mode-switch{
   position:fixed;
@@ -43,6 +43,14 @@ body{
   padding:18px;
   z-index:1000;
   flex-wrap:wrap;
+  transition:0.4s;
+}
+
+.mode-switch.scrolled{
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  background: rgba(0,0,0,0.35);
+  border-bottom:1px solid rgba(255,255,255,0.1);
 }
 
 .switch{
@@ -62,13 +70,11 @@ body{
   background:var(--accent);
   top:2px;
   left:3px;
-  border-radius:50%;
-  transition:0.4s ease;
+  transition:0.4s;
 }
 
 body.cubism .switch::before{
   transform:translateX(32px);
-  border-radius:0;
 }
 
 button{
@@ -80,7 +86,7 @@ button{
   cursor:pointer;
 }
 
-/* INTRO */
+/* ================= INTRO ================= */
 
 section.intro{
   min-height:100vh;
@@ -104,7 +110,7 @@ section.intro{
   line-height:2;
 }
 
-/* ART */
+/* ================= ART ================= */
 
 .artwork{
   display:none;
@@ -128,6 +134,11 @@ body.abstract .abstract-art{
 .art-container img{
   width:100%;
   cursor:pointer;
+  transition:0.3s;
+}
+
+.art-container img:hover{
+  transform:scale(1.02);
 }
 
 .art-title{
@@ -142,7 +153,7 @@ body.abstract .abstract-art{
   font-size:14px;
 }
 
-/* NOTE */
+/* NOTES */
 
 .note{
   position:absolute;
@@ -150,12 +161,20 @@ body.abstract .abstract-art{
   display:flex;
   justify-content:center;
   align-items:center;
-  text-align:center;
   padding:30px;
-  background:rgba(0,0,0,0.9);
+  text-align:center;
+  background:rgba(0,0,0,0.92);
   opacity:0;
   pointer-events:none;
-  transition:0.4s ease;
+  transition:0.4s;
+}
+
+body.abstract .note{
+  clip-path: polygon(20% 0%, 100% 10%, 80% 100%, 0% 90%);
+}
+
+body.cubism .note{
+  clip-path: polygon(0 0, 100% 5%, 95% 100%, 5% 95%);
 }
 
 .art-container.active .note{
@@ -163,19 +182,19 @@ body.abstract .abstract-art{
   pointer-events:auto;
 }
 
-/* OVERLAY */
+/* ================= OVERLAYS ================= */
 
 .overlay{
   position:fixed;
   inset:0;
   background:#000;
   display:flex;
+  flex-direction:column;
   justify-content:center;
   align-items:center;
-  flex-direction:column;
   opacity:0;
   pointer-events:none;
-  transition:0.4s ease;
+  transition:0.4s;
   z-index:2000;
   padding:40px;
   text-align:center;
@@ -206,35 +225,56 @@ body.abstract .abstract-art{
   height:100%;
   border:none;
 }
+
 </style>
 </head>
 
 <body class="cubism">
 
-<div class="mode-switch">
+<!-- TOP BAR (FINAL ORDER) -->
+
+<div class="mode-switch" id="topBar">
+
   <span>Abstract</span>
-  <div class="switch" onclick="toggleMode()"></div>
+
+  <button class="contact-btn"
+          data-en="Contact"
+          data-de="Kontakt">Contact</button>
+
   <span>Cubism</span>
 
-  <button class="rental-btn" data-en="Art-Rental" data-de="Kunstvermietung">Art-Rental</button>
-  <button class="contact-btn" data-en="Contact" data-de="Kontakt">Contact</button>
+  <button class="rental-btn"
+          data-en="Art-Rental"
+          data-de="Kunstvermietung">Art-Rental</button>
+
+  <div class="switch" onclick="toggleMode()"></div>
+
   <button class="lang-btn" onclick="toggleLanguage()">DE</button>
+
 </div>
 
+<!-- INTRO -->
+
 <section class="intro">
-  <h2 id="title" data-en="Voices in the Darkness" data-de="Stimmen in der Dunkelheit">
-    Voices in the Darkness
+  <h2 data-en="Voices in the Darkness"
+      data-de="Stimmen in der Dunkelheit">
+      Voices in the Darkness
   </h2>
-  <p id="subtitle"
-     data-en="We create upon request."
+  <p data-en="We create upon request."
      data-de="Wir schaffen auf Anfrage.">
+     We create upon request.
   </p>
 </section>
 
+<!-- CUBISM WORKS -->
+
 <section class="artwork cubism-art">
+
+<!-- P1 -->
 <div class="art-container">
 <img src="images/P1.jpeg">
-<div class="note" data-en="Geometric fracture of perception."
+<div class="note"
+data-en="Geometric fracture of perception."
 data-de="Geometrische Fragmentierung der Wahrnehmung.">
 Geometric fracture of perception.
 </div>
@@ -245,9 +285,77 @@ data-de="Gouache auf Acrylpapier · 2025">
 Gouache on Acrylic Paper · 2025
 </div>
 </div>
+
+<!-- P2 -->
+<div class="art-container">
+<img src="images/P2.jpeg">
+<div class="note"
+data-en="Emotion reconstructed through structure."
+data-de="Emotion durch Struktur neu erschaffen.">
+Emotion reconstructed through structure.
+</div>
+<div class="art-title">P2</div>
+<div class="art-subtitle"
+data-en="Gouache on Acrylic Paper · 2025"
+data-de="Gouache auf Acrylpapier · 2025">
+Gouache on Acrylic Paper · 2025
+</div>
+</div>
+
+<!-- Fell in Love -->
+<div class="art-container">
+<img src="images/fell in love.jpeg">
+<div class="note"
+data-en="Love fragmented into form."
+data-de="Liebe, zerlegt in Form.">
+Love fragmented into form.
+</div>
+<div class="art-title">Fell in Love</div>
+<div class="art-subtitle"
+data-en="Gouache on Acrylic Paper · 2025"
+data-de="Gouache auf Acrylpapier · 2025">
+Gouache on Acrylic Paper · 2025
+</div>
+</div>
+
+<!-- Lucid -->
+<div class="art-container">
+<img src="images/lucid.jpeg">
+<div class="note"
+data-en="Lucidity within distortion."
+data-de="Klarheit innerhalb der Verzerrung.">
+Lucidity within distortion.
+</div>
+<div class="art-title">Lucid</div>
+<div class="art-subtitle"
+data-en="Gouache on Acrylic Paper · 2025"
+data-de="Gouache auf Acrylpapier · 2025">
+Gouache on Acrylic Paper · 2025
+</div>
+</div>
+
+<!-- Hope -->
+<div class="art-container">
+<img src="images/hope in the darkness.jpeg">
+<div class="note"
+data-en="Hope structured in darkness."
+data-de="Hoffnung strukturiert in Dunkelheit.">
+Hope structured in darkness.
+</div>
+<div class="art-title">Hope in the Darkness</div>
+<div class="art-subtitle"
+data-en="Gouache on Acrylic Paper · 2025"
+data-de="Gouache auf Acrylpapier · 2025">
+Gouache on Acrylic Paper · 2025
+</div>
+</div>
+
 </section>
 
+<!-- ABSTRACT -->
+
 <section class="artwork abstract-art">
+
 <div class="art-container">
 <img src="images/schizophrenia.jpeg">
 <div class="note"
@@ -255,14 +363,17 @@ data-en="Chaos dissolving into silence."
 data-de="Chaos, das sich in Stille auflöst.">
 Chaos dissolving into silence.
 </div>
-<div class="art-title">Schizophrenia</div>
+<div class="art-title">Lost in voices</div>
 <div class="art-subtitle"
 data-en="Gouache on Acrylic Paper · 2025"
 data-de="Gouache auf Acrylpapier · 2025">
 Gouache on Acrylic Paper · 2025
 </div>
 </div>
+
 </section>
+
+<!-- CONTACT -->
 
 <div class="overlay" id="contactPanel">
 <img src="images/Durali Demir.jpg" class="profile-pic">
@@ -271,6 +382,8 @@ Gouache on Acrylic Paper · 2025
 <p>d.demir@dudu-art-gallery.com</p>
 <button onclick="closePanels()">Close</button>
 </div>
+
+<!-- RENTAL -->
 
 <div class="overlay" id="rentalPanel">
 <h2 data-en="Art-Rental" data-de="Kunstvermietung">Art-Rental</h2>
@@ -330,6 +443,15 @@ function closePanels(){
 document.querySelectorAll(".overlay")
 .forEach(p=>p.classList.remove("active"));
 }
+
+/* SCROLL BLUR */
+window.addEventListener("scroll",()=>{
+if(window.scrollY>50){
+document.getElementById("topBar").classList.add("scrolled");
+}else{
+document.getElementById("topBar").classList.remove("scrolled");
+}
+});
 
 </script>
 
