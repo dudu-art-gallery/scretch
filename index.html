@@ -17,7 +17,7 @@
 
 body.abstract{
   --bg:#8B2C2C;
-  --accent:#000;
+  --accent:#000000;
 }
 
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -35,15 +35,16 @@ body{
 .mode-switch{
   position:fixed;
   top:0;
+  left:0;
   width:100%;
   display:flex;
   justify-content:center;
   align-items:center;
   gap:14px;
-  padding:18px;
+  padding:18px 20px;
   z-index:1000;
+  transition:0.4s ease;
   flex-wrap:wrap;
-  transition:0.4s;
 }
 
 .mode-switch.scrolled{
@@ -70,20 +71,31 @@ body{
   background:var(--accent);
   top:2px;
   left:3px;
-  transition:0.4s;
+  border-radius:50%;
+  transition:0.4s ease;
 }
 
 body.cubism .switch::before{
   transform:translateX(32px);
+  border-radius:0;
 }
 
-button{
+.contact-btn,.rental-btn,.lang-btn{
   border:1px solid var(--text);
   background:transparent;
   color:var(--text);
   padding:8px 14px;
   font-size:13px;
   cursor:pointer;
+  transition:0.3s;
+  white-space:nowrap;
+}
+
+.contact-btn:hover,
+.rental-btn:hover,
+.lang-btn:hover{
+  background:var(--accent);
+  color:#000;
 }
 
 /* ================= INTRO ================= */
@@ -134,12 +146,19 @@ body.abstract .abstract-art{
 .art-container img{
   width:100%;
   cursor:pointer;
-  transition:0.3s;
+  transition:0.3s ease;
 }
 
 .art-container img:hover{
   transform:scale(1.02);
 }
+
+body.cubism .art-container img{
+  clip-path: polygon(0 0, 100% 10%, 90% 100%, 10% 90%);
+  transform: rotate(-2deg);
+}
+
+/* TITLES */
 
 .art-title{
   margin-top:20px;
@@ -161,12 +180,13 @@ body.abstract .abstract-art{
   display:flex;
   justify-content:center;
   align-items:center;
-  padding:30px;
   text-align:center;
-  background:rgba(0,0,0,0.92);
+  padding:30px;
+  background:rgba(0,0,0,0.9);
   opacity:0;
   pointer-events:none;
-  transition:0.4s;
+  transition:0.4s ease;
+  font-size:1.1rem;
 }
 
 body.abstract .note{
@@ -182,19 +202,19 @@ body.cubism .note{
   pointer-events:auto;
 }
 
-/* ================= OVERLAYS ================= */
+/* ================= OVERLAY ================= */
 
 .overlay{
   position:fixed;
   inset:0;
   background:#000;
   display:flex;
-  flex-direction:column;
   justify-content:center;
   align-items:center;
+  flex-direction:column;
   opacity:0;
   pointer-events:none;
-  transition:0.4s;
+  transition:0.4s ease;
   z-index:2000;
   padding:40px;
   text-align:center;
@@ -208,16 +228,20 @@ body.cubism .note{
 .profile-pic{
   width:150px;
   height:150px;
-  border-radius:50%;
   object-fit:cover;
+  border-radius:50%;
   margin-bottom:20px;
 }
+
+/* PDF PREVIEW */
 
 .pdf-preview{
   width:90%;
   max-width:900px;
   height:70vh;
   margin:30px 0;
+  overflow:auto;
+  border:1px solid rgba(255,255,255,0.2);
 }
 
 .pdf-preview iframe{
@@ -231,227 +255,128 @@ body.cubism .note{
 
 <body class="cubism">
 
-<!-- TOP BAR (FINAL ORDER) -->
-
 <div class="mode-switch" id="topBar">
-
   <span>Abstract</span>
-
-  <button class="contact-btn"
-          data-en="Contact"
-          data-de="Kontakt">Contact</button>
-
-  <span>Cubism</span>
-
-  <button class="rental-btn"
-          data-en="Art-Rental"
-          data-de="Kunstvermietung">Art-Rental</button>
-
   <div class="switch" onclick="toggleMode()"></div>
-
+  <span>Cubism</span>
+  <button class="rental-btn">Art-Rental</button>
+  <button class="contact-btn">Contact</button>
   <button class="lang-btn" onclick="toggleLanguage()">DE</button>
-
 </div>
 
-<!-- INTRO -->
-
 <section class="intro">
-  <h2 data-en="Voices in the Darkness"
-      data-de="Stimmen in der Dunkelheit">
-      Voices in the Darkness
-  </h2>
-  <p data-en="We create upon request."
-     data-de="Wir schaffen auf Anfrage.">
-     We create upon request.
-  </p>
+  <h2 id="title">Voices in the Darkness</h2>
+  <p id="subtitle">We create upon request.</p>
 </section>
 
-<!-- CUBISM WORKS -->
+<!-- ================= CUBISM ================= -->
 
 <section class="artwork cubism-art">
 
-<!-- P1 -->
 <div class="art-container">
 <img src="images/P1.jpeg">
-<div class="note"
-data-en="Geometric fracture of perception."
-data-de="Geometrische Fragmentierung der Wahrnehmung.">
-Geometric fracture of perception.
-</div>
+<div class="note">Geometric fracture of perception.</div>
 <div class="art-title">P1</div>
-<div class="art-subtitle"
-data-en="Gouache on Acrylic Paper · 2025"
-data-de="Gouache auf Acrylpapier · 2025">
-Gouache on Acrylic Paper · 2025
-</div>
+<div class="art-subtitle">Gouache on Acrylic Paper · 2025</div>
 </div>
 
-<!-- P2 -->
 <div class="art-container">
 <img src="images/P2.jpeg">
-<div class="note"
-data-en="Emotion reconstructed through structure."
-data-de="Emotion durch Struktur neu erschaffen.">
-Emotion reconstructed through structure.
-</div>
+<div class="note">Emotion reconstructed through structure.</div>
 <div class="art-title">P2</div>
-<div class="art-subtitle"
-data-en="Gouache on Acrylic Paper · 2025"
-data-de="Gouache auf Acrylpapier · 2025">
-Gouache on Acrylic Paper · 2025
-</div>
+<div class="art-subtitle">Gouache on Acrylic Paper · 2025</div>
 </div>
 
-<!-- Fell in Love -->
 <div class="art-container">
 <img src="images/fell in love.jpeg">
-<div class="note"
-data-en="Love fragmented into form."
-data-de="Liebe, zerlegt in Form.">
-Love fragmented into form.
-</div>
+<div class="note">Love fragmented into form.</div>
 <div class="art-title">Fell in Love</div>
-<div class="art-subtitle"
-data-en="Gouache on Acrylic Paper · 2025"
-data-de="Gouache auf Acrylpapier · 2025">
-Gouache on Acrylic Paper · 2025
-</div>
+<div class="art-subtitle">Gouache on Acrylic Paper · 2025</div>
 </div>
 
-<!-- Lucid -->
 <div class="art-container">
 <img src="images/lucid.jpeg">
-<div class="note"
-data-en="Lucidity within distortion."
-data-de="Klarheit innerhalb der Verzerrung.">
-Lucidity within distortion.
-</div>
+<div class="note">Lucidity within distortion.</div>
 <div class="art-title">Lucid</div>
-<div class="art-subtitle"
-data-en="Gouache on Acrylic Paper · 2025"
-data-de="Gouache auf Acrylpapier · 2025">
-Gouache on Acrylic Paper · 2025
-</div>
+<div class="art-subtitle">Gouache on Acrylic Paper · 2025</div>
 </div>
 
-<!-- Hope -->
 <div class="art-container">
 <img src="images/hope in the darkness.jpeg">
-<div class="note"
-data-en="Hope structured in darkness."
-data-de="Hoffnung strukturiert in Dunkelheit.">
-Hope structured in darkness.
-</div>
+<div class="note">Hope structured in darkness.</div>
 <div class="art-title">Hope in the Darkness</div>
-<div class="art-subtitle"
-data-en="Gouache on Acrylic Paper · 2025"
-data-de="Gouache auf Acrylpapier · 2025">
-Gouache on Acrylic Paper · 2025
-</div>
+<div class="art-subtitle">Gouache on Acrylic Paper · 2025</div>
 </div>
 
 </section>
 
-<!-- ABSTRACT -->
+<!-- ================= ABSTRACT ================= -->
 
 <section class="artwork abstract-art">
-
 <div class="art-container">
 <img src="images/schizophrenia.jpeg">
-<div class="note"
-data-en="Chaos dissolving into silence."
-data-de="Chaos, das sich in Stille auflöst.">
-Chaos dissolving into silence.
-</div>
+<div class="note">Chaos dissolving into silence.</div>
 <div class="art-title">Lost in voices</div>
-<div class="art-subtitle"
-data-en="Gouache on Acrylic Paper · 2025"
-data-de="Gouache auf Acrylpapier · 2025">
-Gouache on Acrylic Paper · 2025
+<div class="art-subtitle">Gouache on Acrylic Paper · 2025</div>
 </div>
-</div>
-
 </section>
 
-<!-- CONTACT -->
+<!-- ================= CONTACT ================= -->
 
 <div class="overlay" id="contactPanel">
-<img src="images/Durali Demir.jpg" class="profile-pic">
-<h2>Durali Demir</h2>
-<p>Munich, Germany</p>
-<p>d.demir@dudu-art-gallery.com</p>
-<button onclick="closePanels()">Close</button>
+  <img src="images/Durali Demir.jpg" class="profile-pic">
+  <h2>Durali Demir</h2>
+  <p>d.demir@dudu-art-gallery.com</p>
+  <p>Munich, Germany</p>
+  <button onclick="closePanels()">Close</button>
 </div>
 
-<!-- RENTAL -->
+<!-- ================= RENTAL ================= -->
 
 <div class="overlay" id="rentalPanel">
-<h2 data-en="Art-Rental" data-de="Kunstvermietung">Art-Rental</h2>
-<div class="pdf-preview">
-<iframe src="images/Art-Rental.pdf"></iframe>
-</div>
-<button onclick="closePanels()">Close</button>
+  <h2>Art-Rental</h2>
+
+  <div class="pdf-preview">
+    <iframe src="images/Art-Rental.pdf"></iframe>
+  </div>
+
+  <a href="images/Art-Rental.pdf" download style="margin-bottom:20px;">Download PDF</a>
+  <button onclick="closePanels()">Close</button>
 </div>
 
 <script>
 
 /* MODE */
 function toggleMode(){
-document.body.classList.toggle("abstract");
-document.body.classList.toggle("cubism");
+  document.body.classList.toggle("abstract");
+  document.body.classList.toggle("cubism");
 }
-
-/* LANGUAGE */
-let currentLang = localStorage.getItem("lang") || "en";
-
-function toggleLanguage(){
-currentLang = currentLang === "en" ? "de" : "en";
-localStorage.setItem("lang", currentLang);
-applyLanguage();
-}
-
-function applyLanguage(){
-document.querySelector(".lang-btn").innerText =
-currentLang === "en" ? "DE" : "EN";
-
-document.querySelectorAll("[data-en]").forEach(el=>{
-el.innerText = el.getAttribute("data-" + currentLang);
-});
-}
-
-applyLanguage();
 
 /* NOTES */
 document.querySelectorAll('.art-container').forEach(container=>{
-const img=container.querySelector('img');
-const note=container.querySelector('.note');
-img.addEventListener('click',()=>container.classList.add('active'));
-note.addEventListener('click',(e)=>{
-e.stopPropagation();
-container.classList.remove('active');
+  const img=container.querySelector('img');
+  const note=container.querySelector('.note');
+  img.addEventListener('click',()=>container.classList.add('active'));
+  note.addEventListener('click',(e)=>{
+    e.stopPropagation();
+    container.classList.remove('active');
+  });
 });
-});
-
-/* OVERLAYS */
-document.querySelector(".contact-btn").onclick=
-()=>document.getElementById("contactPanel").classList.add("active");
-
-document.querySelector(".rental-btn").onclick=
-()=>document.getElementById("rentalPanel").classList.add("active");
-
-function closePanels(){
-document.querySelectorAll(".overlay")
-.forEach(p=>p.classList.remove("active"));
-}
 
 /* SCROLL BLUR */
 window.addEventListener("scroll",()=>{
-if(window.scrollY>50){
-document.getElementById("topBar").classList.add("scrolled");
-}else{
-document.getElementById("topBar").classList.remove("scrolled");
-}
+  const topBar=document.getElementById("topBar");
+  if(window.scrollY>50){
+    topBar.classList.add("scrolled");
+  }else{
+    topBar.classList.remove("scrolled");
+  }
 });
+
+/* OVERLAYS */
+document.querySelector(".contact-btn").onclick=()=>document.getElementById("contactPanel").classList.add("active");
+document.querySelector(".rental-btn").onclick=()=>document.getElementById("rentalPanel").classList.add("active");
+function closePanels(){document.querySelectorAll(".overlay").forEach(p=>p.classList.remove("active"));}
 
 </script>
 
