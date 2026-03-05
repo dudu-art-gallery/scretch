@@ -5,13 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DUDU Art Gallery</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+
 <style>
 :root{
   --bg:#0d0d0d;
   --text:#f2f2f2;
   --muted:#888;
   --accent:#8B2C2C;
-  --radius:0px;
 }
 
 body.abstract{
@@ -20,38 +20,39 @@ body.abstract{
 }
 
 *{margin:0;padding:0;box-sizing:border-box;}
+
 body{
   background:var(--bg);
   color:var(--text);
   font-family:'Inter',sans-serif;
-  transition:0.8s ease;
+  transition:background 0.8s ease;
   overflow-x:hidden;
 }
 
-/* Entrance badge */
-.entry{
-  position:fixed;
+/* ===== ENTRANCE LOGO ===== */
+.entry {
+  position: fixed;
   inset:0;
   background:#000;
   display:flex;
   justify-content:center;
   align-items:center;
   z-index:10000;
-  transition:opacity 2s ease;
 }
 .entry h1{
   font-family:'Cormorant Garamond',serif;
   font-size:80px;
-  color:var(--text);
+  color: var(--text);
   letter-spacing:8px;
   animation:fadeIn 3s forwards;
 }
 .entry.hidden{
   opacity:0;
   pointer-events:none;
+  transition:opacity 1s ease;
 }
 
-/* Top bar */
+/* ===== TOP BAR ===== */
 .mode-switch{
   position:fixed;
   top:0;
@@ -64,14 +65,15 @@ body{
   gap:10px;
   padding:18px 20px;
   z-index:1000;
-  transition:0.4s ease;
 }
+
 .mode-switch.scrolled{
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   background: rgba(0,0,0,0.35);
   border-bottom:1px solid rgba(255,255,255,0.1);
 }
+
 .switch{
   width:60px;
   height:28px;
@@ -80,6 +82,7 @@ body{
   position:relative;
   cursor:pointer;
 }
+
 .switch::before{
   content:"";
   position:absolute;
@@ -91,10 +94,12 @@ body{
   border-radius:50%;
   transition:0.4s ease;
 }
+
 body.cubism .switch::before{
   transform:translateX(32px);
   border-radius:0;
 }
+
 .contact-btn,.rental-btn,.lang-btn{
   border:1px solid var(--text);
   background:transparent;
@@ -105,12 +110,22 @@ body.cubism .switch::before{
   transition:0.3s;
   white-space:nowrap;
 }
-.contact-btn:hover,.rental-btn:hover,.lang-btn:hover{
+.contact-btn:hover,
+.rental-btn:hover,
+.lang-btn:hover{
   background:var(--accent);
   color:#000;
 }
 
-/* Intro */
+/* Toggle container horizontal */
+.toggle-container{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  flex-shrink:0;
+}
+
+/* ===== INTRO ===== */
 section.intro{
   min-height:100vh;
   display:flex;
@@ -120,12 +135,32 @@ section.intro{
   text-align:center;
   padding:120px 20px 60px;
 }
-.intro h2{font-family:'Cormorant Garamond',serif;font-size:60px;margin-bottom:30px;}
-.intro p{max-width:600px;color:var(--muted);line-height:2;}
 
-/* Artwork */
-.artwork{display:none;flex-direction:column;align-items:center;}
-body.cubism .cubism-art, body.abstract .abstract-art{display:flex;}
+.intro h2{
+  font-family:'Cormorant Garamond',serif;
+  font-size:60px;
+  margin-bottom:30px;
+}
+
+.intro p{
+  max-width:600px;
+  color:var(--muted);
+  line-height:2;
+}
+
+/* ===== ART ===== */
+.artwork{
+  display:none;
+  flex-direction:column;
+  align-items:center;
+}
+
+body.cubism .cubism-art,
+body.abstract .abstract-art{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
 
 .art-container{
   width:90%;
@@ -134,20 +169,34 @@ body.cubism .cubism-art, body.abstract .abstract-art{display:flex;}
   position:relative;
   text-align:center;
 }
+
 .art-container img{
   width:100%;
   cursor:pointer;
   transition:0.3s ease;
 }
-.art-container img:hover{transform:scale(1.02);}
+
+.art-container img:hover{
+  transform:scale(1.02);
+}
+
 body.cubism .art-container img{
   clip-path: polygon(0 0, 100% 10%, 90% 100%, 10% 90%);
   transform: rotate(-2deg);
 }
 
 /* Titles */
-.art-title{margin-top:20px;font-family:'Cormorant Garamond',serif;font-size:28px;}
-.art-subtitle{color:var(--muted);margin-top:5px;font-size:14px;}
+.art-title{
+  margin-top:20px;
+  font-family:'Cormorant Garamond',serif;
+  font-size:28px;
+}
+
+.art-subtitle{
+  color:var(--muted);
+  margin-top:5px;
+  font-size:14px;
+}
 
 /* Notes */
 .note{
@@ -164,11 +213,21 @@ body.cubism .art-container img{
   transition:0.4s ease;
   font-size:1.1rem;
 }
-body.abstract .note{clip-path: polygon(20% 0%, 100% 10%, 80% 100%, 0% 90%);}
-body.cubism .note{clip-path: polygon(0 0, 100% 5%, 95% 100%, 5% 95%);}
-.art-container.active .note{opacity:1;pointer-events:auto;}
 
-/* Overlay */
+body.abstract .note{
+  clip-path: polygon(20% 0%, 100% 10%, 80% 100%, 0% 90%);
+}
+
+body.cubism .note{
+  clip-path: polygon(0 0, 100% 5%, 95% 100%, 5% 95%);
+}
+
+.art-container.active .note{
+  opacity:1;
+  pointer-events:auto;
+}
+
+/* ===== OVERLAYS ===== */
 .overlay{
   position:fixed;
   inset:0;
@@ -184,96 +243,134 @@ body.cubism .note{clip-path: polygon(0 0, 100% 5%, 95% 100%, 5% 95%);}
   padding:40px;
   text-align:center;
 }
-.overlay.active{opacity:1;pointer-events:auto;}
-.profile-pic{width:150px;height:150px;object-fit:cover;border-radius:50%;margin-bottom:20px;}
 
-/* PDF preview */
-.pdf-preview{width:90%;max-width:900px;height:70vh;margin:30px 0;overflow:auto;border:1px solid rgba(255,255,255,0.2);}
-.pdf-preview iframe{width:100%;height:100%;border:none;}
-
-@media(max-width:380px){
-  .contact-btn,.rental-btn,.lang-btn{padding:6px 10px;font-size:12px;}
-  .switch{width:55px;height:26px;}
+.overlay.active{
+  opacity:1;
+  pointer-events:auto;
 }
 
-/* Fade in */
-@keyframes fadeIn{to{opacity:1;}}
+.profile-pic{
+  width:150px;
+  height:150px;
+  object-fit:cover;
+  border-radius:50%;
+  margin-bottom:20px;
+}
+
+/* PDF PREVIEW */
+.pdf-preview{
+  width:90%;
+  max-width:900px;
+  height:70vh;
+  margin:30px 0;
+  overflow:auto;
+  border:1px solid rgba(255,255,255,0.2);
+}
+
+.pdf-preview iframe{
+  width:100%;
+  height:100%;
+  border:none;
+}
+
+/* ===== MOBILE ===== */
+@media(max-width:380px){
+  .contact-btn,.rental-btn,.lang-btn{
+    padding:6px 10px;
+    font-size:12px;
+  }
+  .switch{
+    width:55px;
+    height:26px;
+  }
+}
+
+/* ENTRANCE FADE */
+@keyframes fadeIn { to { opacity:1; } }
 </style>
 </head>
-
 <body class="cubism">
 
-<!-- Entrance Badge -->
+<!-- ENTRANCE -->
 <div class="entry" id="entryScreen">
   <h1>DUDU</h1>
 </div>
 
-<!-- Top Bar -->
+<!-- TOP BAR -->
 <div class="mode-switch" id="topBar">
   <button class="contact-btn">Contact</button>
   <button class="rental-btn">Art-Rental</button>
   <button class="lang-btn" onclick="toggleLanguage()">DE</button>
-  <span>Abstract</span>
-  <div class="switch" onclick="toggleMode()"></div>
-  <span>Cubism</span>
+  <div class="toggle-container">
+    <span>Abstract</span>
+    <div class="switch" onclick="toggleMode()"></div>
+    <span>Cubism</span>
+  </div>
 </div>
 
+<!-- INTRO -->
 <section class="intro">
   <h2 id="title">Voices in the Darkness</h2>
-  <p id="subtitle">We create upon request.</p>
+  <p id="subtitle">Between rupture and reconstruction, silence becomes structure.</p>
 </section>
 
-<!-- Cubism Artworks -->
+<!-- CUBISM ARTWORK -->
 <section class="artwork cubism-art">
-  <div class="art-container" data-key="P1">
-    <img src="images/P1.jpeg">
-    <div class="note">Geometric fracture of perception.</div>
-    <div class="art-title">P1</div>
-    <div class="art-subtitle">Gouache on Acrylic Paper · 2025</div>
-  </div>
-  <div class="art-container" data-key="P2">
-    <img src="images/P2.jpeg">
-    <div class="note">Emotion reconstructed through structure.</div>
-    <div class="art-title">P2</div>
-    <div class="art-subtitle">Gouache on Acrylic Paper · 2025</div>
-  </div>
-  <div class="art-container" data-key="fell">
-    <img src="images/fell in love.jpeg">
-    <div class="note">Love fragmented into form.</div>
-    <div class="art-title">Fell in Love</div>
-    <div class="art-subtitle">Gouache on Acrylic Paper · 2025</div>
-  </div>
-  <div class="art-container" data-key="lucid">
-    <img src="images/lucid.jpeg">
-    <div class="note">Lucidity within distortion.</div>
-    <div class="art-title">Lucid</div>
-    <div class="art-subtitle">Gouache on Acrylic Paper · 2025</div>
-  </div>
-  <div class="art-container" data-key="hope">
-    <img src="images/hope in the darkness.jpeg">
-    <div class="note">Hope structured in darkness.</div>
-    <div class="art-title">Hope in the Darkness</div>
-    <div class="art-subtitle">Gouache on Acrylic Paper · 2025</div>
-  </div>
+
+<div class="art-container">
+<img src="images/P1.jpeg">
+<div class="note">Geometric exploration of light and shadow.</div>
+<div class="art-title">P1</div>
+<div class="art-subtitle">Gouache on acrylic paper · 2025</div>
+</div>
+
+<div class="art-container">
+<img src="images/P2.jpeg">
+<div class="note">Cubist breakdown of perception and form.</div>
+<div class="art-title">P2</div>
+<div class="art-subtitle">Gouache on acrylic paper · 2025</div>
+</div>
+
+<div class="art-container">
+<img src="images/fell in love.jpeg">
+<div class="note">Emotional geometry and vibrant color.</div>
+<div class="art-title">Fell in Love</div>
+<div class="art-subtitle">Gouache on acrylic paper · 2025</div>
+</div>
+
+<div class="art-container">
+<img src="images/lucid.jpeg">
+<div class="note">Fragmented visions of the mind in Cubist form.</div>
+<div class="art-title">Lucid</div>
+<div class="art-subtitle">Gouache on acrylic paper · 2025</div>
+</div>
+
+<div class="art-container">
+<img src="images/hope in the darkness.jpeg">
+<div class="note">Cubist contrast of light and shadow.</div>
+<div class="art-title">Hope in the Darkness</div>
+<div class="art-subtitle">Gouache on acrylic paper · 2025</div>
+</div>
+
 </section>
 
-<!-- Abstract Artworks -->
+<!-- ABSTRACT ARTWORK -->
 <section class="artwork abstract-art">
-  <div class="art-container" data-key="lost">
-    <img src="images/schizophrenia.jpeg">
-    <div class="note">Chaos dissolving into silence.</div>
-    <div class="art-title">Lost in Voices</div>
-    <div class="art-subtitle">Gouache on Acrylic Paper · 2025</div>
-  </div>
-  <div class="art-container" data-key="face">
-    <img src="images/the face.jpeg">
-    <div class="note">Identity in color and form.</div>
-    <div class="art-title">The Face</div>
-    <div class="art-subtitle">Gouache on Acrylic Paper · 2025</div>
-  </div>
+<div class="art-container">
+<img src="images/schizophrenia.jpeg">
+<div class="note">Abstract exploration of chaos and calm.</div>
+<div class="art-title">Lost in Voices</div>
+<div class="art-subtitle">Abstract Series · 2025</div>
+</div>
+<div class="art-container">
+<img src="images/the face.jpeg">
+<div class="note">Bold abstraction of identity and expression.</div>
+<div class="art-title">The Face</div>
+<div class="art-subtitle">Abstract Series · 2025</div>
+</div>
 </section>
 
-<!-- Contact Overlay -->
+<!-- CONTACT -->
 <div class="overlay" id="contactPanel">
   <img src="images/Durali Demir.jpg" class="profile-pic">
   <h2>Durali Demir</h2>
@@ -282,7 +379,7 @@ body.cubism .note{clip-path: polygon(0 0, 100% 5%, 95% 100%, 5% 95%);}
   <button onclick="closePanels()">Close</button>
 </div>
 
-<!-- Rental Overlay -->
+<!-- ART-RENTAL -->
 <div class="overlay" id="rentalPanel">
   <h2>Art-Rental</h2>
   <div class="pdf-preview">
@@ -293,29 +390,19 @@ body.cubism .note{clip-path: polygon(0 0, 100% 5%, 95% 100%, 5% 95%);}
 </div>
 
 <script>
-/* Entrance badge */
+/* ENTRANCE */
 window.addEventListener("load",()=>{
-  setTimeout(()=>document.getElementById("entryScreen").classList.add("hidden"),3000);
+  const entry=document.getElementById("entryScreen");
+  setTimeout(()=>entry.classList.add("hidden"),3000);
 });
 
-/* Mode toggle */
+/* MODE */
 function toggleMode(){
   document.body.classList.toggle("abstract");
   document.body.classList.toggle("cubism");
 }
 
-/* Scroll blur top bar */
-window.addEventListener("scroll",()=>{
-  const topBar=document.getElementById("topBar");
-  topBar.classList.toggle("scrolled",window.scrollY>50);
-});
-
-/* Overlay buttons */
-document.querySelector(".contact-btn").onclick=()=>document.getElementById("contactPanel").classList.add("active");
-document.querySelector(".rental-btn").onclick=()=>document.getElementById("rentalPanel").classList.add("active");
-function closePanels(){document.querySelectorAll(".overlay").forEach(p=>p.classList.remove("active"));}
-
-/* Notes toggle */
+/* NOTES */
 document.querySelectorAll('.art-container').forEach(container=>{
   const img=container.querySelector('img');
   const note=container.querySelector('.note');
@@ -326,52 +413,70 @@ document.querySelectorAll('.art-container').forEach(container=>{
   });
 });
 
-/* Language translations */
-let currentLang="en";
+/* SCROLL EFFECT */
+window.addEventListener("scroll",()=>{
+  const topBar=document.getElementById("topBar");
+  if(window.scrollY>50){
+    topBar.classList.add("scrolled");
+  }else{
+    topBar.classList.remove("scrolled");
+  }
+});
+
+/* OVERLAYS */
+document.querySelector(".contact-btn").onclick=()=>document.getElementById("contactPanel").classList.add("active");
+document.querySelector(".rental-btn").onclick=()=>document.getElementById("rentalPanel").classList.add("active");
+function closePanels(){document.querySelectorAll(".overlay").forEach(p=>p.classList.remove("active"));}
+
+/* LANGUAGE */
+let lang="EN";
 const translations={
-  en:{
+  EN:{
     title:"Voices in the Darkness",
-    subtitle:"We create upon request.",
-    artworks:{
-      P1:["P1","Gouache on Acrylic Paper · 2025","Geometric fracture of perception."],
-      P2:["P2","Gouache on Acrylic Paper · 2025","Emotion reconstructed through structure."],
-      fell:["Fell in Love","Gouache on Acrylic Paper · 2025","Love fragmented into form."],
-      lucid:["Lucid","Gouache on Acrylic Paper · 2025","Lucidity within distortion."],
-      hope:["Hope in the Darkness","Gouache on Acrylic Paper · 2025","Hope structured in darkness."],
-      lost:["Lost in Voices","Gouache on Acrylic Paper · 2025","Chaos dissolving into silence."],
-      face:["The Face","Gouache on Acrylic Paper · 2025","Identity in color and form."]
-    }
+    subtitle:"Between rupture and reconstruction, silence becomes structure.",
+    cubism:[
+      {title:"P1", subtitle:"Gouache on acrylic paper · 2025"},
+      {title:"P2", subtitle:"Gouache on acrylic paper · 2025"},
+      {title:"Fell in Love", subtitle:"Gouache on acrylic paper · 2025"},
+      {title:"Lucid", subtitle:"Gouache on acrylic paper · 2025"},
+      {title:"Hope in the Darkness", subtitle:"Gouache on acrylic paper · 2025"}
+    ],
+    abstract:[
+      {title:"Lost in Voices", subtitle:"Abstract Series · 2025"},
+      {title:"The Face", subtitle:"Abstract Series · 2025"}
+    ]
   },
-  de:{
+  DE:{
     title:"Stimmen in der Dunkelheit",
-    subtitle:"Wir schaffen auf Anfrage.",
-    artworks:{
-      P1:["P1","Gouache auf Aquarellpapier · 2025","Geometrische Wahrnehmungs-Fraktur."],
-      P2:["P2","Gouache auf Aquarellpapier · 2025","Emotionen durch Struktur rekonstruiert."],
-      fell:["Verliebt","Gouache auf Aquarellpapier · 2025","Liebe fragmentiert in Form."],
-      lucid:["Klarheit","Gouache auf Aquarellpapier · 2025","Klarheit innerhalb von Verzerrung."],
-      hope:["Hoffnung in der Dunkelheit","Gouache auf Aquarellpapier · 2025","Hoffnung strukturiert in Dunkelheit."],
-      lost:["Verloren in Stimmen","Gouache auf Aquarellpapier · 2025","Chaos löst sich in Stille auf."],
-      face:["Das Gesicht","Gouache auf Aquarellpapier · 2025","Identität in Farbe und Form."]
-    }
+    subtitle:"Zwischen Bruch und Wiederaufbau wird Stille zu Struktur.",
+    cubism:[
+      {title:"P1", subtitle:"Gouache auf Acrylpapier · 2025"},
+      {title:"P2", subtitle:"Gouache auf Acrylpapier · 2025"},
+      {title:"Verliebt", subtitle:"Gouache auf Acrylpapier · 2025"},
+      {title:"Lucid", subtitle:"Gouache auf Acrylpapier · 2025"},
+      {title:"Hoffnung in der Dunkelheit", subtitle:"Gouache auf Acrylpapier · 2025"}
+    ],
+    abstract:[
+      {title:"Verloren in Stimmen", subtitle:"Abstrakte Serie · 2025"},
+      {title:"Das Gesicht", subtitle:"Abstrakte Serie · 2025"}
+    ]
   }
 };
 
 function toggleLanguage(){
-  currentLang = currentLang==="en"?"de":"en";
-  document.getElementById("title").textContent=translations[currentLang].title;
-  document.getElementById("subtitle").textContent=translations[currentLang].subtitle;
-  document.querySelectorAll(".art-container").forEach(container=>{
-    const key=container.dataset.key;
-    const trans=translations[currentLang].artworks[key];
-    if(trans){
-      container.querySelector(".art-title").textContent=trans[0];
-      container.querySelector(".art-subtitle").textContent=trans[1];
-      container.querySelector(".note").textContent=trans[2];
-    }
+  lang = lang==="EN"?"DE":"EN";
+  document.querySelector(".lang-btn").textContent=lang;
+  document.getElementById("title").textContent=translations[lang].title;
+  document.getElementById("subtitle").textContent=translations[lang].subtitle;
+
+  document.querySelectorAll(".cubism-art .art-container").forEach((c,i)=>{
+    c.querySelector(".art-title").textContent=translations[lang].cubism[i].title;
+    c.querySelector(".art-subtitle").textContent=translations[lang].cubism[i].subtitle;
   });
-  const langBtn=document.querySelector(".lang-btn");
-  langBtn.textContent=currentLang==="en"?"DE":"EN";
+  document.querySelectorAll(".abstract-art .art-container").forEach((c,i)=>{
+    c.querySelector(".art-title").textContent=translations[lang].abstract[i].title;
+    c.querySelector(".art-subtitle").textContent=translations[lang].abstract[i].subtitle;
+  });
 }
 </script>
 </body>
