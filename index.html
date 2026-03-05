@@ -82,8 +82,19 @@ section.intro{
   text-align:center;
   padding:120px 20px 60px;
 }
-section.intro h2{font-family:'Cormorant Garamond',serif;font-size:60px;margin-bottom:30px;}
-section.intro p{max-width:600px;color:var(--muted);line-height:2;}
+section.intro h2{
+  font-family:'Cormorant Garamond',serif;
+  font-size:88px;
+  margin-bottom:35px;
+  letter-spacing:2px;
+}
+
+section.intro p{
+  max-width:700px;
+  color:var(--muted);
+  line-height:2;
+  font-size:22px;
+}
 
 /* ================ ARTWORK ================= */
 .artwork{display:none;flex-direction:column;align-items:center;}
@@ -273,7 +284,7 @@ document.querySelector(".rental-btn").onclick=()=>document.getElementById("renta
 function closePanels(){document.querySelectorAll(".overlay").forEach(p=>p.classList.remove("active"));}
 
 // LANGUAGE TOGGLE
-let lang='en';
+let lang='de';
 function applyLanguage(){
   document.querySelectorAll('.art-title').forEach(el=>el.textContent=el.dataset[lang]);
   document.querySelectorAll('.art-subtitle').forEach(el=>el.textContent=el.dataset[lang]);
