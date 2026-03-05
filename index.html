@@ -54,26 +54,40 @@ body{
   left:0;
   width:100%;
   display:flex;
-  justify-content:center;
+  flex-direction:column;
   align-items:center;
-  gap:8px;
-  padding:10px 8px;
   z-index:1000;
-  transition:0.4s ease;
-  flex-wrap:nowrap;
-  overflow-x:auto;
+  padding:10px 8px;
+  gap:4px;
 }
-.mode-switch button,
-.mode-switch span,
-.mode-switch .switch{
-  flex-shrink:0;
-}
-
 .mode-switch.scrolled{
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   background: rgba(0,0,0,0.35);
   border-bottom:1px solid rgba(255,255,255,0.1);
+}
+
+/* First row buttons */
+.top-row{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:8px;
+  flex-wrap:wrap;
+  width:100%;
+}
+
+/* Second row toggle */
+.bottom-row{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:8px;
+}
+
+/* Buttons and switch */
+button, .switch, span{
+  flex-shrink:0;
 }
 
 .switch{
@@ -212,12 +226,16 @@ body.cubism .note{clip-path: polygon(0 0, 100% 5%, 95% 100%, 5% 95%);}
 
 <!-- TOP BAR -->
 <div class="mode-switch" id="topBar">
-  <button class="contact-btn">Contact</button>
-  <button class="rental-btn">Art-Rental</button>
-  <button class="lang-btn" onclick="toggleLanguage()">DE</button>
-  <span>Abstract</span>
-  <div class="switch" onclick="toggleMode()"></div>
-  <span>Cubism</span>
+  <div class="top-row">
+    <button class="contact-btn">Contact</button>
+    <button class="rental-btn">Art-Rental</button>
+    <button class="lang-btn" onclick="toggleLanguage()">DE</button>
+  </div>
+  <div class="bottom-row">
+    <span>Abstract</span>
+    <div class="switch" onclick="toggleMode()"></div>
+    <span>Cubism</span>
+  </div>
 </div>
 
 <!-- INTRO -->
@@ -226,54 +244,53 @@ body.cubism .note{clip-path: polygon(0 0, 100% 5%, 95% 100%, 5% 95%);}
   <p id="subtitle">We create upon request.</p>
 </section>
 
-<!-- CUBISM ART -->
+<!-- CUBISM AND ABSTRACT ARTWORKS (same as before) -->
 <section class="artwork cubism-art">
-<div class="art-container">
-<img src="images/P1.jpeg">
-<div class="note" data-en="Geometric fracture of perception." data-de="Geometrische Zerlegung der Wahrnehmung."></div>
-<div class="art-title" data-en="P1" data-de="P1">P1</div>
-<div class="art-subtitle" data-en="Gouache on Acrylic Paper · 2025" data-de="Gouache auf Acrylpapier · 2025">Gouache on Acrylic Paper · 2025</div>
-</div>
-<div class="art-container">
-<img src="images/P2.jpeg">
-<div class="note" data-en="Emotion reconstructed through structure." data-de="Emotion durch Struktur rekonstruiert."></div>
-<div class="art-title" data-en="P2" data-de="P2">P2</div>
-<div class="art-subtitle" data-en="Gouache on Acrylic Paper · 2025" data-de="Gouache auf Acrylpapier · 2025">Gouache on Acrylic Paper · 2025</div>
-</div>
-<div class="art-container">
-<img src="images/fell in love.jpeg">
-<div class="note" data-en="Love fragmented into form." data-de="Liebe in Form fragmentiert."></div>
-<div class="art-title" data-en="Fell in Love" data-de="Verliebt Gefallen">Fell in Love</div>
-<div class="art-subtitle" data-en="Gouache on Acrylic Paper · 2025" data-de="Gouache auf Acrylpapier · 2025">Gouache on Acrylic Paper · 2025</div>
-</div>
-<div class="art-container">
-<img src="images/lucid.jpeg">
-<div class="note" data-en="Lucidity within distortion." data-de="Klarheit innerhalb von Verzerrung."></div>
-<div class="art-title" data-en="Lucid" data-de="Klar">Lucid</div>
-<div class="art-subtitle" data-en="Gouache on Acrylic Paper · 2025" data-de="Gouache auf Acrylpapier · 2025">Gouache on Acrylic Paper · 2025</div>
-</div>
-<div class="art-container">
-<img src="images/hope in the darkness.jpeg">
-<div class="note" data-en="Hope structured in darkness." data-de="Hoffnung in Dunkelheit strukturiert."></div>
-<div class="art-title" data-en="Hope in the Darkness" data-de="Hoffnung in der Dunkelheit">Hope in the Darkness</div>
-<div class="art-subtitle" data-en="Gouache on Acrylic Paper · 2025" data-de="Gouache auf Acrylpapier · 2025">Gouache on Acrylic Paper · 2025</div>
-</div>
+  <div class="art-container">
+    <img src="images/P1.jpeg">
+    <div class="note" data-en="Geometric fracture of perception." data-de="Geometrische Zerlegung der Wahrnehmung."></div>
+    <div class="art-title" data-en="P1" data-de="P1">P1</div>
+    <div class="art-subtitle" data-en="Gouache on Acrylic Paper · 2025" data-de="Gouache auf Acrylpapier · 2025">Gouache on Acrylic Paper · 2025</div>
+  </div>
+  <div class="art-container">
+    <img src="images/P2.jpeg">
+    <div class="note" data-en="Emotion reconstructed through structure." data-de="Emotion durch Struktur rekonstruiert."></div>
+    <div class="art-title" data-en="P2" data-de="P2">P2</div>
+    <div class="art-subtitle" data-en="Gouache on Acrylic Paper · 2025" data-de="Gouache auf Acrylpapier · 2025">Gouache on Acrylic Paper · 2025</div>
+  </div>
+  <div class="art-container">
+    <img src="images/fell in love.jpeg">
+    <div class="note" data-en="Love fragmented into form." data-de="Liebe in Form fragmentiert."></div>
+    <div class="art-title" data-en="Fell in Love" data-de="Verliebt Gefallen">Fell in Love</div>
+    <div class="art-subtitle" data-en="Gouache on Acrylic Paper · 2025" data-de="Gouache auf Acrylpapier · 2025">Gouache on Acrylic Paper · 2025</div>
+  </div>
+  <div class="art-container">
+    <img src="images/lucid.jpeg">
+    <div class="note" data-en="Lucidity within distortion." data-de="Klarheit innerhalb von Verzerrung."></div>
+    <div class="art-title" data-en="Lucid" data-de="Klar">Lucid</div>
+    <div class="art-subtitle" data-en="Gouache on Acrylic Paper · 2025" data-de="Gouache auf Acrylpapier · 2025">Gouache on Acrylic Paper · 2025</div>
+  </div>
+  <div class="art-container">
+    <img src="images/hope in the darkness.jpeg">
+    <div class="note" data-en="Hope structured in darkness." data-de="Hoffnung in Dunkelheit strukturiert."></div>
+    <div class="art-title" data-en="Hope in the Darkness" data-de="Hoffnung in der Dunkelheit">Hope in the Darkness</div>
+    <div class="art-subtitle" data-en="Gouache on Acrylic Paper · 2025" data-de="Gouache auf Acrylpapier · 2025">Gouache on Acrylic Paper · 2025</div>
+  </div>
 </section>
 
-<!-- ABSTRACT ART -->
 <section class="artwork abstract-art">
-<div class="art-container">
-<img src="images/schizophrenia.jpeg">
-<div class="note" data-en="Chaos dissolving into silence." data-de="Chaos löst sich in Stille auf."></div>
-<div class="art-title" data-en="Lost in Voices" data-de="Verloren in Stimmen">Lost in Voices</div>
-<div class="art-subtitle" data-en="Gouache on Acrylic Paper · 2025" data-de="Gouache auf Acrylpapier · 2025">Gouache on Acrylic Paper · 2025</div>
-</div>
-<div class="art-container">
-<img src="images/the face.jpeg">
-<div class="note" data-en="Exploration of identity and perception." data-de="Erkundung von Identität und Wahrnehmung."></div>
-<div class="art-title" data-en="The Face" data-de="Das Gesicht">The Face</div>
-<div class="art-subtitle" data-en="Gouache on Acrylic Paper · 2025" data-de="Gouache auf Acrylpapier · 2025">Gouache on Acrylic Paper · 2025</div>
-</div>
+  <div class="art-container">
+    <img src="images/schizophrenia.jpeg">
+    <div class="note" data-en="Chaos dissolving into silence." data-de="Chaos löst sich in Stille auf."></div>
+    <div class="art-title" data-en="Lost in Voices" data-de="Verloren in Stimmen">Lost in Voices</div>
+    <div class="art-subtitle" data-en="Gouache on Acrylic Paper · 2025" data-de="Gouache auf Acrylpapier · 2025">Gouache on Acrylic Paper · 2025</div>
+  </div>
+  <div class="art-container">
+    <img src="images/the face.jpeg">
+    <div class="note" data-en="Exploration of identity and perception." data-de="Erkundung von Identität und Wahrnehmung."></div>
+    <div class="art-title" data-en="The Face" data-de="Das Gesicht">The Face</div>
+    <div class="art-subtitle" data-en="Gouache on Acrylic Paper · 2025" data-de="Gouache auf Acrylpapier · 2025">Gouache on Acrylic Paper · 2025</div>
+  </div>
 </section>
 
 <!-- CONTACT -->
