@@ -158,7 +158,21 @@ body.cubism .art-container img{
   transform: rotate(-2deg);
 }
 
-/* ================= NOTES ================= */
+/* TITLES */
+
+.art-title{
+  margin-top:20px;
+  font-family:'Cormorant Garamond',serif;
+  font-size:28px;
+}
+
+.art-subtitle{
+  color:var(--muted);
+  margin-top:5px;
+  font-size:14px;
+}
+
+/* NOTES */
 
 .note{
   position:absolute;
@@ -202,6 +216,8 @@ body.cubism .note{
   pointer-events:none;
   transition:0.4s ease;
   z-index:2000;
+  padding:40px;
+  text-align:center;
 }
 
 .overlay.active{
@@ -209,11 +225,29 @@ body.cubism .note{
   pointer-events:auto;
 }
 
-@media(max-width:380px){
-  .contact-btn,.rental-btn,.lang-btn{
-    padding:6px 10px;
-    font-size:12px;
-  }
+.profile-pic{
+  width:150px;
+  height:150px;
+  object-fit:cover;
+  border-radius:50%;
+  margin-bottom:20px;
+}
+
+/* PDF PREVIEW */
+
+.pdf-preview{
+  width:90%;
+  max-width:900px;
+  height:70vh;
+  margin:30px 0;
+  overflow:auto;
+  border:1px solid rgba(255,255,255,0.2);
+}
+
+.pdf-preview iframe{
+  width:100%;
+  height:100%;
+  border:none;
 }
 
 </style>
@@ -225,98 +259,88 @@ body.cubism .note{
   <span>Abstract</span>
   <div class="switch" onclick="toggleMode()"></div>
   <span>Cubism</span>
-  <button class="rental-btn" data-en="Art-Rental" data-de="Kunstvermietung">Art-Rental</button>
-  <button class="contact-btn" data-en="Contact" data-de="Kontakt">Contact</button>
+  <button class="rental-btn">Art-Rental</button>
+  <button class="contact-btn">Contact</button>
   <button class="lang-btn" onclick="toggleLanguage()">DE</button>
 </div>
 
 <section class="intro">
   <h2 id="title">Voices in the Darkness</h2>
-  <p id="subtitle">This is just the beginning. We create upon request.</p>
+  <p id="subtitle">We create upon request.</p>
 </section>
 
 <!-- ================= CUBISM ================= -->
 
 <section class="artwork cubism-art">
 
-  <div class="art-container">
-    <img src="images/P1.jpeg">
-    <div class="note" data-en="Geometric fracture of perception."
-         data-de="Geometrische Fragmentierung der Wahrnehmung.">
-         Geometric fracture of perception.
-    </div>
-  </div>
+<div class="art-container">
+<img src="images/P1.jpeg">
+<div class="note">Geometric fracture of perception.</div>
+<div class="art-title">P1</div>
+<div class="art-subtitle">Gouache on Acrylic Paper · 2025</div>
+</div>
 
-  <div class="art-container">
-    <img src="images/P2.jpeg">
-    <div class="note"
-         data-en="Emotion reconstructed through structure."
-         data-de="Emotion durch Struktur neu erschaffen.">
-         Emotion reconstructed through structure.
-    </div>
-  </div>
+<div class="art-container">
+<img src="images/P2.jpeg">
+<div class="note">Emotion reconstructed through structure.</div>
+<div class="art-title">P2</div>
+<div class="art-subtitle">Gouache on Acrylic Paper · 2025</div>
+</div>
 
-  <div class="art-container">
-    <img src="images/fell in love.jpeg">
-    <div class="note"
-         data-en="Love fragmented into form."
-         data-de="Liebe, zerlegt in Form.">
-         Love fragmented into form.
-    </div>
-  </div>
+<div class="art-container">
+<img src="images/fell in love.jpeg">
+<div class="note">Love fragmented into form.</div>
+<div class="art-title">Fell in Love</div>
+<div class="art-subtitle">Gouache on Acrylic Paper · 2025</div>
+</div>
 
-  <div class="art-container">
-    <img src="images/lucid.jpeg">
-    <div class="note"
-         data-en="Lucidity within distortion."
-         data-de="Klarheit innerhalb der Verzerrung.">
-         Lucidity within distortion.
-    </div>
-  </div>
+<div class="art-container">
+<img src="images/lucid.jpeg">
+<div class="note">Lucidity within distortion.</div>
+<div class="art-title">Lucid</div>
+<div class="art-subtitle">Gouache on Acrylic Paper · 2025</div>
+</div>
 
-  <div class="art-container">
-    <img src="images/hope in the darkness.jpeg">
-    <div class="note"
-         data-en="Hope structured in darkness."
-         data-de="Hoffnung strukturiert in Dunkelheit.">
-         Hope structured in darkness.
-    </div>
-  </div>
+<div class="art-container">
+<img src="images/hope in the darkness.jpeg">
+<div class="note">Hope structured in darkness.</div>
+<div class="art-title">Hope in the Darkness</div>
+<div class="art-subtitle">Gouache on Acrylic Paper · 2025</div>
+</div>
 
 </section>
 
 <!-- ================= ABSTRACT ================= -->
 
 <section class="artwork abstract-art">
-
-  <div class="art-container">
-    <img src="images/schizophrenia.jpeg">
-    <div class="note"
-         data-en="Chaos dissolving into silence."
-         data-de="Chaos, das sich in Stille auflöst.">
-         Chaos dissolving into silence.
-    </div>
-  </div>
-
+<div class="art-container">
+<img src="images/schizophrenia.jpeg">
+<div class="note">Chaos dissolving into silence.</div>
+<div class="art-title">Lost in Voices</div>
+<div class="art-subtitle">Gouache on Acrylic Paper · 2025</div>
+</div>
 </section>
 
 <!-- ================= CONTACT ================= -->
 
 <div class="overlay" id="contactPanel">
-  <h2 data-en="Contact" data-de="Kontakt">Contact</h2>
-  <p>Durali Demir</p>
+  <img src="images/Durali Demir.jpg" class="profile-pic">
+  <h2>Durali Demir</h2>
   <p>d.demir@dudu-art-gallery.com</p>
+  <p>Munich, Germany</p>
   <button onclick="closePanels()">Close</button>
 </div>
 
 <!-- ================= RENTAL ================= -->
 
 <div class="overlay" id="rentalPanel">
-  <h2 data-en="Art-Rental" data-de="Kunstvermietung">Art-Rental</h2>
-  <p data-en="Details available upon request."
-     data-de="Details auf Anfrage erhältlich.">
-     Details available upon request.
-  </p>
+  <h2>Art-Rental</h2>
+
+  <div class="pdf-preview">
+    <iframe src="images/Art-Rental.pdf"></iframe>
+  </div>
+
+  <a href="images/Art-Rental.pdf" download style="margin-bottom:20px;">Download PDF</a>
   <button onclick="closePanels()">Close</button>
 </div>
 
@@ -324,51 +348,9 @@ body.cubism .note{
 
 /* MODE */
 function toggleMode(){
-  const body=document.body;
-  if(body.classList.contains("abstract")){
-    body.classList.remove("abstract");
-    body.classList.add("cubism");
-    localStorage.setItem("mode","cubism");
-  } else {
-    body.classList.remove("cubism");
-    body.classList.add("abstract");
-    localStorage.setItem("mode","abstract");
-  }
+  document.body.classList.toggle("abstract");
+  document.body.classList.toggle("cubism");
 }
-
-/* LOAD SAVED MODE */
-const savedMode = localStorage.getItem("mode");
-if(savedMode){ document.body.className = savedMode; }
-
-/* LANGUAGE */
-let currentLang = localStorage.getItem("lang") || "en";
-
-function toggleLanguage(){
-  currentLang = currentLang==="en" ? "de" : "en";
-  localStorage.setItem("lang",currentLang);
-  applyLanguage();
-}
-
-function applyLanguage(){
-  document.querySelector(".lang-btn").innerText =
-    currentLang==="en" ? "DE" : "EN";
-
-  document.getElementById("title").innerText =
-    currentLang==="en"
-    ? "Voices in the Darkness"
-    : "Stimmen in der Dunkelheit";
-
-  document.getElementById("subtitle").innerText =
-    currentLang==="en"
-    ? "We create upon request."
-    : "Wir schaffen auf Anfrage.";
-
-  document.querySelectorAll("[data-en]").forEach(el=>{
-    el.innerText = el.getAttribute("data-"+currentLang);
-  });
-}
-
-applyLanguage();
 
 /* NOTES */
 document.querySelectorAll('.art-container').forEach(container=>{
