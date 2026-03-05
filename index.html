@@ -30,7 +30,7 @@ body{
   overflow-x:hidden;
 }
 
-/* TOP BAR */
+/* ================= TOP BAR ================= */
 
 .mode-switch{
   position:fixed;
@@ -49,6 +49,7 @@ body{
 
 .mode-switch.scrolled{
   backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   background: rgba(0,0,0,0.35);
   border-bottom:1px solid rgba(255,255,255,0.1);
 }
@@ -97,7 +98,7 @@ body.cubism .switch::before{
   color:#000;
 }
 
-/* INTRO */
+/* ================= INTRO ================= */
 
 section.intro{
   min-height:100vh;
@@ -121,7 +122,7 @@ section.intro{
   line-height:2;
 }
 
-/* ART */
+/* ================= ART ================= */
 
 .artwork{
   display:none;
@@ -148,12 +149,16 @@ body.abstract .abstract-art{
   transition:0.3s ease;
 }
 
+.art-container img:hover{
+  transform:scale(1.02);
+}
+
 body.cubism .art-container img{
   clip-path: polygon(0 0, 100% 10%, 90% 100%, 10% 90%);
   transform: rotate(-2deg);
 }
 
-/* NOTES */
+/* ================= NOTES ================= */
 
 .note{
   position:absolute;
@@ -167,6 +172,15 @@ body.cubism .art-container img{
   opacity:0;
   pointer-events:none;
   transition:0.4s ease;
+  font-size:1.1rem;
+}
+
+body.abstract .note{
+  clip-path: polygon(20% 0%, 100% 10%, 80% 100%, 0% 90%);
+}
+
+body.cubism .note{
+  clip-path: polygon(0 0, 100% 5%, 95% 100%, 5% 95%);
 }
 
 .art-container.active .note{
@@ -174,7 +188,7 @@ body.cubism .art-container img{
   pointer-events:auto;
 }
 
-/* OVERLAY */
+/* ================= OVERLAY ================= */
 
 .overlay{
   position:fixed;
@@ -195,6 +209,13 @@ body.cubism .art-container img{
   pointer-events:auto;
 }
 
+@media(max-width:380px){
+  .contact-btn,.rental-btn,.lang-btn{
+    padding:6px 10px;
+    font-size:12px;
+  }
+}
+
 </style>
 </head>
 
@@ -211,51 +232,125 @@ body.cubism .art-container img{
 
 <section class="intro">
   <h2 id="title">Voices in the Darkness</h2>
-  <p id="subtitle">We create upon request!</p>
+  <p id="subtitle">We create upon request.</p>
 </section>
 
+<!-- ================= CUBISM ================= -->
+
 <section class="artwork cubism-art">
+
   <div class="art-container">
     <img src="images/P1.jpeg">
     <div class="note" data-en="Geometric fracture of perception."
          data-de="Geometrische Fragmentierung der Wahrnehmung.">
-      Geometric fracture of perception.
+         Geometric fracture of perception.
     </div>
   </div>
+
+  <div class="art-container">
+    <img src="images/P2.jpeg">
+    <div class="note"
+         data-en="Emotion reconstructed through structure."
+         data-de="Emotion durch Struktur neu erschaffen.">
+         Emotion reconstructed through structure.
+    </div>
+  </div>
+
+  <div class="art-container">
+    <img src="images/fell in love.jpeg">
+    <div class="note"
+         data-en="Love fragmented into form."
+         data-de="Liebe, zerlegt in Form.">
+         Love fragmented into form.
+    </div>
+  </div>
+
+  <div class="art-container">
+    <img src="images/lucid.jpeg">
+    <div class="note"
+         data-en="Lucidity within distortion."
+         data-de="Klarheit innerhalb der Verzerrung.">
+         Lucidity within distortion.
+    </div>
+  </div>
+
+  <div class="art-container">
+    <img src="images/hope in the darkness.jpeg">
+    <div class="note"
+         data-en="Hope structured in darkness."
+         data-de="Hoffnung strukturiert in Dunkelheit.">
+         Hope structured in darkness.
+    </div>
+  </div>
+
 </section>
 
+<!-- ================= ABSTRACT ================= -->
+
 <section class="artwork abstract-art">
+
   <div class="art-container">
     <img src="images/schizophrenia.jpeg">
     <div class="note"
          data-en="Chaos dissolving into silence."
          data-de="Chaos, das sich in Stille auflöst.">
-      Chaos dissolving into silence.
+         Chaos dissolving into silence.
     </div>
   </div>
+
 </section>
+
+<!-- ================= CONTACT ================= -->
 
 <div class="overlay" id="contactPanel">
   <h2 data-en="Contact" data-de="Kontakt">Contact</h2>
+  <img src="images/Durali Demir.jpg">
   <p>Durali Demir</p>
   <p>d.demir@dudu-art-gallery.com</p>
   <button onclick="closePanels()">Close</button>
 </div>
 
+<!-- ================= RENTAL ================= -->
+
+<div class="overlay" id="rentalPanel">
+  <h2 data-en="Art-Rental" data-de="Kunstvermietung">Art-Rental</h2>
+  <p data-en="Details available upon request."
+     data-de="Details auf Anfrage erhältlich.">
+     Details available upon request.
+  </p>
+  <button onclick="closePanels()">Close</button>
+</div>
+
 <script>
 
-/* MODE TOGGLE */
+/* MODE */
 function toggleMode(){
   const body=document.body;
-  body.classList.toggle("abstract");
-  body.classList.toggle("cubism");
+  if(body.classList.contains("abstract")){
+    body.classList.remove("abstract");
+    body.classList.add("cubism");
+    localStorage.setItem("mode","cubism");
+  } else {
+    body.classList.remove("cubism");
+    body.classList.add("abstract");
+    localStorage.setItem("mode","abstract");
+  }
 }
 
-/* LANGUAGE TOGGLE */
-let currentLang="en";
+/* LOAD SAVED MODE */
+const savedMode = localStorage.getItem("mode");
+if(savedMode){ document.body.className = savedMode; }
+
+/* LANGUAGE */
+let currentLang = localStorage.getItem("lang") || "en";
 
 function toggleLanguage(){
   currentLang = currentLang==="en" ? "de" : "en";
+  localStorage.setItem("lang",currentLang);
+  applyLanguage();
+}
+
+function applyLanguage(){
   document.querySelector(".lang-btn").innerText =
     currentLang==="en" ? "DE" : "EN";
 
@@ -273,6 +368,8 @@ function toggleLanguage(){
     el.innerText = el.getAttribute("data-"+currentLang);
   });
 }
+
+applyLanguage();
 
 /* NOTES */
 document.querySelectorAll('.art-container').forEach(container=>{
@@ -294,6 +391,11 @@ window.addEventListener("scroll",()=>{
     topBar.classList.remove("scrolled");
   }
 });
+
+/* OVERLAYS */
+document.querySelector(".contact-btn").onclick=()=>document.getElementById("contactPanel").classList.add("active");
+document.querySelector(".rental-btn").onclick=()=>document.getElementById("rentalPanel").classList.add("active");
+function closePanels(){document.querySelectorAll(".overlay").forEach(p=>p.classList.remove("active"));}
 
 </script>
 
