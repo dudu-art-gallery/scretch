@@ -9,7 +9,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Inter:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
-
 :root{
   --bg:#ffffff;
   --text:#0d0d0d;
@@ -73,15 +72,11 @@ padding:12px;
 z-index:1000;
 }
 
-/* MENU BUTTON */
-
 .menu-btn{
 position:absolute;
 right:20px;
 top:10px;
 }
-
-/* SWITCH */
 
 .bottom-row{
 display:flex;
@@ -89,8 +84,6 @@ justify-content:center;
 align-items:center;
 gap:8px;
 }
-
-/* BUTTON */
 
 button{
 border:1px solid var(--text);
@@ -105,50 +98,6 @@ transition:0.3s;
 button:hover{
 background:var(--accent);
 color:#000;
-}
-
-/* BACK BUTTON SPECIFIC */
-
-#paintingPage button{
-border:2px solid #000;
-color:#fff;
-background:#000;
-font-weight:bold;
-padding:8px 16px;
-margin-top:20px;
-cursor:pointer;
-}
-
-#paintingPage button:hover{
-background:#fff;
-color:#000;
-}
-
-/* SWITCH */
-
-.switch{
-width:60px;
-height:28px;
-background:#000;
-border-radius:50px;
-position:relative;
-cursor:pointer;
-}
-
-.switch::before{
-content:"";
-position:absolute;
-width:22px;
-height:22px;
-background:#fff;
-top:3px;
-left:4px;
-border-radius:50%;
-transition:0.4s;
-}
-
-body.cubism .switch::before{
-transform:translateX(30px);
 }
 
 /* SIDE MENU */
@@ -241,6 +190,7 @@ margin-bottom:100px;
 
 .gallery-grid div{
 text-align:center;
+cursor:pointer;
 }
 
 .gallery-grid img{
@@ -250,96 +200,56 @@ height:auto;
 box-shadow:0 8px 30px rgba(0,0,0,0.25);
 }
 
-/* OVERLAYS */
+/* OVERLAY PAGE FOR PAINTING HISTORY */
 
-.overlay{
+#paintingPage{
 position:fixed;
 inset:0;
-background:#000;
+background:#fff;
+color:#000;
 display:flex;
 flex-direction:column;
-justify-content:center;
 align-items:center;
+justify-content:flex-start;
+padding-top:60px;
 opacity:0;
 pointer-events:none;
 transition:0.4s;
-z-index:2000;
-color:#fff;
+z-index:4000;
 }
 
-.overlay.active{
+#paintingPage.active{
 opacity:1;
 pointer-events:auto;
 }
 
-.overlay h2,
-.overlay p,
-.overlay a,
-.overlay button{
-color:#fff;
-}
-
-/* PROFILE IMAGE */
-
-.profile-pic{
-width:160px;
-margin-bottom:30px;
-}
-
-/* CONTACT PANEL SPACING */
-
-#contactPanel h2 {
-  margin-bottom: 10px;
-}
-
-#contactPanel p {
-  margin: 8px 0;
-}
-
-/* HISTORY PAGE SPECIFIC */
-
-#paintingPage{
-background:#fff;
-color:#000;
-justify-content:flex-start;
-padding-top:60px;
-}
-
-#paintingPage h2,
-#paintingPage p{
-color:#000;
+#paintingPage h2, #paintingPage p{
 text-align:center;
+margin:20px;
 }
 
 #paintingPage #paintingImage{
 max-width:350px;
+width:90%;
 height:auto;
-margin:55px 0;
+margin:20px 0;
 }
 
-/* HISTORY NAVIGATION ARROWS */
+/* BACK BUTTON ON PAINTING PAGE */
 
-#paintingPage .nav-arrow{
-position:absolute;
-top:50%;
-transform:translateY(-50%);
-font-size:40px;
-font-weight:bold;
-cursor:pointer;
+#paintingPage button{
+border:2px solid #000;
 color:#000;
-user-select:none;
+background:#fff;
+font-weight:bold;
+padding:8px 16px;
+cursor:pointer;
+margin-top:20px;
 }
 
-#prevArrow{
-left:20px;
-}
-
-#nextArrow{
-right:20px;
-}
-
-#paintingPage .nav-arrow:hover{
-color:#8B2C2C;
+#paintingPage button:hover{
+background:#000;
+color:#fff;
 }
 
 /* ANIMATION */
@@ -347,7 +257,6 @@ color:#8B2C2C;
 @keyframes fadeIn{
 to{opacity:1;}
 }
-
 </style>
 </head>
 
@@ -358,181 +267,117 @@ to{opacity:1;}
 </div>
 
 <div class="mode-switch">
-
 <button class="menu-btn" onclick="toggleMenu()">Menu</button>
-
 <div class="bottom-row">
 <span>Abstract</span>
 <div class="switch" onclick="toggleMode()"></div>
 <span>Cubism</span>
 </div>
-
 </div>
 
 <!-- SIDE MENU -->
 
 <div class="side-menu" id="sideMenu">
-
 <button class="menu-close" onclick="toggleMenu()">✕</button>
-
 <button onclick="openContact()">Contact</button>
-
 <button onclick="openRental()">Art-Rental</button>
-
 <button class="lang-btn" onclick="toggleLanguage()">DE</button>
-
 </div>
 
 <!-- INTRO -->
 
 <section class="intro">
-
 <h2 id="title">art rental gallery</h2>
-
 <p id="subtitle">we create upon request.</p>
-
 </section>
 
 <!-- CUBISM -->
 
 <section class="gallery cubism-gallery">
-
 <h2>Cubism</h2>
-
 <div class="gallery-grid">
-
-<div>
+<div onclick="openPainting('p1')">
 <img src="images/P1.jpeg">
 <p>P1</p>
-<button onclick="openPainting('p1')">History</button>
 </div>
-
-<div>
+<div onclick="openPainting('p2')">
 <img src="images/P2.jpg">
 <p>P2</p>
-<button onclick="openPainting('p2')">History</button>
 </div>
-
-<div>
+<div onclick="openPainting('fell')">
 <img src="images/fell in love.jpeg">
 <p>Fell in Love</p>
-<button onclick="openPainting('fell')">History</button>
 </div>
-
-<div>
+<div onclick="openPainting('lucid')">
 <img src="images/lucid.jpg">
 <p>Lucid</p>
-<button onclick="openPainting('lucid')">History</button>
 </div>
-
-<div>
+<div onclick="openPainting('hope')">
 <img src="images/hope in the darkness.jpg">
 <p>Hope in the Darkness</p>
-<button onclick="openPainting('hope')">History</button>
 </div>
-
 </div>
-
 </section>
 
 <!-- ABSTRACT -->
 
 <section class="gallery abstract-gallery">
-
 <h2>Abstract</h2>
-
 <div class="gallery-grid">
-
-<div>
+<div onclick="openPainting('schiz')">
 <img src="images/schizophrenia.jpeg">
-<p>Lost in Voices</p>
-<button onclick="openPainting('schiz')">History</button>
+<p>Schizophrenia</p>
 </div>
-
-<div>
+<div onclick="openPainting('face')">
 <img src="images/the face.jpg">
 <p>Chaint</p>
-<button onclick="openPainting('face')">History</button>
 </div>
-
 </div>
-
 </section>
 
 <!-- CONTACT -->
 
 <div class="overlay" id="contactPanel">
-
 <img src="images/Durali Demir.jpg" class="profile-pic">
-
 <h2>Durali Demir</h2>
-
 <p>Founder & Curator</p>
-
 <p>d.demir@dudu-art-gallery.com</p>
-
 <p>Munich, Germany</p>
-
 <button onclick="closePanels()">Back</button>
-
 </div>
 
 <!-- RENTAL -->
 
 <div class="overlay" id="rentalPanel">
-
 <h2>Art-Rental</h2>
-
 <div style="width:90%;max-width:900px;height:70vh;margin:30px 0;">
-
 <iframe src="images/Art-Rental.pdf" style="width:100%;height:100%;border:none;"></iframe>
-
 </div>
-
 <a href="images/Art-Rental.pdf" download>Download PDF</a>
-
 <button onclick="closePanels()">Back</button>
-
 </div>
 
 <!-- PAINTING PAGE -->
 
-<div class="overlay" id="paintingPage">
-
+<div id="paintingPage">
 <h2 id="paintingTitle"></h2>
-
 <img id="paintingImage">
-
 <p id="paintingHistory"></p>
-
-<div id="prevArrow" class="nav-arrow" onclick="navigatePainting(-1)">&#10094;</div>
-<div id="nextArrow" class="nav-arrow" onclick="navigatePainting(1)">&#10095;</div>
-
-<button onclick="closePanels()">Back</button>
-
+<button onclick="closePaintingPage()">Back</button>
 </div>
 
 <script>
-
-/* ENTRY SCREEN FIX */
-window.addEventListener("load", () => {
-  const entry = document.getElementById("entryScreen");
-  setTimeout(() => {
-    entry.classList.add("hidden");
-    entry.addEventListener("transitionend", () => {
-      entry.style.display = "none";
-    });
-  }, 1000); // 1 second delay for faster disappearance
+// ENTRY
+window.addEventListener("load",()=>{
+setTimeout(()=>{ document.getElementById("entryScreen").classList.add("hidden"); },3000);
 });
 
-/* MODE */
-
+// MODE
 function toggleMode(){
 document.body.classList.toggle("abstract");
 document.body.classList.toggle("cubism");
 updateGalleryVisibility();
 }
-
 function updateGalleryVisibility(){
 const cubismGallery=document.querySelector(".cubism-gallery");
 const abstractGallery=document.querySelector(".abstract-gallery");
@@ -544,48 +389,439 @@ cubismGallery.style.display="none";
 abstractGallery.style.display="block";
 }
 }
-
 document.addEventListener("DOMContentLoaded",updateGalleryVisibility);
 
-/* MENU */
+// MENU
+function toggleMenu(){ document.getElementById("sideMenu").classList.toggle("active"); }
 
-function toggleMenu(){
-document.getElementById("sideMenu").classList.toggle("active");
-}
+// PANELS
+function openContact(){ toggleMenu(); document.getElementById("contactPanel").classList.add("active"); }
+function openRental(){ toggleMenu(); document.getElementById("rentalPanel").classList.add("active"); }
+function closePanels(){ document.querySelectorAll(".overlay").forEach(p=>p.classList.remove("active")); }
 
-/* PANELS */
-
-function openContact(){
-toggleMenu();
-document.getElementById("contactPanel").classList.add("active");
-}
-
-function openRental(){
-toggleMenu();
-document.getElementById("rentalPanel").classList.add("active");
-}
-
-function closePanels(){
-document.querySelectorAll(".overlay").forEach(p=>p.classList.remove("active"));
-}
-
-/* LANGUAGE */
-
+// LANGUAGE
 let lang='de';
 function applyLanguage(){
 document.getElementById('title').textContent=(lang==='en')?'art rental gallery':'Galerie zur Kunstvermietung';
 document.getElementById('subtitle').textContent=(lang==='en')?'We create upon request.':'Wir kreieren auf Anfrage.';
 document.querySelector(".lang-btn").textContent=(lang==='en')?'DE':'EN';
 }
-function toggleLanguage(){
-lang=(lang==='en')?'de':'en';
-applyLanguage();
-}
+function toggleLanguage(){ lang=(lang==='en')?'de':'en'; applyLanguage(); }
 document.addEventListener("DOMContentLoaded",applyLanguage);
 
-/* PAINTING HISTORY WITH NAVIGATION */
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DUDU - Art Rental Gallery</title>
 
-const paintings=[
+<link rel="icon" type="images/png" href="images/favicon.png">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#ffffff;
+  --text:#0d0d0d;
+  --muted:#555;
+  --accent:#8B2C2C;
+}
+
+body.abstract{
+  --bg:#0d0d0d;
+  --text:#f2f2f2;
+  --muted:#888;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+background:var(--bg);
+color:var(--text);
+font-family:'Inter',sans-serif;
+transition:background 0.8s ease;
+}
+
+/* ENTRY */
+
+.entry{
+position:fixed;
+inset:0;
+background:#ffffff;
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:10000;
+transition:opacity 1s ease;
+}
+
+.entry.hidden{
+opacity:0;
+pointer-events:none;
+}
+
+.entry h1{
+font-family:'Cormorant Garamond',serif;
+font-size:80px;
+color:#000;
+letter-spacing:8px;
+animation:fadeIn 2s forwards;
+}
+
+/* TOP BAR */
+
+.mode-switch{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+padding:12px;
+z-index:1000;
+}
+
+.menu-btn{
+position:absolute;
+right:20px;
+top:10px;
+}
+
+.bottom-row{
+display:flex;
+justify-content:center;
+align-items:center;
+gap:8px;
+}
+
+button{
+border:1px solid var(--text);
+background:transparent;
+color:var(--text);
+padding:8px 14px;
+font-size:13px;
+cursor:pointer;
+transition:0.3s;
+}
+
+button:hover{
+background:var(--accent);
+color:#000;
+}
+
+/* SIDE MENU */
+
+.side-menu{
+position:fixed;
+top:0;
+right:-280px;
+width:260px;
+height:100vh;
+background:rgba(10,10,10,0.9);
+backdrop-filter:blur(14px);
+display:flex;
+flex-direction:column;
+align-items:flex-end;
+padding:80px 30px;
+gap:20px;
+transition:0.4s;
+z-index:3000;
+color:#fff;
+}
+
+.side-menu button,
+.side-menu .lang-btn{
+color:#fff;
+border-color:#fff;
+}
+
+.side-menu button:hover{
+background:var(--accent);
+color:#000;
+}
+
+.side-menu.active{
+right:0;
+}
+
+.menu-close{
+position:absolute;
+top:20px;
+right:20px;
+color:#fff;
+border-color:#fff;
+}
+
+/* INTRO */
+
+.intro{
+min-height:45vh;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+text-align:center;
+}
+
+.intro h2{
+font-family:'Cormorant Garamond',serif;
+font-size:24px;
+margin-bottom:10px;
+}
+
+.intro p{
+max-width:700px;
+color:var(--muted);
+margin-bottom:80px;
+}
+
+/* GALLERY */
+
+.gallery{
+padding:40px 20px;
+text-align:center;
+}
+
+.gallery h2{
+font-family:'Cormorant Garamond',serif;
+font-size:28px;
+margin-bottom:60px;
+color:var(--text);
+}
+
+.gallery-grid{
+display:grid;
+grid-template-columns:1fr;
+gap:300px;
+justify-items:center;
+margin-bottom:100px;
+}
+
+.gallery-grid div{
+text-align:center;
+cursor:pointer;
+}
+
+.gallery-grid img{
+width:80%;
+max-width:500px;
+height:auto;
+box-shadow:0 8px 30px rgba(0,0,0,0.25);
+}
+
+/* OVERLAY PAGE FOR PAINTING HISTORY */
+
+#paintingPage{
+position:fixed;
+inset:0;
+background:#fff;
+color:#000;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:flex-start;
+padding-top:60px;
+opacity:0;
+pointer-events:none;
+transition:0.4s;
+z-index:4000;
+}
+
+#paintingPage.active{
+opacity:1;
+pointer-events:auto;
+}
+
+#paintingPage h2, #paintingPage p{
+text-align:center;
+margin:20px;
+}
+
+#paintingPage #paintingImage{
+max-width:350px;
+width:90%;
+height:auto;
+margin:20px 0;
+}
+
+/* BACK BUTTON ON PAINTING PAGE */
+
+#paintingPage button{
+border:2px solid #000;
+color:#000;
+background:#fff;
+font-weight:bold;
+padding:8px 16px;
+cursor:pointer;
+margin-top:20px;
+}
+
+#paintingPage button:hover{
+background:#000;
+color:#fff;
+}
+
+/* ANIMATION */
+
+@keyframes fadeIn{
+to{opacity:1;}
+}
+</style>
+</head>
+
+<body class="cubism">
+
+<div class="entry" id="entryScreen">
+<h1>DUDU</h1>
+</div>
+
+<div class="mode-switch">
+<button class="menu-btn" onclick="toggleMenu()">Menu</button>
+<div class="bottom-row">
+<span>Abstract</span>
+<div class="switch" onclick="toggleMode()"></div>
+<span>Cubism</span>
+</div>
+</div>
+
+<!-- SIDE MENU -->
+
+<div class="side-menu" id="sideMenu">
+<button class="menu-close" onclick="toggleMenu()">✕</button>
+<button onclick="openContact()">Contact</button>
+<button onclick="openRental()">Art-Rental</button>
+<button class="lang-btn" onclick="toggleLanguage()">DE</button>
+</div>
+
+<!-- INTRO -->
+
+<section class="intro">
+<h2 id="title">art rental gallery</h2>
+<p id="subtitle">we create upon request.</p>
+</section>
+
+<!-- CUBISM -->
+
+<section class="gallery cubism-gallery">
+<h2>Cubism</h2>
+<div class="gallery-grid">
+<div onclick="openPainting('p1')">
+<img src="images/P1.jpeg">
+<p>P1</p>
+</div>
+<div onclick="openPainting('p2')">
+<img src="images/P2.jpg">
+<p>P2</p>
+</div>
+<div onclick="openPainting('fell')">
+<img src="images/fell in love.jpeg">
+<p>Fell in Love</p>
+</div>
+<div onclick="openPainting('lucid')">
+<img src="images/lucid.jpg">
+<p>Lucid</p>
+</div>
+<div onclick="openPainting('hope')">
+<img src="images/hope in the darkness.jpg">
+<p>Hope in the Darkness</p>
+</div>
+</div>
+</section>
+
+<!-- ABSTRACT -->
+
+<section class="gallery abstract-gallery">
+<h2>Abstract</h2>
+<div class="gallery-grid">
+<div onclick="openPainting('schiz')">
+<img src="images/schizophrenia.jpeg">
+<p>Schizophrenia</p>
+</div>
+<div onclick="openPainting('face')">
+<img src="images/the face.jpg">
+<p>Chaint</p>
+</div>
+</div>
+</section>
+
+<!-- CONTACT -->
+
+<div class="overlay" id="contactPanel">
+<img src="images/Durali Demir.jpg" class="profile-pic">
+<h2>Durali Demir</h2>
+<p>Founder & Curator</p>
+<p>d.demir@dudu-art-gallery.com</p>
+<p>Munich, Germany</p>
+<button onclick="closePanels()">Back</button>
+</div>
+
+<!-- RENTAL -->
+
+<div class="overlay" id="rentalPanel">
+<h2>Art-Rental</h2>
+<div style="width:90%;max-width:900px;height:70vh;margin:30px 0;">
+<iframe src="images/Art-Rental.pdf" style="width:100%;height:100%;border:none;"></iframe>
+</div>
+<a href="images/Art-Rental.pdf" download>Download PDF</a>
+<button onclick="closePanels()">Back</button>
+</div>
+
+<!-- PAINTING PAGE -->
+
+<div id="paintingPage">
+<h2 id="paintingTitle"></h2>
+<img id="paintingImage">
+<p id="paintingHistory"></p>
+<button onclick="closePaintingPage()">Back</button>
+</div>
+
+<script>
+// ENTRY
+window.addEventListener("load",()=>{
+setTimeout(()=>{ document.getElementById("entryScreen").classList.add("hidden"); },3000);
+});
+
+// MODE
+function toggleMode(){
+document.body.classList.toggle("abstract");
+document.body.classList.toggle("cubism");
+updateGalleryVisibility();
+}
+function updateGalleryVisibility(){
+const cubismGallery=document.querySelector(".cubism-gallery");
+const abstractGallery=document.querySelector(".abstract-gallery");
+if(document.body.classList.contains("cubism")){
+cubismGallery.style.display="block";
+abstractGallery.style.display="none";
+}else{
+cubismGallery.style.display="none";
+abstractGallery.style.display="block";
+}
+}
+document.addEventListener("DOMContentLoaded",updateGalleryVisibility);
+
+// MENU
+function toggleMenu(){ document.getElementById("sideMenu").classList.toggle("active"); }
+
+// PANELS
+function openContact(){ toggleMenu(); document.getElementById("contactPanel").classList.add("active"); }
+function openRental(){ toggleMenu(); document.getElementById("rentalPanel").classList.add("active"); }
+function closePanels(){ document.querySelectorAll(".overlay").forEach(p=>p.classList.remove("active")); }
+
+// LANGUAGE
+let lang='de';
+function applyLanguage(){
+document.getElementById('title').textContent=(lang==='en')?'art rental gallery':'Galerie zur Kunstvermietung';
+document.getElementById('subtitle').textContent=(lang==='en')?'We create upon request.':'Wir kreieren auf Anfrage.';
+document.querySelector(".lang-btn").textContent=(lang==='en')?'DE':'EN';
+}
+function toggleLanguage(){ lang=(lang==='en')?'de':'en'; applyLanguage(); }
+document.addEventListener("DOMContentLoaded",applyLanguage);
+
+// PAINTINGS DATA
+ const paintings=[
 {id:"p1", title:"P1", image:"images/P1.jpeg", history:"Red doesn't ask for life. It takes it."},
 {id:"p2", title:"P2", image:"images/P2.jpg", history:"Yellow doesn't ask for light. It takes it."},
 {id:"fell", title:"Fell in Love", image:"images/fell in love.jpeg", history:"Falling in Love is not under your control. Only God decides who you are going to love. You have to appreciate it or you are going to lose yourself."},
@@ -595,29 +831,34 @@ const paintings=[
 {id:"face", title:"Chaint", image:"images/the face.jpg", history:"Captured in your thoughts. There is no way out. The evil follows. The dark shades. Breaking it is not possible. You have to forgive."}
 ];
 
-let currentIndex=0;
-
 function openPainting(id){
-currentIndex = paintings.findIndex(p=>p.id===id);
-showPainting(currentIndex);
+const p = paintings.find(p=>p.id===id);
+document.getElementById("paintingTitle").textContent=p.title;
+document.getElementById("paintingImage").src=p.image;
+document.getElementById("paintingHistory").textContent=p.history;
 document.getElementById("paintingPage").classList.add("active");
 }
 
-function showPainting(index){
-const p = paintings[index];
-document.getElementById("paintingTitle").textContent = p.title;
-document.getElementById("paintingImage").src = p.image;
-document.getElementById("paintingHistory").textContent = p.history;
-}
-
-function navigatePainting(direction){
-currentIndex += direction;
-if(currentIndex < 0) currentIndex = paintings.length-1;
-if(currentIndex >= paintings.length) currentIndex = 0;
-showPainting(currentIndex);
+function closePaintingPage(){
+document.getElementById("paintingPage").classList.remove("active");
 }
 
 </script>
+</body>
+</html>
 
+function openPainting(id){
+const p = paintings.find(p=>p.id===id);
+document.getElementById("paintingTitle").textContent=p.title;
+document.getElementById("paintingImage").src=p.image;
+document.getElementById("paintingHistory").textContent=p.history;
+document.getElementById("paintingPage").classList.add("active");
+}
+
+function closePaintingPage(){
+document.getElementById("paintingPage").classList.remove("active");
+}
+
+</script>
 </body>
 </html>
