@@ -59,7 +59,7 @@ font-family:'Cormorant Garamond',serif;
 font-size:80px;
 color:#000;
 letter-spacing:8px;
-animation:fadeIn 1s forwards;
+animation:fadeIn 2s forwards;
 }
 
 /* TOP BAR */
@@ -293,7 +293,7 @@ margin-bottom:30px;
 }
 
 #contactPanel p {
-  margin: 10px 0; /* increased spacing */
+  margin: 8px 0;
 }
 
 /* HISTORY PAGE SPECIFIC */
@@ -314,20 +314,17 @@ margin-bottom: 10px;
 #paintingPage #paintingImage{
 max-width:350px;
 height:auto;
-margin:55px 0;
+margin:550px 0;
 }
 
 /* HISTORY TEXT ORGANIZATION */
 #paintingPage #paintingHistory {
-  max-width: 600px;
-  margin: 20px auto;
-  line-height: 1.6;
-  text-align: justify;
-  padding: 0 10px;
-  font-size: 16px;
-  color: #000; /* black letters */
-  opacity:0;
-  transition: opacity 0.5s ease-in;
+  max-width: 400px;       /* readable width */
+  margin: 20px auto;      /* space above and below */
+  line-height: 1.6;       /* spacing between lines */
+  text-align: justify;    /* neat block alignment */
+  padding: 0 10px;        /* horizontal padding */
+  font-size: 16px;        /* comfortable reading size */
 }
 
 /* HISTORY NAVIGATION ARROWS */
@@ -339,7 +336,7 @@ transform:translateY(-50%);
 font-size:40px;
 font-weight:bold;
 cursor:pointer;
-color:#fff;
+color:#000;
 user-select:none;
 }
 
@@ -516,7 +513,7 @@ to{opacity:1;}
 
 <img id="paintingImage">
 
-<div id="paintingHistory"></div>
+<p id="paintingHistory"></p>
 
 <div id="prevArrow" class="nav-arrow" onclick="navigatePainting(-1)">&#10094;</div>
 <div id="nextArrow" class="nav-arrow" onclick="navigatePainting(1)">&#10095;</div>
@@ -535,7 +532,7 @@ window.addEventListener("load", () => {
     entry.addEventListener("transitionend", () => {
       entry.style.display = "none";
     });
-  }, 1000);
+  }, 1000); // 1 second delay for faster disappearance
 });
 
 /* MODE */
@@ -596,7 +593,7 @@ applyLanguage();
 }
 document.addEventListener("DOMContentLoaded",applyLanguage);
 
-/* PAINTING HISTORY WITH PARAGRAPHS AND FADE-IN */
+/* PAINTING HISTORY WITH NAVIGATION */
 
 const paintings=[
 {id:"p1", title:"P1", image:"images/P1.jpeg", history:"Red doesn't ask for life. It takes it."},
@@ -620,20 +617,7 @@ function showPainting(index){
 const p = paintings[index];
 document.getElementById("paintingTitle").textContent = p.title;
 document.getElementById("paintingImage").src = p.image;
-
-// Split history into sentences and create separate paragraphs with fade-in
-const sentences = p.history.split('. ').filter(s => s.trim() !== '');
-const historyDiv = document.getElementById("paintingHistory");
-historyDiv.innerHTML = '';
-sentences.forEach((s,i) => {
-  const pEl = document.createElement('p');
-  pEl.textContent = s.trim() + (s.endsWith('.') ? '' : '.');
-  pEl.style.color = "#fff"; // black text
-  pEl.style.opacity = "0";
-  pEl.style.transition = `opacity 0.5s ease-in ${i*0.2}s`;
-  historyDiv.appendChild(pEl);
-  setTimeout(()=>{pEl.style.opacity = "1";}, 50);
-});
+document.getElementById("paintingHistory").textContent = p.history;
 }
 
 function navigatePainting(direction){
