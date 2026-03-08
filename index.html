@@ -49,20 +49,10 @@ z-index:10000;
 transition:opacity 1s ease;
 }
 
-/* ENTRY SCREEN FIX */
-window.addEventListener("load", () => {
-  const entry = document.getElementById("entryScreen");
-
-  // start fade-out after 1.5 seconds
-  setTimeout(() => {
-    entry.classList.add("hidden");
-
-    // remove from flow after transition ends (fade 1s)
-    entry.addEventListener("transitionend", () => {
-      entry.style.display = "none";
-    });
-  }, 1500); // adjust delay here
-});
+.entry.hidden{
+opacity:0;
+pointer-events:none;
+}
 
 .entry h1{
 font-family:'Cormorant Garamond',serif;
@@ -296,6 +286,16 @@ width:160px;
 margin-bottom:30px;
 }
 
+/* CONTACT PANEL SPACING */
+
+#contactPanel h2 {
+  margin-bottom: 10px;
+}
+
+#contactPanel p {
+  margin: 8px 0;
+}
+
 /* HISTORY PAGE SPECIFIC */
 
 #paintingPage{
@@ -514,50 +514,35 @@ to{opacity:1;}
 
 <script>
 
-/* ENTRY */
-
-window.addEventListener("load",()=>{
-
-setTimeout(()=>{
-
-document.getElementById("entryScreen").classList.add("hidden");
-
-},1500);
-
+/* ENTRY SCREEN FIX */
+window.addEventListener("load", () => {
+  const entry = document.getElementById("entryScreen");
+  setTimeout(() => {
+    entry.classList.add("hidden");
+    entry.addEventListener("transitionend", () => {
+      entry.style.display = "none";
+    });
+  }, 1000); // 1 second delay for faster disappearance
 });
 
 /* MODE */
 
 function toggleMode(){
-
 document.body.classList.toggle("abstract");
-
 document.body.classList.toggle("cubism");
-
 updateGalleryVisibility();
-
 }
 
 function updateGalleryVisibility(){
-
 const cubismGallery=document.querySelector(".cubism-gallery");
-
 const abstractGallery=document.querySelector(".abstract-gallery");
-
 if(document.body.classList.contains("cubism")){
-
 cubismGallery.style.display="block";
-
 abstractGallery.style.display="none";
-
 }else{
-
 cubismGallery.style.display="none";
-
 abstractGallery.style.display="block";
-
 }
-
 }
 
 document.addEventListener("DOMContentLoaded",updateGalleryVisibility);
@@ -565,69 +550,49 @@ document.addEventListener("DOMContentLoaded",updateGalleryVisibility);
 /* MENU */
 
 function toggleMenu(){
-
 document.getElementById("sideMenu").classList.toggle("active");
-
 }
 
 /* PANELS */
 
 function openContact(){
-
 toggleMenu();
-
 document.getElementById("contactPanel").classList.add("active");
-
 }
 
 function openRental(){
-
 toggleMenu();
-
 document.getElementById("rentalPanel").classList.add("active");
-
 }
 
 function closePanels(){
-
 document.querySelectorAll(".overlay").forEach(p=>p.classList.remove("active"));
-
 }
 
 /* LANGUAGE */
 
 let lang='de';
-
 function applyLanguage(){
-
 document.getElementById('title').textContent=(lang==='en')?'art rental gallery':'Galerie zur Kunstvermietung';
-
 document.getElementById('subtitle').textContent=(lang==='en')?'We create upon request.':'Wir kreieren auf Anfrage.';
-
 document.querySelector(".lang-btn").textContent=(lang==='en')?'DE':'EN';
-
 }
-
 function toggleLanguage(){
-
 lang=(lang==='en')?'de':'en';
-
 applyLanguage();
-
 }
-
 document.addEventListener("DOMContentLoaded",applyLanguage);
 
 /* PAINTING HISTORY WITH NAVIGATION */
 
 const paintings=[
 {id:"p1", title:"P1", image:"images/P1.jpeg", history:"Red doesn't ask for life. It takes it."},
-{id:"p2", title:"P2", image:"images/P2.jpg", history:"Yellow doesn't ask for ligth. It takes it"},
-{id:"fell", title:"Fell in Love", image:"images/fell in love.jpeg", history:"Falling on Love is not under your control. Only God decides who you gonna love. You have to appriciate it or you are gonna loose your self.},
-{id:"lucid", title:"Lucid", image:"images/lucid.jpg", history:"It is clearly infront of you, but you can't see it. It is clearly behind you, but you can't hear it. It is clearly over you, but you can't smell it. It is clearly under you, but you can't feel."},
-{id:"hope", title:"Hope in the Darkness", image:"images/hope in the darkness.jpg", history:"Between ligth and darkness. Between hope and rupture. There is always a figth."},
-{id:"schiz", title:"Lost in Voices", image:"images/schizophrenia.jpeg", history:"The most vornable. The most anxious. The momst restructed. The most feard. The pain in the eye."},
-{id:"face", title:"Chaint", image:"images/the face.jpg", history:"Captured in your thougths. There is no way out. The evil follows. The dark shades. Braking it, is not possible. You have to forgive."}
+{id:"p2", title:"P2", image:"images/P2.jpg", history:"Yellow doesn't ask for light. It takes it."},
+{id:"fell", title:"Fell in Love", image:"images/fell in love.jpeg", history:"Falling in Love is not under your control. Only God decides who you are going to love. You have to appreciate it or you are going to lose yourself."},
+{id:"lucid", title:"Lucid", image:"images/lucid.jpg", history:"It is clearly in front of you, but you can't see it. It is clearly behind you, but you can't hear it. It is clearly over you, but you can't smell it. It is clearly under you, but you can't feel."},
+{id:"hope", title:"Hope in the Darkness", image:"images/hope in the darkness.jpg", history:"Between light and darkness. Between hope and rupture. There is always a fight."},
+{id:"schiz", title:"Lost in Voices", image:"images/schizophrenia.jpeg", history:"The most vulnerable. The most anxious. The most restricted. The most feared. The pain in the eye."},
+{id:"face", title:"Chaint", image:"images/the face.jpg", history:"Captured in your thoughts. There is no way out. The evil follows. The dark shades. Breaking it is not possible. You have to forgive."}
 ];
 
 let currentIndex=0;
