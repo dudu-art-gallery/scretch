@@ -6,7 +6,6 @@
 <title>DUDU - Art Rental Gallery</title>
 
 <link rel="icon" type="images/png" href="images/favicon.png">
-
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Inter:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
@@ -33,7 +32,6 @@ body{
 }
 
 /* ENTRY */
-
 .entry{
   position:fixed;
   inset:0;
@@ -56,7 +54,6 @@ body{
 }
 
 /* TOP BAR */
-
 .mode-switch{
   position:fixed;
   top:0;
@@ -67,7 +64,6 @@ body{
 }
 
 /* MENU BUTTON RIGHT */
-
 .menu-btn{
   position:absolute;
   right:20px;
@@ -82,7 +78,6 @@ body{
 }
 
 /* BUTTON STYLE */
-
 button{
   border:1px solid var(--text);
   background:transparent;
@@ -99,7 +94,6 @@ button:hover{
 }
 
 /* SWITCH */
-
 .switch{
   width:60px;
   height:28px;
@@ -126,7 +120,6 @@ body.cubism .switch::before{
 }
 
 /* SIDE MENU */
-
 .side-menu{
   position:fixed;
   top:0;
@@ -142,6 +135,19 @@ body.cubism .switch::before{
   gap:20px;
   transition:0.4s;
   z-index:3000;
+  color:#fff; /* Default text white */
+}
+
+/* White side menu buttons */
+.side-menu button,
+.side-menu .lang-btn {
+  color: #fff;
+  border-color: #fff;
+}
+
+.side-menu button:hover{
+  background:var(--accent);
+  color:#000;
 }
 
 .side-menu.active{
@@ -152,10 +158,11 @@ body.cubism .switch::before{
   position:absolute;
   top:20px;
   right:20px;
+  color:#fff; /* Close button white */
+  border-color:#fff;
 }
 
 /* INTRO */
-
 .intro{
   min-height:100vh;
   display:flex;
@@ -176,8 +183,40 @@ body.cubism .switch::before{
   color:var(--muted);
 }
 
-/* OVERLAYS */
+/* GALLERY */
+.gallery{
+  padding:60px 20px;
+  text-align:center;
+}
 
+.gallery h2{
+  font-family:'Cormorant Garamond',serif;
+  font-size:28px;
+  margin-bottom:30px;
+  color:var(--text);
+}
+
+.gallery-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:20px;
+  justify-items:center;
+}
+
+.gallery-grid img{
+  width:100%;
+  max-width:250px;
+  height:auto;
+  border-radius:8px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.3);
+  transition:transform 0.3s;
+}
+
+.gallery-grid img:hover{
+  transform:scale(1.05);
+}
+
+/* OVERLAYS */
 .overlay{
   position:fixed;
   inset:0;
@@ -205,7 +244,6 @@ body.cubism .switch::before{
 }
 
 /* ANIMATION */
-
 @keyframes fadeIn{
   to{opacity:1;}
 }
@@ -229,15 +267,11 @@ body.cubism .switch::before{
 </div>
 
 <!-- SIDE MENU -->
-
 <div class="side-menu" id="sideMenu">
-
 <button class="menu-close" onclick="toggleMenu()">✕</button>
-
 <button onclick="openContact()">Contact</button>
 <button onclick="openRental()">Art-Rental</button>
 <button class="lang-btn" onclick="toggleLanguage()">DE</button>
-
 </div>
 
 <section class="intro">
@@ -245,106 +279,109 @@ body.cubism .switch::before{
 <p id="subtitle">we create upon request.</p>
 </section>
 
+<!-- GALLERY -->
+<section class="gallery cubism-gallery">
+  <h2>Cubism</h2>
+  <div class="gallery-grid">
+    <img src="images/P1.jpeg" alt="P1">
+    <img src="images/P2.jpeg" alt="P2">
+    <img src="images/fell in love.jpeg" alt="Fell in Love">
+    <img src="images/lucid.jpeg" alt="Lucid">
+    <img src="images/hope in the darkness.jpeg" alt="Hope in the Darkness">
+  </div>
+</section>
+
+<section class="gallery abstract-gallery">
+  <h2>Abstract</h2>
+  <div class="gallery-grid">
+    <img src="images/schizophrenia.jpeg" alt="Lost in Voices">
+    <img src="images/the face.jpeg" alt="The Face">
+  </div>
+</section>
+
 <!-- CONTACT -->
-
 <div class="overlay" id="contactPanel">
-
 <img src="images/Durali Demir.jpg" class="profile-pic">
-
 <h2>Durali Demir</h2>
 <p>Founder & Curator</p>
 <p>d.demir@dudu-art-gallery.com</p>
 <p>Munich, Germany</p>
-
 <button onclick="closePanels()">Back</button>
-
 </div>
 
 <!-- RENTAL -->
-
 <div class="overlay" id="rentalPanel">
-
 <h2>Art-Rental</h2>
-
 <div style="width:90%;max-width:900px;height:70vh;margin:30px 0;">
 <iframe src="images/Art-Rental.pdf" style="width:100%;height:100%;border:none;"></iframe>
 </div>
-
 <a href="images/Art-Rental.pdf" download>Download PDF</a>
-
 <button onclick="closePanels()">Back</button>
-
 </div>
 
 <script>
-
 /* ENTRY */
-
 window.addEventListener("load",()=>{
-setTimeout(()=>{
-document.getElementById("entryScreen").classList.add("hidden");
-},3000);
+  setTimeout(()=>{
+    document.getElementById("entryScreen").classList.add("hidden");
+  },3000);
 });
 
 /* MODE */
-
 function toggleMode(){
-document.body.classList.toggle("abstract");
-document.body.classList.toggle("cubism");
+  document.body.classList.toggle("abstract");
+  document.body.classList.toggle("cubism");
+  updateGalleryVisibility();
 }
 
-/* MENU */
+function updateGalleryVisibility(){
+  const cubismGallery = document.querySelector(".cubism-gallery");
+  const abstractGallery = document.querySelector(".abstract-gallery");
+  if(document.body.classList.contains("cubism")){
+    cubismGallery.style.display="block";
+    abstractGallery.style.display="none";
+  }else{
+    cubismGallery.style.display="none";
+    abstractGallery.style.display="block";
+  }
+}
 
+// Initialize gallery visibility
+document.addEventListener("DOMContentLoaded",updateGalleryVisibility);
+
+/* MENU */
 function toggleMenu(){
-document.getElementById("sideMenu").classList.toggle("active");
+  document.getElementById("sideMenu").classList.toggle("active");
 }
 
 /* OPEN PANELS */
-
 function openContact(){
-toggleMenu();
-document.getElementById("contactPanel").classList.add("active");
+  toggleMenu();
+  document.getElementById("contactPanel").classList.add("active");
 }
-
 function openRental(){
-toggleMenu();
-document.getElementById("rentalPanel").classList.add("active");
+  toggleMenu();
+  document.getElementById("rentalPanel").classList.add("active");
 }
 
 /* CLOSE PANELS */
-
 function closePanels(){
-document.querySelectorAll(".overlay").forEach(p=>p.classList.remove("active"));
-toggleMenu();
+  document.querySelectorAll(".overlay").forEach(p=>p.classList.remove("active"));
+  toggleMenu();
 }
 
 /* LANGUAGE */
-
 let lang='de';
-
 function applyLanguage(){
-
-document.getElementById('title').textContent=(lang==='en')
-? 'art rental gallery'
-: 'Galerie zur Kunstvermietung';
-
-document.getElementById('subtitle').textContent=(lang==='en')
-? 'We create upon request.'
-: 'Wir kreieren auf Anfrage.';
-
-document.querySelector(".lang-btn").textContent=(lang==='en')
-? 'DE'
-: 'EN';
-
+  document.getElementById('title').textContent=(lang==='en')? 'art rental gallery':'Galerie zur Kunstvermietung';
+  document.getElementById('subtitle').textContent=(lang==='en')? 'We create upon request.':'Wir kreieren auf Anfrage.';
+  document.querySelector(".lang-btn").textContent=(lang==='en')? 'DE':'EN';
 }
-
 function toggleLanguage(){
-lang=(lang==='en')?'de':'en';
-applyLanguage();
+  lang=(lang==='en')?'de':'en';
+  applyLanguage();
 }
-
 document.addEventListener("DOMContentLoaded",applyLanguage);
-
 </script>
 
 </body>
