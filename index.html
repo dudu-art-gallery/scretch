@@ -107,6 +107,25 @@ background:var(--accent);
 color:#000;
 }
 
+/* BACK BUTTON SPECIFIC */
+
+#paintingPage button{
+border:2px solid #000;
+color:#000;
+background:#fff;
+font-weight:bold;
+padding:8px 16px;
+margin-top:20px;
+cursor:pointer;
+z-index:3001;
+position:relative;
+}
+
+#paintingPage button:hover{
+background:#000;
+color:#fff;
+}
+
 /* SWITCH */
 
 .switch{
@@ -217,7 +236,7 @@ color:var(--text);
 .gallery-grid{
 display:grid;
 grid-template-columns:1fr;
-gap:300px; /* super large spacing */
+gap:300px;
 justify-items:center;
 margin-bottom:100px;
 }
@@ -227,7 +246,7 @@ text-align:center;
 }
 
 .gallery-grid img{
-width:80%; /* smaller images for museum feel */
+width:80%;
 max-width:500px;
 height:auto;
 box-shadow:0 8px 30px rgba(0,0,0,0.25);
@@ -255,13 +274,6 @@ opacity:1;
 pointer-events:auto;
 }
 
-.overlay h2,
-.overlay p,
-.overlay a,
-.overlay button{
-color:#fff;
-}
-
 /* PROFILE IMAGE */
 
 .profile-pic{
@@ -272,24 +284,71 @@ margin-bottom:20px;
 /* HISTORY PAGE SPECIFIC */
 
 #paintingPage{
-background:#fff; /* white background */
+background:#fff;
 color:#000;
 justify-content:flex-start;
 padding-top:60px;
+position:relative;
+display:flex;
+flex-direction:column;
+align-items:center;
 }
 
 #paintingPage h2,
 #paintingPage p{
 color:#000;
+text-align:center;
 }
 
 #paintingPage #paintingImage{
-max-width:350px; /* smaller image for history page */
+max-width:350px;
 height:auto;
 margin:20px 0;
+z-index:3000;
 }
 
-/* ANIMATION */
+/* HISTORY NAVIGATION ARROWS */
+
+#paintingPage .nav-arrow{
+position:fixed;
+top:50%;
+transform:translateY(-50%);
+font-size:60px;
+font-weight:bold;
+cursor:pointer;
+color:#000;
+user-select:none;
+z-index:3001;
+padding:10px;
+}
+
+#prevArrow{
+left:10px;
+}
+
+#nextArrow{
+right:10px;
+}
+
+#paintingPage .nav-arrow:hover{
+color:#8B2C2C;
+}
+
+/* MOBILE RESPONSIVE */
+
+@media(max-width:768px){
+  #paintingPage .nav-arrow{
+    font-size:45px;
+    padding:15px;
+  }
+  .gallery-grid img{
+    max-width:300px;
+    width:90%;
+  }
+  .gallery-grid{
+    gap:150px;
+  }
+}
 
 @keyframes fadeIn{
 to{opacity:1;}
@@ -392,7 +451,7 @@ to{opacity:1;}
 
 <div>
 <img src="images/schizophrenia.jpeg">
-<p>Lost in voices</p>
+<p>Lost in Voices</p>
 <button onclick="openPainting('schiz')">History</button>
 </div>
 
@@ -452,7 +511,10 @@ to{opacity:1;}
 
 <p id="paintingHistory"></p>
 
-<button onclick="closePanels()">Back to Main Page</button>
+<div id="prevArrow" class="nav-arrow" onclick="navigatePainting(-1)">&#10094;</div>
+<div id="nextArrow" class="nav-arrow" onclick="navigatePainting(1)">&#10095;</div>
+
+<button onclick="closePanels()">Back</button>
 
 </div>
 
@@ -562,38 +624,38 @@ applyLanguage();
 
 document.addEventListener("DOMContentLoaded",applyLanguage);
 
-/* PAINTING HISTORY */
+/* PAINTING HISTORY WITH NAVIGATION */
 
-const paintings={
+const paintings=[
+{id:"p1", title:"P1", image:"images/P1.jpeg", history:"This painting explores fragmented human perception and emotional tension."},
+{id:"p2", title:"P2", image:"images/P2.jpg", history:"P2 represents a cubist breakdown of identity and spatial structure."},
+{id:"fell", title:"Fell in Love", image:"images/fell in love.jpeg", history:"A story of emotion and intimacy captured in abstract lines."},
+{id:"lucid", title:"Lucid", image:"images/lucid.jpg", history:"Lucid reflects the state between dream and consciousness."},
+{id:"hope", title:"Hope in the Darkness", image:"images/hope in the darkness.jpg", history:"Hope emerges even in dark times, captured in cubist forms."},
+{id:"schiz", title:"Lost in Voices", image:"images/schizophrenia.jpeg", history:"Explores the fragmented mind and perception."},
+{id:"face", title:"Chaint", image:"images/the face.jpg", history:"A complex abstract portrait revealing inner emotions."}
+];
 
-p1:{title:"P1", image:"images/P1.jpeg", history:"This painting explores fragmented human perception and emotional tension."},
-
-p2:{title:"P2", image:"images/P2.jpg", history:"P2 represents a cubist breakdown of identity and spatial structure."},
-
-fell:{title:"Fell in Love", image:"images/fell in love.jpeg", history:"A story of emotion and intimacy captured in abstract lines."},
-
-lucid:{title:"Lucid", image:"images/lucid.jpg", history:"Lucid reflects the state between dream and consciousness."},
-
-hope:{title:"Hope in the Darkness", image:"images/hope in the darkness.jpg", history:"Hope emerges even in dark times, captured in cubist forms."},
-
-schiz:{title:"Lost in Voices", image:"images/schizophrenia.jpeg", history:"Explores the fragmented mind and perception."},
-
-face:{title:"Chaint", image:"images/the face.jpg", history:"A complex abstract portrait revealing inner emotions."}
-
-};
+let currentIndex=0;
 
 function openPainting(id){
-
-const p=paintings[id];
-
-document.getElementById("paintingTitle").textContent=p.title;
-
-document.getElementById("paintingImage").src=p.image;
-
-document.getElementById("paintingHistory").textContent=p.history;
-
+currentIndex = paintings.findIndex(p=>p.id===id);
+showPainting(currentIndex);
 document.getElementById("paintingPage").classList.add("active");
+}
 
+function showPainting(index){
+const p = paintings[index];
+document.getElementById("paintingTitle").textContent = p.title;
+document.getElementById("paintingImage").src = p.image;
+document.getElementById("paintingHistory").textContent = p.history;
+}
+
+function navigatePainting(direction){
+currentIndex += direction;
+if(currentIndex < 0) currentIndex = paintings.length-1;
+if(currentIndex >= paintings.length) currentIndex = 0;
+showPainting(currentIndex);
 }
 
 </script>
