@@ -293,7 +293,7 @@ margin-bottom:30px;
 }
 
 #contactPanel p {
-  margin: 10px 0; /* increased spacing */
+  margin: 8px 0;
 }
 
 /* HISTORY PAGE SPECIFIC */
@@ -513,7 +513,7 @@ to{opacity:1;}
 
 <img id="paintingImage">
 
-<div id="paintingHistory"></div>
+<p id="paintingHistory"></p>
 
 <div id="prevArrow" class="nav-arrow" onclick="navigatePainting(-1)">&#10094;</div>
 <div id="nextArrow" class="nav-arrow" onclick="navigatePainting(1)">&#10095;</div>
@@ -532,7 +532,7 @@ window.addEventListener("load", () => {
     entry.addEventListener("transitionend", () => {
       entry.style.display = "none";
     });
-  }, 1000);
+  }, 1000); // 1 second delay for faster disappearance
 });
 
 /* MODE */
@@ -593,7 +593,7 @@ applyLanguage();
 }
 document.addEventListener("DOMContentLoaded",applyLanguage);
 
-/* PAINTING HISTORY WITH PARAGRAPHS */
+/* PAINTING HISTORY WITH NAVIGATION */
 
 const paintings=[
 {id:"p1", title:"P1", image:"images/P1.jpeg", history:"Red doesn't ask for life. It takes it."},
@@ -617,16 +617,7 @@ function showPainting(index){
 const p = paintings[index];
 document.getElementById("paintingTitle").textContent = p.title;
 document.getElementById("paintingImage").src = p.image;
-
-// Split history into sentences and create separate paragraphs
-const sentences = p.history.split('. ').filter(s => s.trim() !== '');
-const historyDiv = document.getElementById("paintingHistory");
-historyDiv.innerHTML = '';
-sentences.forEach(s => {
-  const pEl = document.createElement('p');
-  pEl.textContent = s.trim() + (s.endsWith('.') ? '' : '.');
-  historyDiv.appendChild(pEl);
-});
+document.getElementById("paintingHistory").textContent = p.history;
 }
 
 function navigatePainting(direction){
