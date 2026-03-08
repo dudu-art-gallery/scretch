@@ -3,7 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DUDU Art Gallery</title>
+<title>DUDU</title>
+
+<link rel="icon" type="favicon.png" href="/favicon.png">
+
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Inter:wght@300;400&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -80,11 +83,11 @@ section.intro{
   justify-content:center;
   align-items:center;
   text-align:center;
-  padding:120px 20px 60px;
+  padding:80px 20px 60px;
 }
 section.intro h2{
   font-family:'Cormorant Garamond',serif;
-  font-size:88px;
+  font-size:24px;
   margin-bottom:35px;
   letter-spacing:2px;
 }
@@ -93,7 +96,7 @@ section.intro p{
   max-width:700px;
   color:var(--muted);
   line-height:2;
-  font-size:22px;
+  font-size:18px;
 }
 
 /* ================ ARTWORK ================= */
@@ -118,15 +121,15 @@ body.cubism .art-container img{clip-path: polygon(0 0, 100% 10%, 90% 100%, 10% 9
   justify-content:center;
   align-items:center;
   text-align:center;
-  padding:60px;
+  padding:24px;
   background:rgba(0,0,0,0.92);
   opacity:0;
   transform:scale(0.96);
   pointer-events:none;
-  font-size:1.7rem;
+  font-size:1.5rem;
   letter-spacing:1.2px;
   line-height:1.8;
-  max-width:650px;
+  max-width:1200px;
   margin:auto;
   transition:opacity 0.45s ease, transform 0.45s ease;
 }
@@ -175,8 +178,8 @@ body.cubism .note{clip-path: polygon(0 0, 100% 5%, 95% 100%, 5% 95%);}
 
 <!-- INTRO -->
 <section class="intro">
-  <h2 id="title">Voices in the Darkness</h2>
-  <p id="subtitle">We create upon request.</p>
+  <h2 id="title">art rental gallery</h2>
+  <p id="subtitle">we create upon request.</p>
 </section>
 
 <!-- CUBISM -->
@@ -198,7 +201,7 @@ body.cubism .note{clip-path: polygon(0 0, 100% 5%, 95% 100%, 5% 95%);}
 <div class="art-container">
 <img src="images/fell in love.jpeg" alt="Fell in Love – Cubist interpretation of love" loading="lazy">
 <div class="note" data-en="Love fragmented into shifting forms." data-de="Liebe in sich wandelnde Formen fragmentiert."></div>
-<div class="art-title" data-en="Fell in Love" data-de="Verliebt Gefallen"></div>
+<div class="art-title" data-en="Fell in Love" data-de="Verliebt"></div>
 <div class="art-subtitle" data-en="Gouache on Acrylic Paper · 2025" data-de="Gouache auf Acrylpapier · 2025"></div>
 </div>
 
@@ -221,7 +224,7 @@ body.cubism .note{clip-path: polygon(0 0, 100% 5%, 95% 100%, 5% 95%);}
 <section class="artwork abstract-art">
 <div class="art-container">
 <img src="images/schizophrenia.jpeg" alt="Lost in Voices – abstract psychological expression" loading="lazy">
-<div class="note" data-en="Chaos dissolving slowly into silence." data-de="Chaos löst sich langsam in Stille auf."></div>
+<div class="note" data-en="Chaos dissolving into silence." data-de="Chaos löst sich in Stille auf."></div>
 <div class="art-title" data-en="Lost in Voices" data-de="Verloren in Stimmen"></div>
 <div class="art-subtitle" data-en="Gouache on Acrylic Paper · 2025" data-de="Gouache auf Acrylpapier · 2025"></div>
 </div>
@@ -238,10 +241,11 @@ body.cubism .note{clip-path: polygon(0 0, 100% 5%, 95% 100%, 5% 95%);}
 <div class="overlay" id="contactPanel">
 <img src="images/Durali Demir.jpg" class="profile-pic" alt="Durali Demir">
 <h2>Durali Demir</h2>
-<h2>Founder & Curator</h2>
+<p>Founder & Curator</p>
 <p>d.demir@dudu-art-gallery.com</p>
 <p>Munich, Germany</p>
-</p></p>
+</p>
+</p>
 <button onclick="closePanels()">Close</button>
 </div>
 
@@ -291,7 +295,7 @@ function applyLanguage(){
   document.querySelectorAll('.art-title').forEach(el=>el.textContent=el.dataset[lang]);
   document.querySelectorAll('.art-subtitle').forEach(el=>el.textContent=el.dataset[lang]);
   document.querySelectorAll('.note').forEach(el=>el.textContent=el.dataset[lang]);
-  document.getElementById('title').textContent=(lang==='en')?'Voices in the Darkness':'Stimmen in der Dunkelheit';
+  document.getElementById('title').textContent=(lang==='en')?'art rental gallery':'Galerie zur Kunstvermietung';
   document.getElementById('subtitle').textContent=(lang==='en')?'We create upon request.':'Wir kreieren auf Anfrage.';
   document.querySelector(".lang-btn").textContent=(lang==='en')?'DE':'EN';
 }
