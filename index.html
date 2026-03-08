@@ -146,8 +146,8 @@ background:rgba(10,10,10,0.9);
 backdrop-filter:blur(14px);
 display:flex;
 flex-direction:column;
-align-items:center;
-justify-content:center;
+align-items:flex-end;
+padding:80px 30px;
 gap:20px;
 transition:0.4s;
 z-index:3000;
@@ -217,8 +217,9 @@ color:var(--text);
 .gallery-grid{
 display:grid;
 grid-template-columns:1fr;
-gap:60px;
+gap:120px;
 justify-items:center;
+margin-bottom:80px;
 }
 
 .gallery-grid div{
@@ -229,13 +230,7 @@ text-align:center;
 width:100%;
 max-width:700px;
 height:auto;
-border-radius:0;
 box-shadow:0 8px 30px rgba(0,0,0,0.25);
-transition:transform 0.3s;
-}
-
-.gallery-grid img:hover{
-transform:scale(1.03);
 }
 
 /* OVERLAYS */
@@ -336,26 +331,31 @@ to{opacity:1;}
 <div>
 <img src="images/P1.jpeg">
 <p>P1</p>
+<button onclick="openPainting('p1')">History</button>
 </div>
 
 <div>
-<img src="images/P2.jpeg">
+<img src="images/P2.jpg">
 <p>P2</p>
+<button onclick="openPainting('p2')">History</button>
 </div>
 
 <div>
 <img src="images/fell in love.jpeg">
 <p>Fell in Love</p>
+<button onclick="openPainting('fell')">History</button>
 </div>
 
 <div>
-<img src="images/lucid.jpeg">
+<img src="images/lucid.jpg">
 <p>Lucid</p>
+<button onclick="openPainting('lucid')">History</button>
 </div>
 
 <div>
-<img src="images/hope in the darkness.jpeg">
+<img src="images/hope in the darkness.jpg">
 <p>Hope in the Darkness</p>
+<button onclick="openPainting('hope')">History</button>
 </div>
 
 </div>
@@ -373,11 +373,13 @@ to{opacity:1;}
 <div>
 <img src="images/schizophrenia.jpeg">
 <p>Schizophrenia</p>
+<button onclick="openPainting('schiz')">History</button>
 </div>
 
 <div>
-<img src="images/the face.jpeg">
-<p>The Face</p>
+<img src="images/the face.jpg">
+<p>Chaint</p>
+<button onclick="openPainting('face')">History</button>
 </div>
 
 </div>
@@ -415,6 +417,20 @@ to{opacity:1;}
 </div>
 
 <a href="images/Art-Rental.pdf" download>Download PDF</a>
+
+<button onclick="closePanels()">Back</button>
+
+</div>
+
+<!-- PAINTING PAGE -->
+
+<div class="overlay" id="paintingPage">
+
+<h2 id="paintingTitle"></h2>
+
+<img id="paintingImage" style="max-width:80%;margin:30px 0;">
+
+<p id="paintingHistory" style="max-width:700px;text-align:center;"></p>
 
 <button onclick="closePanels()">Back</button>
 
@@ -525,6 +541,40 @@ applyLanguage();
 }
 
 document.addEventListener("DOMContentLoaded",applyLanguage);
+
+/* PAINTING HISTORY */
+
+const paintings={
+
+p1:{title:"P1", image:"images/P1.jpeg", history:"This painting explores fragmented human perception and emotional tension."},
+
+p2:{title:"P2", image:"images/P2.jpg", history:"P2 represents a cubist breakdown of identity and spatial structure."},
+
+fell:{title:"Fell in Love", image:"images/fell in love.jpeg", history:"A story of emotion and intimacy captured in abstract lines."},
+
+lucid:{title:"Lucid", image:"images/lucid.jpg", history:"Lucid reflects the state between dream and consciousness."},
+
+hope:{title:"Hope in the Darkness", image:"images/hope in the darkness.jpg", history:"Hope emerges even in dark times, captured in cubist forms."},
+
+schiz:{title:"Schizophrenia", image:"images/schizophrenia.jpeg", history:"Explores the fragmented mind and perception."},
+
+face:{title:"Chaint", image:"images/the face.jpg", history:"A complex abstract portrait revealing inner emotions."}
+
+};
+
+function openPainting(id){
+
+const p=paintings[id];
+
+document.getElementById("paintingTitle").textContent=p.title;
+
+document.getElementById("paintingImage").src=p.image;
+
+document.getElementById("paintingHistory").textContent=p.history;
+
+document.getElementById("paintingPage").classList.add("active");
+
+}
 
 </script>
 
