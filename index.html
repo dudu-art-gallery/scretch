@@ -325,9 +325,15 @@ margin:55px 0;
   text-align: justify;
   padding: 0 10px;
   font-size: 16px;
-  color: #000 !important; /* black letters */
+  color: #000 !important; /* enforce black letters */
   opacity:0;
   transition: opacity 0.5s ease-in;
+}
+
+/* FORCE ALL HISTORY PAGE TEXT TO BLACK */
+#paintingPage, 
+#paintingPage * {
+  color: #000 !important;
 }
 
 /* HISTORY NAVIGATION ARROWS */
@@ -628,9 +634,9 @@ historyDiv.innerHTML = '';
 sentences.forEach((s,i) => {
   const pEl = document.createElement('p');
   pEl.textContent = s.trim() + (s.endsWith('.') ? '' : '.');
-  pEl.style.color = "#000"; // black text
   pEl.style.opacity = "0";
   pEl.style.transition = `opacity 0.5s ease-in ${i*0.2}s`;
+  pEl.style.color = "#000"; // enforce black text
   historyDiv.appendChild(pEl);
   setTimeout(()=>{pEl.style.opacity = "1";}, 50);
 });
