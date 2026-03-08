@@ -163,7 +163,7 @@ body.cubism .switch::before{
 
 /* INTRO */
 .intro{
-  min-height:100vh;
+  min-height:30vh; /* reduced space */
   display:flex;
   justify-content:center;
   align-items:center;
@@ -174,37 +174,43 @@ body.cubism .switch::before{
 .intro h2{
   font-family:'Cormorant Garamond',serif;
   font-size:24px;
-  margin-bottom:20px;
+  margin-bottom:10px;
 }
 
 .intro p{
   max-width:700px;
   color:var(--muted);
+  margin-bottom:40px; /* space before gallery */
 }
 
 /* GALLERY */
 .gallery{
-  padding:60px 20px;
+  padding:20px;
   text-align:center;
 }
 
 .gallery h2{
   font-family:'Cormorant Garamond',serif;
   font-size:28px;
-  margin-bottom:30px;
+  margin-bottom:20px;
   color:var(--text);
 }
 
 .gallery-grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:20px;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:30px;
   justify-items:center;
+  align-items:start;
+}
+
+.gallery-grid div{
+  text-align:center;
 }
 
 .gallery-grid img{
   width:100%;
-  max-width:250px;
+  max-width:300px;
   height:auto;
   border-radius:8px;
   box-shadow:0 4px 12px rgba(0,0,0,0.3);
@@ -228,18 +234,14 @@ body.cubism .switch::before{
   pointer-events:none;
   transition:0.4s;
   z-index:2000;
+  color:#fff;
 }
 
-.overlay.active{
-  opacity:1;
-  pointer-events:auto;
-}
-
-.profile-pic{
-  width:150px;
-  height:150px;
-  border-radius:50%;
-  margin-bottom:20px;
+.overlay h2,
+.overlay p,
+.overlay a,
+.overlay button{
+  color:#fff;
 }
 
 /* ANIMATION */
@@ -278,7 +280,7 @@ body.cubism .switch::before{
 <p id="subtitle">we create upon request.</p>
 </section>
 
-<!-- GALLERY -->
+<!-- GALLERY CUBISM -->
 <section class="gallery cubism-gallery">
   <h2>Cubism</h2>
   <div class="gallery-grid">
@@ -290,6 +292,7 @@ body.cubism .switch::before{
   </div>
 </section>
 
+<!-- GALLERY ABSTRACT -->
 <section class="gallery abstract-gallery">
   <h2>Abstract</h2>
   <div class="gallery-grid">
