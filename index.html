@@ -59,7 +59,7 @@ font-family:'Cormorant Garamond',serif;
 font-size:80px;
 color:#000;
 letter-spacing:8px;
-animation:fadeIn 2s forwards;
+animation:fadeIn 1s forwards;
 }
 
 /* TOP BAR */
@@ -314,17 +314,20 @@ margin-bottom: 10px;
 #paintingPage #paintingImage{
 max-width:350px;
 height:auto;
-margin:100px 0;
+margin:55px 0;
 }
 
 /* HISTORY TEXT ORGANIZATION */
 #paintingPage #paintingHistory {
-  max-width: 600px;       /* readable width */
-  margin: 20px auto;      /* space above and below */
-  line-height: 1.6;       /* spacing between lines */
-  text-align: justify;    /* neat block alignment */
-  padding: 0 10px;        /* horizontal padding */
-  font-size: 16px;        /* comfortable reading size */
+  max-width: 600px;
+  margin: 20px auto;
+  line-height: 1.6;
+  text-align: justify;
+  padding: 0 10px;
+  font-size: 16px;
+  color: #fff; /* black letters */
+  opacity:0;
+  transition: opacity 0.5s ease-in;
 }
 
 /* HISTORY NAVIGATION ARROWS */
@@ -593,7 +596,7 @@ applyLanguage();
 }
 document.addEventListener("DOMContentLoaded",applyLanguage);
 
-/* PAINTING HISTORY WITH PARAGRAPHS */
+/* PAINTING HISTORY WITH PARAGRAPHS AND FADE-IN */
 
 const paintings=[
 {id:"p1", title:"P1", image:"images/P1.jpeg", history:"Red doesn't ask for life. It takes it."},
@@ -618,14 +621,18 @@ const p = paintings[index];
 document.getElementById("paintingTitle").textContent = p.title;
 document.getElementById("paintingImage").src = p.image;
 
-// Split history into sentences and create separate paragraphs
+// Split history into sentences and create separate paragraphs with fade-in
 const sentences = p.history.split('. ').filter(s => s.trim() !== '');
 const historyDiv = document.getElementById("paintingHistory");
 historyDiv.innerHTML = '';
-sentences.forEach(s => {
+sentences.forEach((s,i) => {
   const pEl = document.createElement('p');
   pEl.textContent = s.trim() + (s.endsWith('.') ? '' : '.');
+  pEl.style.color = "#fff"; // black text
+  pEl.style.opacity = "0";
+  pEl.style.transition = `opacity 0.5s ease-in ${i*0.2}s`;
   historyDiv.appendChild(pEl);
+  setTimeout(()=>{pEl.style.opacity = "1";}, 50);
 });
 }
 
