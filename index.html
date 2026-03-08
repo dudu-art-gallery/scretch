@@ -49,10 +49,20 @@ z-index:10000;
 transition:opacity 1s ease;
 }
 
-.entry.hidden{
-opacity:0;
-pointer-events:none;
-}
+/* ENTRY SCREEN FIX */
+window.addEventListener("load", () => {
+  const entry = document.getElementById("entryScreen");
+
+  // start fade-out after 1.5 seconds
+  setTimeout(() => {
+    entry.classList.add("hidden");
+
+    // remove from flow after transition ends (fade 1s)
+    entry.addEventListener("transitionend", () => {
+      entry.style.display = "none";
+    });
+  }, 1500); // adjust delay here
+});
 
 .entry h1{
 font-family:'Cormorant Garamond',serif;
