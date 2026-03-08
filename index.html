@@ -24,7 +24,7 @@ body.abstract{
   --accent:#8B2C2C;
 }
 
-{margin:0;padding:0;box-sizing:border-box;}
+*{margin:0;padding:0;box-sizing:border-box;}
 
 body{
   background:var(--bg);
@@ -34,7 +34,7 @@ body{
   overflow-x:hidden;
 }
 
-/ ENTRY SCREEN /
+/* ENTRY SCREEN */
 
 .entry{
   position:fixed;
@@ -57,7 +57,7 @@ body{
   animation:fadeIn 2s forwards;
 }
 
-/ TOP BAR /
+/* TOP BAR */
 
 .mode-switch{
   position:fixed;
@@ -107,7 +107,7 @@ button:hover{
   color:#000;
 }
 
-/ SWITCH /
+/* SWITCH */
 
 .switch{
   width:60px;
@@ -135,7 +135,7 @@ body.cubism .switch::before{
   transform:translateX(30px);
 }
 
-/ SIDE MENU /
+/* SIDE MENU */
 
 .side-menu{
   position:fixed;
@@ -168,7 +168,7 @@ body.cubism .switch::before{
   right:20px;
 }
 
-/ INTRO /
+/* INTRO */
 
 section.intro{
   min-height:100vh;
@@ -194,7 +194,7 @@ section.intro p{
   font-size:18px;
 }
 
-/ ARTWORK /
+/* ARTWORK */
 
 .artwork{
   display:none;
@@ -230,7 +230,7 @@ body.cubism .art-container img{
   transform: rotate(-2deg);
 }
 
-/ TITLES /
+/* TITLES */
 
 .art-title{
   margin-top:20px;
@@ -244,7 +244,7 @@ body.cubism .art-container img{
   font-size:14px;
 }
 
-/ NOTES /
+/* NOTES */
 
 .note{
   position:absolute;
@@ -284,7 +284,7 @@ body.cubism .note{
   filter:blur(3px) brightness(0.55);
 }
 
-/ OVERLAYS */
+/* OVERLAYS */
 
 .overlay{
   position:fixed;
@@ -354,8 +354,6 @@ body.cubism .note{
 
 </div>
 
-<!-- SIDE MENU -->
-
 <div class="side-menu" id="sideMenu">
 
 <button class="menu-close" onclick="toggleMenu()">✕</button>
@@ -371,10 +369,6 @@ body.cubism .note{
 <p id="subtitle">we create upon request.</p>
 </section>
 
-<!-- (Your artworks remain exactly the same as before) -->
-
-<!-- CONTACT PANEL -->
-
 <div class="overlay" id="contactPanel">
 
 <img src="images/Durali Demir.jpg" class="profile-pic">
@@ -387,8 +381,6 @@ body.cubism .note{
 <button onclick="closePanels()">Close</button>
 
 </div>
-
-<!-- RENTAL PANEL -->
 
 <div class="overlay" id="rentalPanel">
 
