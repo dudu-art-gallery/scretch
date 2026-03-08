@@ -628,7 +628,7 @@ historyDiv.innerHTML = '';
 sentences.forEach((s,i) => {
   const pEl = document.createElement('p');
   pEl.textContent = s.trim() + (s.endsWith('.') ? '' : '.');
-  pEl.style.color = "#fff"; // black text
+  pEl.style.color = "#000"; // black text
   pEl.style.opacity = "0";
   pEl.style.transition = `opacity 0.5s ease-in ${i*0.2}s`;
   historyDiv.appendChild(pEl);
