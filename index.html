@@ -203,23 +203,23 @@ margin-bottom:80px;
 /* GALLERY */
 
 .gallery{
-padding:20px;
+padding:40px 20px;
 text-align:center;
 }
 
 .gallery h2{
 font-family:'Cormorant Garamond',serif;
 font-size:28px;
-margin-bottom:40px;
+margin-bottom:60px;
 color:var(--text);
 }
 
 .gallery-grid{
 display:grid;
 grid-template-columns:1fr;
-gap:120px;
+gap:300px; /* super large spacing */
 justify-items:center;
-margin-bottom:80px;
+margin-bottom:100px;
 }
 
 .gallery-grid div{
@@ -227,8 +227,8 @@ text-align:center;
 }
 
 .gallery-grid img{
-width:100%;
-max-width:700px;
+width:80%; /* smaller images for museum feel */
+max-width:500px;
 height:auto;
 box-shadow:0 8px 30px rgba(0,0,0,0.25);
 }
@@ -267,6 +267,26 @@ color:#fff;
 .profile-pic{
 width:160px;
 margin-bottom:20px;
+}
+
+/* HISTORY PAGE SPECIFIC */
+
+#paintingPage{
+background:#fff; /* white background */
+color:#000;
+justify-content:flex-start;
+padding-top:60px;
+}
+
+#paintingPage h2,
+#paintingPage p{
+color:#000;
+}
+
+#paintingPage #paintingImage{
+max-width:350px; /* smaller image for history page */
+height:auto;
+margin:20px 0;
 }
 
 /* ANIMATION */
@@ -428,11 +448,11 @@ to{opacity:1;}
 
 <h2 id="paintingTitle"></h2>
 
-<img id="paintingImage" style="max-width:80%;margin:30px 0;">
+<img id="paintingImage">
 
-<p id="paintingHistory" style="max-width:700px;text-align:center;"></p>
+<p id="paintingHistory"></p>
 
-<button onclick="closePanels()">Back</button>
+<button onclick="closePanels()">Back to Main Page</button>
 
 </div>
 
