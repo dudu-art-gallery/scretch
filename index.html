@@ -11,16 +11,16 @@
 <style>
 
 :root{
-  --bg:#ffffff;
-  --text:#0d0d0d;
-  --muted:#555;
-  --accent:#8B2C2C;
+--bg:#ffffff;
+--text:#0d0d0d;
+--muted:#555;
+--accent:#8B2C2C;
 }
 
 body.abstract{
-  --bg:#0d0d0d;
-  --text:#f2f2f2;
-  --muted:#888;
+--bg:#0d0d0d;
+--text:#f2f2f2;
+--muted:#888;
 }
 
 *{
@@ -57,7 +57,6 @@ pointer-events:none;
 .entry h1{
 font-family:'Cormorant Garamond',serif;
 font-size:80px;
-color:#000;
 letter-spacing:8px;
 animation:fadeIn 1s forwards;
 }
@@ -73,8 +72,6 @@ padding:12px;
 z-index:1000;
 }
 
-/* MENU BUTTON */
-
 .menu-btn{
 position:absolute;
 right:20px;
@@ -89,42 +86,6 @@ justify-content:center;
 align-items:center;
 gap:8px;
 }
-
-/* BUTTON */
-
-button{
-border:1px solid var(--text);
-background:transparent;
-color:var(--text);
-padding:8px 14px;
-font-size:13px;
-cursor:pointer;
-transition:0.3s;
-}
-
-button:hover{
-background:var(--accent);
-color:#000;
-}
-
-/* BACK BUTTON SPECIFIC */
-
-#paintingPage button{
-border:2px solid #000;
-color:#fff;
-background:#000;
-font-weight:bold;
-padding:8px 16px;
-margin-top:20px;
-cursor:pointer;
-}
-
-#paintingPage button:hover{
-background:#fff;
-color:#000;
-}
-
-/* SWITCH */
 
 .switch{
 width:60px;
@@ -151,6 +112,23 @@ body.cubism .switch::before{
 transform:translateX(30px);
 }
 
+/* BUTTON */
+
+button{
+border:1px solid var(--text);
+background:transparent;
+color:var(--text);
+padding:8px 14px;
+font-size:13px;
+cursor:pointer;
+transition:0.3s;
+}
+
+button:hover{
+background:var(--accent);
+color:#000;
+}
+
 /* SIDE MENU */
 
 .side-menu{
@@ -171,27 +149,8 @@ z-index:3000;
 color:#fff;
 }
 
-.side-menu button,
-.side-menu .lang-btn{
-color:#fff;
-border-color:#fff;
-}
-
-.side-menu button:hover{
-background:var(--accent);
-color:#000;
-}
-
 .side-menu.active{
 right:0;
-}
-
-.menu-close{
-position:absolute;
-top:20px;
-right:20px;
-color:#fff;
-border-color:#fff;
 }
 
 /* INTRO */
@@ -228,7 +187,6 @@ text-align:center;
 font-family:'Cormorant Garamond',serif;
 font-size:28px;
 margin-bottom:60px;
-color:var(--text);
 }
 
 .gallery-grid{
@@ -239,136 +197,76 @@ justify-items:center;
 margin-bottom:100px;
 }
 
-.gallery-grid div{
-text-align:center;
-}
-
 .gallery-grid img{
 width:80%;
 max-width:500px;
-height:auto;
 box-shadow:0 8px 30px rgba(0,0,0,0.25);
 }
 
-/* OVERLAYS */
-
-.overlay{
-position:fixed;
-inset:0;
-background:#000;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-opacity:0;
-pointer-events:none;
-transition:0.4s;
-z-index:2000;
-color:#fff;
-}
-
-.overlay.active{
-opacity:1;
-pointer-events:auto;
-}
-
-.overlay h2,
-.overlay p,
-.overlay a,
-.overlay button{
-color:#fff;
-}
-
-/* PROFILE IMAGE */
-
-.profile-pic{
-width:160px;
-margin-bottom:30px;
-}
-
-/* CONTACT PANEL SPACING */
-
-#contactPanel h2 {
-  margin-bottom: 10px;
-}
-
-#contactPanel p {
-  margin: 10px 0; /* increased spacing */
-}
-
-/* HISTORY PAGE SPECIFIC */
+/* HISTORY PAGE */
 
 #paintingPage{
-background:#e5e5e5;  /* grey background */
-color:#000;
-justify-content:flex-start;
-padding-top:60px;
-position:relative;
-display:flex;
-flex-direction:column;
-align-items:center;
-}
-
-#paintingPage h2{
-color:#000;
-text-align:center;
-margin-bottom: 10px;
-}
-
-#paintingPage #paintingImage{
-max-width:350px;
-height:auto;
-margin:55px 0;
-}
-
-/* HISTORY TEXT ORGANIZATION */
-#paintingPage #paintingHistory {
-  max-width: 600px;
-  margin: 20px auto;
-  line-height: 1.6;
-  text-align: justify;
-  padding: 0 10px;
-  font-size: 16px;
-  color: #000 !important; /* enforce black letters */
-  opacity:0;
-  transition: opacity 0.5s ease-in;
-}
-
-/* FORCE ALL HISTORY PAGE TEXT TO BLACK */
-#paintingPage, 
-#paintingPage * {
-  color: #000 !important;
-}
-
-/* HISTORY NAVIGATION ARROWS */
-
-#paintingPage .nav-arrow{
+display:none;
 position:absolute;
+top:0;
+left:0;
+width:100%;
+min-height:100vh;
+background:#e5e5e5;
+text-align:center;
+padding-top:90px;
+animation:fadePage 0.4s ease;
+}
+
+#paintingImage{
+max-width:350px;
+margin:40px auto;
+display:block;
+}
+
+#paintingHistory{
+max-width:600px;
+margin:auto;
+}
+
+#paintingHistory p{
+color:#000;
+line-height:1.7;
+margin:12px auto;
+font-size:16px;
+}
+
+.nav-arrow{
+position:fixed;
 top:50%;
 transform:translateY(-50%);
 font-size:40px;
-font-weight:bold;
 cursor:pointer;
 color:#000;
-user-select:none;
 }
 
-#prevArrow{
-left:20px;
+#prevArrow{ left:20px; }
+#nextArrow{ right:20px; }
+
+.backBtn{
+margin-top:30px;
+background:#000;
+color:#fff;
+border:2px solid #000;
 }
 
-#nextArrow{
-right:20px;
+.backBtn:hover{
+background:#fff;
+color:#000;
 }
 
-#paintingPage .nav-arrow:hover{
-color:#8B2C2C;
-}
+/* ANIMATIONS */
 
-/* ANIMATION */
+@keyframes fadeIn{to{opacity:1;}}
 
-@keyframes fadeIn{
-to{opacity:1;}
+@keyframes fadePage{
+from{opacity:0; transform:translateY(20px);}
+to{opacity:1; transform:translateY(0);}
 }
 
 </style>
@@ -376,12 +274,9 @@ to{opacity:1;}
 
 <body class="cubism">
 
-<div class="entry" id="entryScreen">
-<h1>DUDU</h1>
-</div>
+<div class="entry" id="entryScreen"><h1>DUDU</h1></div>
 
 <div class="mode-switch">
-
 <button class="menu-btn" onclick="toggleMenu()">Menu</button>
 
 <div class="bottom-row">
@@ -389,36 +284,16 @@ to{opacity:1;}
 <div class="switch" onclick="toggleMode()"></div>
 <span>Cubism</span>
 </div>
-
 </div>
 
-<!-- SIDE MENU -->
-
-<div class="side-menu" id="sideMenu">
-
-<button class="menu-close" onclick="toggleMenu()">✕</button>
-
-<button onclick="openContact()">Contact</button>
-
-<button onclick="openRental()">Art-Rental</button>
-
-<button class="lang-btn" onclick="toggleLanguage()">DE</button>
-
-</div>
-
-<!-- INTRO -->
+<div id="mainContent">
 
 <section class="intro">
-
-<h2 id="title">art rental gallery</h2>
-
-<p id="subtitle">we create upon request.</p>
-
+<h2>art rental gallery</h2>
+<p>we create upon request.</p>
 </section>
 
-<!-- CUBISM -->
-
-<section class="gallery cubism-gallery">
+<section class="gallery">
 
 <h2>Cubism</h2>
 
@@ -436,221 +311,99 @@ to{opacity:1;}
 <button onclick="openPainting('p2')">History</button>
 </div>
 
-<div>
-<img src="images/fell in love.jpeg">
-<p>Fell in Love</p>
-<button onclick="openPainting('fell')">History</button>
-</div>
-
-<div>
-<img src="images/lucid.jpg">
-<p>Lucid</p>
-<button onclick="openPainting('lucid')">History</button>
-</div>
-
-<div>
-<img src="images/hope in the darkness.jpg">
-<p>Hope in the Darkness</p>
-<button onclick="openPainting('hope')">History</button>
-</div>
-
 </div>
 
 </section>
 
-<!-- ABSTRACT -->
-
-<section class="gallery abstract-gallery">
-
-<h2>Abstract</h2>
-
-<div class="gallery-grid">
-
-<div>
-<img src="images/schizophrenia.jpeg">
-<p>Lost in Voices</p>
-<button onclick="openPainting('schiz')">History</button>
 </div>
 
-<div>
-<img src="images/the face.jpg">
-<p>Chaint</p>
-<button onclick="openPainting('face')">History</button>
-</div>
-
-</div>
-
-</section>
-
-<!-- CONTACT -->
-
-<div class="overlay" id="contactPanel">
-
-<img src="images/Durali Demir.jpg" class="profile-pic">
-
-<h2>Durali Demir</h2>
-
-<p>Founder & Curator</p>
-
-<p>d.demir@dudu-art-gallery.com</p>
-
-<p>Munich, Germany</p>
-
-<button onclick="closePanels()">Back</button>
-
-</div>
-
-<!-- RENTAL -->
-
-<div class="overlay" id="rentalPanel">
-
-<h2>Art-Rental</h2>
-
-<div style="width:90%;max-width:900px;height:70vh;margin:30px 0;">
-
-<iframe src="images/Art-Rental.pdf" style="width:100%;height:100%;border:none;"></iframe>
-
-</div>
-
-<a href="images/Art-Rental.pdf" download>Download PDF</a>
-
-<button onclick="closePanels()">Back</button>
-
-</div>
-
-<!-- PAINTING PAGE -->
-
-<div class="overlay" id="paintingPage">
+<div id="paintingPage">
 
 <h2 id="paintingTitle"></h2>
-
 <img id="paintingImage">
-
 <div id="paintingHistory"></div>
 
 <div id="prevArrow" class="nav-arrow" onclick="navigatePainting(-1)">&#10094;</div>
 <div id="nextArrow" class="nav-arrow" onclick="navigatePainting(1)">&#10095;</div>
 
-<button onclick="closePanels()">Back</button>
+<button class="backBtn" onclick="goBack()">Back</button>
 
 </div>
 
 <script>
 
-/* ENTRY SCREEN FIX */
-window.addEventListener("load", () => {
-  const entry = document.getElementById("entryScreen");
-  setTimeout(() => {
-    entry.classList.add("hidden");
-    entry.addEventListener("transitionend", () => {
-      entry.style.display = "none";
-    });
-  }, 1000);
+window.addEventListener("load",()=>{
+const entry=document.getElementById("entryScreen");
+setTimeout(()=>{
+entry.classList.add("hidden");
+entry.addEventListener("transitionend",()=>{entry.style.display="none";});
+},1000);
 });
-
-/* MODE */
-
-function toggleMode(){
-document.body.classList.toggle("abstract");
-document.body.classList.toggle("cubism");
-updateGalleryVisibility();
-}
-
-function updateGalleryVisibility(){
-const cubismGallery=document.querySelector(".cubism-gallery");
-const abstractGallery=document.querySelector(".abstract-gallery");
-if(document.body.classList.contains("cubism")){
-cubismGallery.style.display="block";
-abstractGallery.style.display="none";
-}else{
-cubismGallery.style.display="none";
-abstractGallery.style.display="block";
-}
-}
-
-document.addEventListener("DOMContentLoaded",updateGalleryVisibility);
-
-/* MENU */
 
 function toggleMenu(){
 document.getElementById("sideMenu").classList.toggle("active");
 }
 
-/* PANELS */
-
-function openContact(){
-toggleMenu();
-document.getElementById("contactPanel").classList.add("active");
+function toggleMode(){
+document.body.classList.toggle("abstract");
+document.body.classList.toggle("cubism");
 }
-
-function openRental(){
-toggleMenu();
-document.getElementById("rentalPanel").classList.add("active");
-}
-
-function closePanels(){
-document.querySelectorAll(".overlay").forEach(p=>p.classList.remove("active"));
-}
-
-/* LANGUAGE */
-
-let lang='de';
-function applyLanguage(){
-document.getElementById('title').textContent=(lang==='en')?'art rental gallery':'Galerie zur Kunstvermietung';
-document.getElementById('subtitle').textContent=(lang==='en')?'We create upon request.':'Wir kreieren auf Anfrage.';
-document.querySelector(".lang-btn").textContent=(lang==='en')?'DE':'EN';
-}
-function toggleLanguage(){
-lang=(lang==='en')?'de':'en';
-applyLanguage();
-}
-document.addEventListener("DOMContentLoaded",applyLanguage);
-
-/* PAINTING HISTORY WITH PARAGRAPHS AND FADE-IN */
 
 const paintings=[
-{id:"p1", title:"P1", image:"images/P1.jpeg", history:"Red doesn't ask for life. It takes it."},
-{id:"p2", title:"P2", image:"images/P2.jpg", history:"Yellow doesn't ask for light. It takes it."},
-{id:"fell", title:"Fell in Love", image:"images/fell in love.jpeg", history:"Falling in Love is not under your control. Only God decides who you are going to love. You have to appreciate it or you are going to lose yourself."},
-{id:"lucid", title:"Lucid", image:"images/lucid.jpg", history:"It is clearly in front of you, but you can't see it. It is clearly behind you, but you can't hear it. It is clearly over you, but you can't smell it. It is clearly under you, but you can't feel."},
-{id:"hope", title:"Hope in the Darkness", image:"images/hope in the darkness.jpg", history:"Between light and darkness. Between hope and rupture. There is always a fight."},
-{id:"schiz", title:"Lost in Voices", image:"images/schizophrenia.jpeg", history:"The most vulnerable. The most anxious. The most restricted. The most feared. The pain in the eye."},
-{id:"face", title:"Chaint", image:"images/the face.jpg", history:"Captured in your thoughts. There is no way out. The evil follows. The dark shades. Breaking it is not possible. You have to forgive."}
+{id:"p1",title:"P1",image:"images/P1.jpeg",history:"Red doesn't ask for life. It takes it."},
+{id:"p2",title:"P2",image:"images/P2.jpg",history:"Yellow doesn't ask for light. It takes it."}
 ];
 
 let currentIndex=0;
 
 function openPainting(id){
-currentIndex = paintings.findIndex(p=>p.id===id);
+
+currentIndex=paintings.findIndex(p=>p.id===id);
+
+document.getElementById("mainContent").style.display="none";
+document.getElementById("paintingPage").style.display="block";
+
 showPainting(currentIndex);
-document.getElementById("paintingPage").classList.add("active");
+
+window.scrollTo(0,0);
 }
 
 function showPainting(index){
-const p = paintings[index];
-document.getElementById("paintingTitle").textContent = p.title;
-document.getElementById("paintingImage").src = p.image;
 
-// Split history into sentences and create separate paragraphs with fade-in
-const sentences = p.history.split('. ').filter(s => s.trim() !== '');
-const historyDiv = document.getElementById("paintingHistory");
-historyDiv.innerHTML = '';
-sentences.forEach((s,i) => {
-  const pEl = document.createElement('p');
-  pEl.textContent = s.trim() + (s.endsWith('.') ? '' : '.');
-  pEl.style.opacity = "0";
-  pEl.style.transition = `opacity 0.5s ease-in ${i*0.2}s`;
-  pEl.style.color = "#000"; // enforce black text
-  historyDiv.appendChild(pEl);
-  setTimeout(()=>{pEl.style.opacity = "1";}, 50);
+const p=paintings[index];
+
+document.getElementById("paintingTitle").textContent=p.title;
+document.getElementById("paintingImage").src=p.image;
+
+const historyDiv=document.getElementById("paintingHistory");
+historyDiv.innerHTML="";
+
+const sentences=p.history.split(". ");
+
+sentences.forEach((s,i)=>{
+const pEl=document.createElement("p");
+pEl.textContent=s.endsWith(".")?s:s+".";
+pEl.style.opacity="0";
+pEl.style.transition=`opacity 0.5s ease ${i*0.2}s`;
+historyDiv.appendChild(pEl);
+setTimeout(()=>{pEl.style.opacity="1";},50);
 });
 }
 
 function navigatePainting(direction){
-currentIndex += direction;
-if(currentIndex < 0) currentIndex = paintings.length-1;
-if(currentIndex >= paintings.length) currentIndex = 0;
+
+currentIndex+=direction;
+
+if(currentIndex<0) currentIndex=paintings.length-1;
+if(currentIndex>=paintings.length) currentIndex=0;
+
 showPainting(currentIndex);
+}
+
+function goBack(){
+document.getElementById("paintingPage").style.display="none";
+document.getElementById("mainContent").style.display="block";
+window.scrollTo(0,0);
 }
 
 </script>
