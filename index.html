@@ -94,10 +94,10 @@ button:hover{background:var(--accent);color:#000;}
 #dedicationPanel{position:fixed;inset:0;width:100vw;height:100vh;display:flex;flex-direction:column;align-items:center;overflow-y:auto;padding:60px 20px;background:#e5e5e5;z-index:2000;opacity:0;pointer-events:none;transition:opacity 0.4s ease;}
 #dedicationPanel.active{opacity:1;pointer-events:auto;}
 #dedicationPanel h2{color:#000;font-family:'Cormorant Garamond', serif;font-size:32px;margin-bottom:20px;text-align:center;}
-#dedicationPanel.active .artist-text p{opacity:1;}
 .dedication-img{max-width:300px;width:80%;margin:20px 0;box-shadow:0 8px 30px rgba(0,0,0,0.25);}
 .dedication-text{max-width:800px;line-height:1.8;text-align:justify;font-size:16px;color:#000;}
 .dedication-text p{opacity:0;margin-bottom:20px;transition:opacity 0.6s ease-in;}
+#dedicationPanel.active .dedication-text p{opacity:1;}
 .back-btn{border:2px solid #000;color:#fff;background:#000;font-weight:bold;padding:10px 20px; margin-top:auto, margin-bottom:30px; cursor:pointer;transition:0.3s;}
 .back-btn:hover{background:#fff;color:#000;}
 
@@ -140,6 +140,7 @@ button:hover{background:var(--accent);color:#000;}
   <h2 id="title">art rental gallery</h2>
   <p id="subtitle">we create upon request.</p>
   <button onclick="openArtistInfo()">Info</button>
+  <button onclick="openDedicationInfo()">Dedication</button>
 </section>
 
 <!-- ARTIST PANEL -->
