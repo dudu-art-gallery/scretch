@@ -22,9 +22,12 @@ body.abstract{
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;transition:background 0.8s ease;}
+
+/* ENTRY */
 .entry{position:fixed;inset:0;background:#ffffff;display:flex;justify-content:center;align-items:center;z-index:10000;transition:opacity 1s ease;}
 .entry.hidden{opacity:0;pointer-events:none;}
 .entry h1{font-family:'Cormorant Garamond',serif;font-size:80px;color:#000;letter-spacing:8px;animation:fadeIn 1s forwards;}
+
 button{border:1px solid var(--text);background:transparent;color:var(--text);padding:8px 14px;font-size:13px;cursor:pointer;transition:0.3s;}
 button:hover{background:var(--accent);color:#000;}
 .back-btn{border:2px solid #000;color:#fff;background:#000;font-weight:bold;padding:10px 20px;margin-top:auto;margin-bottom:30px;cursor:pointer;transition:0.3s;}
@@ -99,6 +102,18 @@ button:hover{background:var(--accent);color:#000;}
 </div>
 
 <script>
+// ENTRY SCREEN
+window.addEventListener("load", () => {
+  setTimeout(() => {
+    const e = document.getElementById("entryScreen");
+    e.classList.add("hidden");
+    e.addEventListener("transitionend", () => {
+      e.style.display = "none";
+    });
+  }, 1000);
+});
+
+// TRANSLATION DATA
 let lang="de";
 
 const t={
@@ -202,6 +217,7 @@ document.getElementById("paintingHistory").textContent=L.paintings[id].history;
 document.getElementById("paintingPage").classList.add("active");
 }
 
+// INITIALIZE
 applyLanguage();
 </script>
 
