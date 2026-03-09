@@ -241,20 +241,26 @@ button:hover{
 }
 
 /* HISTORY PAGE SPECIFIC */
-#paintingPage{
-  max-width:1000px;
-  padding-top:80px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  text-align:center;
+#paintingPage {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #e5e5e5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
+  padding-top: 60px;
+  z-index: 2000;
 }
-#paintingPage h2{
-  font-family:'Cormorant Garamond',serif;
-  font-size:32px;
-  color:#000;
-  margin-bottom:20px;
+#paintingPage h2 {
+  color: #000;
 }
+#paintingPage #paintingHistory {
+  color: #000;
+}
+
 #paintingPage #paintingImage{
   max-width:500px;
   height:auto;
@@ -373,13 +379,13 @@ button:hover{
 </div>
 
 <!-- PAINTING PAGE -->
-<div class="overlay" id="paintingPage">
-<h2 id="paintingTitle"></h2>
-<img id="paintingImage">
-<div id="paintingHistory"></div>
-<div id="prevArrow" class="nav-arrow" onclick="navigatePainting(-1)">&#10094;</div>
-<div id="nextArrow" class="nav-arrow" onclick="navigatePainting(1)">&#10095;</div>
-<button onclick="closePanels()">Back</button>
+<div class="overlay" id="paintingPage" style="background:#e5e5e5; inset:0; justify-content:flex-start; align-items:center; overflow-y:auto; padding:60px 20px;">
+  <h2 id="paintingTitle"></h2>
+  <img id="paintingImage" style="max-width:500px; width:90%; margin:20px 0;">
+  <div id="paintingHistory" style="max-width:800px; line-height:1.6; text-align:justify; font-size:16px; color:#000;"></div>
+  <div id="prevArrow" class="nav-arrow" onclick="navigatePainting(-1)">&#10094;</div>
+  <div id="nextArrow" class="nav-arrow" onclick="navigatePainting(1)">&#10095;</div>
+  <button onclick="closePanels()">Back</button>
 </div>
 
 <script>
