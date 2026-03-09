@@ -5,6 +5,34 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DUDU - Art Rental Gallery</title>
   
+<!-- Automatic German Translation (Hidden Dropdown) -->
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({
+    pageLanguage: 'en',
+    includedLanguages: 'de',
+    layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+  }, 'google_translate_element');
+  
+  // Automatically switch to German and hide the widget
+  setTimeout(() => {
+    const select = document.querySelector('#google_translate_element select');
+    if(select){
+      select.value = 'de';
+      select.dispatchEvent(new Event('change'));
+    }
+    // Hide the dropdown
+    const widget = document.getElementById('google_translate_element');
+    if(widget){ widget.style.display = 'none'; }
+  }, 500);
+}
+</script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+<!-- Hidden container for Google Translate (required by script) -->
+<div id="google_translate_element" style="display: none;"></div>
+
+
   
 <link rel="icon" type="images/png" href="images/favicon.png">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Inter:wght@300;400&display=swap" rel="stylesheet">
