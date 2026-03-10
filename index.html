@@ -88,6 +88,7 @@ button:hover{background:var(--accent);color:#000;}
 .artist-text{max-width:800px;line-height:1.8;text-align:justify;font-size:16px;color:#000;}
 .artist-text p{opacity:0;margin-bottom:20px;transition:opacity 0.6s ease-in;}
 #artistPanel.active .artist-text p{opacity:1;}
+
 .back-btn{border:2px solid #000;color:#fff;background:#000;font-weight:bold;padding:10px 20px;margin:30px 0;cursor:pointer;transition:0.3s;}
 .back-btn:hover{background:#fff;color:#000;}
 
@@ -99,6 +100,7 @@ button:hover{background:var(--accent);color:#000;}
 .dedication-text{max-width:800px;line-height:1.8;text-align:justify;font-size:16px;color:#000;}
 .dedication-text p{opacity:0;margin-bottom:20px;transition:opacity 0.6s ease-in;}
 #dedicationPanel.active .dedication-text p{opacity:1;}
+
 .back-btn{border:2px solid #000;color:#fff;background:#000;font-weight:bold;padding:10px 20px; margin-top:auto, margin-bottom:30px; cursor:pointer;transition:0.3s;}
 .back-btn:hover{background:#fff;color:#000;}
 
@@ -143,6 +145,29 @@ button:hover{background:var(--accent);color:#000;}
   <button onclick="openDedicationInfo()">Dedication</button>
 </section>
 
+
+
+<!-- CUBISM -->
+<section class="gallery cubism-gallery">
+<h2>Cubism</h2>
+<div class="gallery-grid">
+  <div><img src="images/P1.jpeg"><p>P1</p><button onclick="openPainting('p1')">History</button></div>
+  <div><img src="images/P2.jpg"><p>P2</p><button onclick="openPainting('p2')">History</button></div>
+  <div><img src="images/fell in love.jpeg"><p>Fell in Love</p><button onclick="openPainting('fell')">History</button></div>
+  <div><img src="images/lucid.jpg"><p>Lucid</p><button onclick="openPainting('lucid')">History</button></div>
+  <div><img src="images/hope in the darkness.jpg"><p>Hope in the Darkness</p><button onclick="openPainting('hope')">History</button></div>
+</div>
+</section>
+
+<!-- ABSTRACT -->
+<section class="gallery abstract-gallery">
+<h2>Abstract</h2>
+<div class="gallery-grid">
+  <div><img src="images/schizophrenia.jpeg"><p>Lost in Voices</p><button onclick="openPainting('schiz')">History</button></div>
+  <div><img src="images/the face.jpg"><p>Chained</p><button onclick="openPainting('face')">History</button></div>
+</div>
+</section>
+
 <!-- ARTIST PANEL -->
 <div class="overlay" id="artistPanel">
   <h2>DUDU - Artist</h2>
@@ -168,27 +193,6 @@ button:hover{background:var(--accent);color:#000;}
      </div>
   <button onclick="closePanels()" class="back-btn">Back</button>
 </div>
-
-<!-- CUBISM -->
-<section class="gallery cubism-gallery">
-<h2>Cubism</h2>
-<div class="gallery-grid">
-  <div><img src="images/P1.jpeg"><p>P1</p><button onclick="openPainting('p1')">History</button></div>
-  <div><img src="images/P2.jpg"><p>P2</p><button onclick="openPainting('p2')">History</button></div>
-  <div><img src="images/fell in love.jpeg"><p>Fell in Love</p><button onclick="openPainting('fell')">History</button></div>
-  <div><img src="images/lucid.jpg"><p>Lucid</p><button onclick="openPainting('lucid')">History</button></div>
-  <div><img src="images/hope in the darkness.jpg"><p>Hope in the Darkness</p><button onclick="openPainting('hope')">History</button></div>
-</div>
-</section>
-
-<!-- ABSTRACT -->
-<section class="gallery abstract-gallery">
-<h2>Abstract</h2>
-<div class="gallery-grid">
-  <div><img src="images/schizophrenia.jpeg"><p>Lost in Voices</p><button onclick="openPainting('schiz')">History</button></div>
-  <div><img src="images/the face.jpg"><p>Chained</p><button onclick="openPainting('face')">History</button></div>
-</div>
-</section>
 
 <!-- CONTACT -->
 <div class="overlay" id="contactPanel">
