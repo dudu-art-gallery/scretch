@@ -128,22 +128,27 @@ margin-bottom:120px;}
 .gallery{padding:120px 20px 40px 20px;text-align:center;}
 .gallery h2{font-family:'Cormorant Garamond',serif;font-size:28px;margin-bottom:60px;color:var(--text);}
 .gallery-grid {
-  display: flex; /* horizontal scrolling */
-  flex-direction: column; /* keep vertical */
-  gap: 60px; /* spacing between paintings */
-  max-height: 80vh; /* limit scrollable area */
-  overflow-y: scroll; /* enable vertical scrolling */
-  scroll-snap-type: y mandatory; /* snap on vertical axis */
+  display: flex;            /* enable flex container */
+  flex-direction: column;   /* vertical layout */
+  gap: 200px;               /* bigger space between paintings */
+  max-height: 80vh;         /* limit scrollable area */
+  overflow-y: scroll;       /* vertical scrolling */
+  scroll-snap-type: y mandatory; /* snap to center */
   align-items: center;
-  padding-bottom: 60px;
+  padding-top: 100px;       /* extra space at top */
+  padding-bottom: 100px;    /* extra space at bottom */
 }
+
 .gallery-grid div {
-  scroll-snap-align: center; /* ensures each painting snaps to center */
+  scroll-snap-align: center; /* snap each painting to center */
   text-align: center;
 }
 
-.gallery-grid img{width:100%;max-width:750px;height:auto;box-shadow:0 8px 30px rgba(0,0,0,0.25);}
-
+.gallery-grid img {
+  width: 90%;
+  max-width: 650px;
+  height: auto;
+}
 /* OVERLAYS */
 .overlay{position:fixed;inset:0;background:#e5e5e5;display:flex;flex-direction:column;align-items:center;opacity:0;pointer-events:none;transition:0.4s;z-index:2000;overflow-y:auto;padding:60px 20px;}
 .overlay.active{opacity:1;pointer-events:auto;}
