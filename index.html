@@ -196,12 +196,10 @@ margin-bottom:120px;}
 #contactPanel h2{margin-bottom:10px;}#contactPanel p{margin:10px 0;}
 
 @media(max-width:768px){
-  #paintingPage .nav-arrow{font-size:45px;}
-  .gallery-grid img{max-width:300px;width:90%;}
-  .gallery-grid{gap:150px;}
-  #artistPanel h2{font-size:26px;}
-  .artist-text{font-size:15px;}
-  .artist-img{max-width:250px;}
+  .gallery-grid {
+    scroll-snap-type: none; /* disable snapping on mobile */
+    gap: 150px; /* still keep larger spaces */
+  }
 }
 
 @keyframes fadeIn{to{opacity:1;}}
