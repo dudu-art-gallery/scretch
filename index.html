@@ -296,8 +296,13 @@ document.addEventListener("DOMContentLoaded",updateGalleryVisibility);
 function toggleMenu(){document.getElementById("sideMenu").classList.toggle("active");}
 
 // PANELS
-function openContact(){toggleMenu();document.getElementById("contactPanel").classList.add("active");}
-function openRental(){toggleMenu();document.getElementById("rentalPanel").classList.add("active");}
+function openContact(){
+document.getElementById("contactPanel").classList.add("active");
+}
+
+function openRental(){
+document.getElementById("rentalPanel").classList.add("active");
+}
 function closePanels(){document.querySelectorAll(".overlay").forEach(p=>p.classList.remove("active"));}
 
 
