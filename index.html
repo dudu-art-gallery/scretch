@@ -271,7 +271,7 @@ text-align:center;
 <div class="overlay" id="dedicationPanel">
   <h2>DUDU</h2>
     <div class="dedication-text">
-    <p>I dedicate all my paintings to the psychologically disabled people in the world. This collection is a summary between order and chaos. Life, from being unable to fly to the liberating moment of breaking out from the cocoon and just flying.</p>
+    <p>I dedicate all my paintings to the psychologically disabled people in the world. This collection is a summary between order and chaos. Life, from being unable to fly to the liberating moment of breaking out from the cocoon and just fly.</p>
      </div>
   <button onclick="closePanels()" class="back-btn">Back</button>
 </div>
@@ -296,17 +296,21 @@ text-align:center;
 <button onclick="closePanels()">Back</button>
 </div>
 
-
   <!-- SPRING COLLECTION -->
 <div class="overlay" id="springPanel">
 <h2>Spring Collection</h2>
 
-<p style="max-width:700px;text-align:center;color:#000;">
-The new spring collection. 
-</p>
-
 <div style="margin-top:40px;text-align:center;">
-<img src="images/the eye of the madame.jpg" style="max-width:400px;width:90%;margin-bottom:30px;">
+<img 
+src="images/the eye of the madame.jpg"
+data-static="images/the eye of the madame.jpg"
+data-gif="images/the eye of the madame.gif"
+class="gif-painting"
+style="max-width:400px;width:90%;margin-bottom:30px;">
+
+<p>The Eye of the Madame</p>
+
+<button onclick="openPainting('madame')">History</button>
 </div>
 
 <button onclick="closePanels()">Back</button>
@@ -360,7 +364,40 @@ const paintings=[
 {id:"lucid",title:"Lucid",image:"images/lucid.jpg",history:"It is clearly in front of you, but you can't see it. It is clearly behind you, but you can't hear it. It is clearly over you, but you can't smell it. It is clearly under you, but you can't feel."},
 {id:"hope",title:"Hope in the Darkness",image:"images/hope in the darkness.jpg",history:"Between light and darkness. Between hope and rupture. There is always a fight."},
 {id:"schiz",title:"Lost in Voices",image:"images/schizophrenia.jpeg",history:"The most vulnerable. The most anxious. The most restricted. The most feared. The pain in the eye."},
-{id:"face",title:"Chained",image:"images/the face.jpg",history:"Captured in your thoughts. There is no way out. The evil follows. The dark shades. Breaking it is not possible. You have to forgive."}];
+{id:"face",title:"Chained",image:"images/the face.jpg",history:"Captured in your thoughts. There is no way out. The evil follows. The dark shades. Breaking it is not possible. You have to forgive."},
+
+{id:"madame",
+title:"The Eye of the Madame",
+image:"images/the eye of the madame.jpg",
+history:"The eye sees what the world hides. Desire, judgment, elegance, and danger all meet in a single glance. The Madame watches silently, knowing more than she reveals."},
+];
+
+ // GIF interaction for "The Eye of the Madame"
+document.querySelectorAll(".gif-painting").forEach(img => {
+
+const staticImg = img.dataset.static;
+const gif = img.dataset.gif;
+
+img.addEventListener("mouseenter", () => {
+img.src = gif;
+});
+
+img.addEventListener("mouseleave", () => {
+img.src = staticImg;
+});
+
+img.addEventListener("touchstart", () => {
+img.src = gif;
+});
+
+img.addEventListener("touchend", () => {
+img.src = staticImg;
+});
+
+});
+
+
+  
 let currentIndex=0;
 function openPainting(id){currentIndex=paintings.findIndex(p=>p.id===id);showPainting(currentIndex);document.getElementById("paintingPage").classList.add("active");}
 function showPainting(index){
