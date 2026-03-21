@@ -132,6 +132,40 @@ margin-bottom:240px;
 .intro button{margin-top:10px;padding:8px 16px;cursor:pointer;}
 
 
+/* FULLSCREEN */
+  .fullscreen-overlay{
+  position:fixed;
+  inset:0;
+  background:#000;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity 0.3s ease;
+}
+
+.fullscreen-overlay.active{
+  opacity:1;
+  pointer-events:auto;
+}
+
+.fullscreen-overlay img{
+  max-width:95%;
+  max-height:95%;
+  object-fit:contain;
+}
+
+.close-fullscreen{
+  position:absolute;
+  top:20px;
+  right:30px;
+  font-size:30px;
+  color:#fff;
+  cursor:pointer;
+}
+
 
 /* GALLERY */
 .gallery{
@@ -195,6 +229,13 @@ text-align:center;
 @keyframes fadeIn{to{opacity:1;}}
 </style>
 </head>
+  
+  <!-- FULLSCREEN OVERLAY -->
+<div id="fullscreenOverlay" class="fullscreen-overlay">
+  <span class="close-fullscreen" onclick="closeFullscreen()">✕</span>
+  <img id="paintingImage" onclick="openFullscreen(this.src)">
+</div>
+  
 <body class="cubism">
 
 <!-- ENTRY -->
@@ -251,11 +292,6 @@ text-align:center;
 
 <button onclick="openPainting('face 2')">History</button>
 </div>
-
-
-
-
-
 
   
 </section>
@@ -381,6 +417,20 @@ title:"The Eye of the Madame",
 image:"images/the eye of the madame.jpg",
 history:"The eye sees what the world hides. Desire, judgment, elegance, and danger all meet in a single glance. The Madame watches silently, knowing more than she reveals."},
 ];
+
+
+  // FULLSCREEN 
+  function openFullscreen(imgSrc){
+  const overlay = document.getElementById("fullscreenOverlay");
+  const img = document.getElementById("fullscreenImage");
+
+  img.src = imgSrc;
+  overlay.classList.add("active");
+}
+
+function closeFullscreen(){
+  document.getElementById("fullscreenOverlay").classList.remove("active");
+}
 
  // GIF interaction for "The Eye of the Madame"
 document.querySelectorAll(".gif-painting").forEach(img => {
