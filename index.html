@@ -183,6 +183,33 @@ text-align:center;
 .profile-pic{width:160px;margin-bottom:30px;}
 #contactPanel h2{margin-bottom:10px; color: #000}#contactPanel p{margin:10px 0; color: #000}
 
+/* FULSCREEN */
+  
+  .fullscreen-overlay{
+  position:fixed;
+  inset:0;
+  background:#000;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity 0.3s ease;
+  z-index:9999;
+}
+
+.fullscreen-overlay.active{
+  opacity:1;
+  pointer-events:auto;
+}
+
+.fullscreen-overlay img{
+  max-width:95%;
+  max-height:95%;
+  object-fit:contain;
+  cursor:zoom-out;
+}
+
 @media(max-width:768px){
   #paintingPage .nav-arrow{font-size:45px;}
   .gallery-grid img{max-width:300px;width:90%;}
@@ -199,6 +226,13 @@ text-align:center;
 
   
 <body class="cubism">
+
+
+  <!-- FULSCREEN -->
+  
+<div id="fullscreenOverlay" class="fullscreen-overlay" onclick="closeFullscreen()">
+  <img id="fullscreenImage">
+</div>
 
   <!-- FULLSCREEN -->
   
@@ -244,11 +278,11 @@ text-align:center;
 <section class="gallery cubism-gallery">
 <h2>Cubism</h2>
 <div class="gallery-grid">
-  <div><img src="images/P1.jpeg"><p>P1</p><button onclick="openPainting('p1')">History</button></div>
-  <div><img src="images/P2.jpg"><p>P2</p><button onclick="openPainting('p2')">History</button></div>
-  <div><img src="images/fell in love.jpeg"><p>Fell in Love</p><button onclick="openPainting('fell')">History</button></div>
-  <div><img src="images/lucid.jpg"><p>Lucid</p><button onclick="openPainting('lucid')">History</button></div>
-  <div><img src="images/hope in the darkness.jpg"><p>Hope in the Darkness</p><button onclick="openPainting('hope')">History</button></div>
+  <div><img src="images/P1.jpeg"><p>P1</p><button onclick="openFullscreen(this.src)">History</button></div>
+  <div><img src="images/P2.jpg"><p>P2</p><button onclick="openFullscreen(this.src)">History</button></div>
+  <div><img src="images/fell in love.jpeg"><p>Fell in Love</p><button onclick="openFullscreen(this.src)"">History</button></div>
+  <div><img src="images/lucid.jpg"><p>Lucid</p><button onclick="openFullscreen(this.src)">History</button></div>
+  <div><img src="images/hope in the darkness.jpg"><p>Hope in the Darkness</p><button onclick="openFullscreen(this.src)">History</button></div>
 </div>
 </section>
 
@@ -256,11 +290,11 @@ text-align:center;
 <section class="gallery abstract-gallery">
 <h2>Abstract</h2>
 <div class="gallery-grid">
-  <div><img src="images/schizophrenia.jpeg"><p>Lost in Voices</p><button onclick="openPainting('schiz')">History</button></div>
-  <div><img src="images/the face.jpg"><p>Chained</p><button onclick="openPainting('face')">History</button></div>
+  <div><img src="images/schizophrenia.jpeg"><p>Lost in Voices</p><button onclick="openFullscreen(this.src)">History</button></div>
+  <div><img src="images/the face.jpg"><p>Chained</p><button onclick="openFullscreen(this.src)">History</button></div>
   <div style="margin-top:40px;text-align:center;"><img src="images/the face 2.jpeg"data-static="images/the face 2.jpeg"data-gif="images/the face 2.gif"class="gif-painting"style="max-width:400px;width:90%;margin-bottom:55px;"><p>the face</p>
 
-<button onclick="openPainting('face 2')">History</button>
+<button onclick="openFullscreen(this.src)">History</button>
 </div>
 
   
@@ -317,12 +351,13 @@ text-align:center;
 <h2>Spring Collection</h2>
 <p>touch the painting and find out</p>
 <div style="margin-top:40px;text-align:center;">
-<img 
-src="images/the eye of the madame.jpg"
+<img src="images/the eye of the madame.jpg"
 data-static="images/the eye of the madame.jpg"
 data-gif="images/the eye of the madame.gif"
 class="gif-painting"
-style="max-width:400px;width:90%;margin-bottom:55px;">
+onclick="openFullscreen(this.src)"
+style="max-width:400px;width:90%;margin-bottom:55px;"
+  >
 <p>the eye of the madame</p>
 
 <button onclick="openPainting('madame')">History</button>
@@ -389,6 +424,20 @@ history:"The eye sees what the world hides. Desire, judgment, elegance, and dang
 ];
 
 
+  // FULSCREEN
+
+  function openFullscreen(src){
+  const overlay = document.getElementById("fullscreenOverlay");
+  const img = document.getElementById("fullscreenImage");
+
+  img.src = src;
+  overlay.classList.add("active");
+}
+
+function closeFullscreen(){
+  document.getElementById("fullscreenOverlay").classList.remove("active");
+}
+  
  // GIF interaction for "The Eye of the Madame"
 document.querySelectorAll(".gif-painting").forEach(img => {
 
