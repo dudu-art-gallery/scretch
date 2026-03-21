@@ -230,15 +230,17 @@ text-align:center;
 </style>
 </head>
 
-<!-- FULLSCREEN -->
+
+  
+<body class="cubism">
+
+  <!-- FULLSCREEN -->
   
 <div id="fullscreenOverlay" class="fullscreen-overlay">
   <span class="close-fullscreen" onclick="closeFullscreen()">✕</span>
   <img id="fullscreenImage">
 </div>
 
-  
-<body class="cubism">
 
 <!-- ENTRY -->
 <div class="entry" id="entryScreen"><h1>DUDU</h1></div>
@@ -367,7 +369,7 @@ style="max-width:400px;width:90%;margin-bottom:55px;">
 <!-- PAINTING PAGE -->
 <div class="overlay" id="paintingPage">
   <h2 id="paintingTitle"></h2>
-  <img id="paintingImage" style="max-width:500px;width:90%;margin:20px 0;">
+  <img id="paintingImage" onclick="openFullscreen(this.src)" style="max-width:500px;width:90%;margin:20px 0;">
   <div id="paintingHistory"></div>
   <div id="prevArrow" class="nav-arrow" onclick="navigatePainting(-1)">&#10094;</div>
   <div id="nextArrow" class="nav-arrow" onclick="navigatePainting(1)">&#10095;</div>
